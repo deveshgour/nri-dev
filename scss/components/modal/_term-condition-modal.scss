@@ -1,0 +1,81 @@
+&--termConditionModal {
+    .modal-body {
+        padding: 0;
+        .close {
+            color: color(50);
+        }
+        .modal-title {
+            padding: 20px 40px;
+        }
+        .modalContent {
+            padding: 40px;
+            &--content {
+                &:not(:last-child) {
+                    margin-bottom: 30px;
+                }
+                &--title {
+                    margin-bottom: 15px;
+                }
+                p {
+                    font: 15px font(md);
+                    line-height: 22px;
+                    color: rgba($color: color(900), $alpha: 0.6);
+                    margin-bottom: 0;
+                    + p {
+                        margin-top: 20px;
+                    }
+                }
+            }
+        }
+    }
+    @include media-breakpoint-down(lg) {
+        .modal-body {
+            .modalContent {
+                padding: 30px;
+                &--content {
+                    &:not(:last-child) {
+                        margin-bottom: 25px;
+                    }
+                    p {
+                        + p {
+                            margin-top: 15px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    @include media-breakpoint-down(md) {
+        .modal-body {
+            .modalContent {
+                padding: 20px;
+                &--content {
+                    &:not(:last-child) {
+                        margin-bottom: 20px;
+                    }
+                    p {
+                        font-size: 14px;
+                        + p {
+                            margin-top: 10px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    @include media-breakpoint-down(xs) {
+        .modal-body {
+            .modalContent {
+                padding: 15px;
+                &--content {
+                    &:not(:last-child) {
+                        margin-bottom: 15px;
+                    }
+                    &--title {
+                        margin-bottom: 10px;
+                    }
+                }
+            }
+        }
+    }
+}

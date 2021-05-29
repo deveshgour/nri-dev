@@ -1,0 +1,41 @@
+.pagination{
+    flex-wrap: wrap;
+    margin-bottom: 0;
+    .page-item{
+        .page-link{
+            border: 0;
+            background: #F4F4F4;
+            color: color(900);
+            width: 38px;height: 38px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 5px;
+            &:active, &:focus{
+                box-shadow: none;
+            }
+            &.previous,&.next{
+                padding: 8px;
+                &:hover{
+                    background: color(900);
+                    color: color(50);
+                }
+            }
+            &.previous{
+                margin-right: 15px;
+                border-radius: 0;
+            }
+            &.next{
+                margin-left: 15px;
+                border-radius: 0;
+            }            
+        }
+        &.active, &:hover{
+            .page-link{
+                color: color(50);
+                background: color(500);
+                @include box-shadow(0, 3px, 6px, rgba(0,0,0,0.06));
+            }
+        }
+    }
+}

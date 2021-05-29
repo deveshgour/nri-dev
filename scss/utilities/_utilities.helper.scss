@@ -1,0 +1,26 @@
+.font-rg{font-family:font(rg) !important}
+.font-md{font-family:font(md) !important}
+.font-bd{font-family:font(bd) !important}
+
+.font-srg{font-family:font(srg) !important}
+
+.bgBlack{background: color(900) !important;}
+
+.linkPrimary{
+    color: color(900);
+    &:hover{
+        color: color(500);
+    }
+}
+.textPrimary{
+    color: color(500) !important;
+}
+.textSecondary{
+    color: rgba($color: color(900), $alpha: .6);
+}
+.textSuccess{
+    color: color(800) !important;
+}
+.textDanger{
+    color: color(850) !important;
+}

@@ -1,0 +1,27 @@
+&--readmoreModal {
+    .modal-body {
+        padding: 50px 35px;
+        background-color: color(50);
+    }
+
+    .detailBox {
+        margin-top: 20px;
+        max-height: 400px;
+        overflow-y: auto;
+        p {
+            color: rgba(color(900), 0.5);
+            font-size: 16px;
+            line-height: 27px;
+            text-align: justify;
+        }
+    }
+
+    @include media-breakpoint-down(sm){
+        .detailBox{
+            p{
+                font-size: 14px;
+                line-height: 24px;
+            }
+        }
+    }
+}

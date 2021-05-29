@@ -1,0 +1,19 @@
+{
+  "name": "nri-dev",
+  "version": "1.0.0",
+  "description": "What is CodeIgniter ###################",
+  "main": "Gruntfile.js",
+  "dependencies": {
+    "grunt": "^1.4.0",
+    "grunt-contrib-cssmin": "^4.0.0",
+    "grunt-contrib-watch": "^1.1.0",
+    "grunt-sass": "^3.1.0",
+    "node-sass": "^6.0.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}

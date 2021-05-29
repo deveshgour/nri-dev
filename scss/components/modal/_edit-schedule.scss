@@ -1,0 +1,47 @@
+&--editScheduleModal{
+    .customRow{
+        margin: 0 -5px;
+        .customColumn{
+            padding: 0 5px;
+        }
+    }
+    .modal-body{
+        padding: 25px;
+        form{
+            margin-top: 30px;
+            label{
+                margin-bottom: 5px;
+                font-family: font(md);
+            }
+            .form-group{
+                .form-control{
+                    padding-right: 35px;
+                }
+                span[class*="icon-"]{
+                    position: absolute;
+                    top: 50%;
+                    transform: translateY(-50%);
+                    right: 10px;
+                    color: rgba(0,0,0,0.6);
+                    pointer-events: none;
+                }
+            }
+        }
+    }
+    @include media-breakpoint-up(sm){
+        max-width: 460px;
+    }
+    @include media-breakpoint-down(lg){
+        .modal-body{
+            padding: 20px;
+            form{
+                margin-top: 20px;
+                .form-group{
+                    .form-control{
+                        padding-right: 25px;
+                    }
+                }
+            }
+        }
+    }
+}

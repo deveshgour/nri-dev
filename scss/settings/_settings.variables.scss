@@ -1,0 +1,80 @@
+// color variables
+$colors:(
+    50:  #ffffff,
+    80:  #F3F3F3,
+    70:  #E8E8ED,  
+    90:  #C9C9C9, 
+    100: #E2E2E2,  
+    120: #8F8F8F,
+    130: #FBFBFF,
+    140: #747474,
+    150: #888888, 
+    160: #828282,
+    200: #737374, 
+    220: #D07935, 
+    500: #EDB17E, 
+    600: #FCE8D0, 
+    700: #FFEBDC,
+    800: #3E9B3B,  
+    850: #DD2F2F, 
+    900: #010080,    
+);
+
+ 
+@function color($color) {
+    // checking to see if our $theme-colors map has that $color key
+    @if map-has-key($colors, $color) {
+    // and if so, it will get that color for us in the map-get syntax
+    @return map-get($colors, $color);
+  }
+    // if not, it will give us a helpful error when we compile
+  @error "Unknown `#{$color}` in $colors.";
+  @return null;
+}
+
+// fonts
+$fonts : (
+    rg   : 'CeraPro-Regular',
+    md   : 'CeraPro-Medium',
+    bd   : 'CeraPro-Bold',
+
+    srg   : 'SegoeUI',
+    sbd   : 'SegoeUI-Bold',
+    ssm   : 'SegoeUI-Semibold', 
+  
+);
+
+@function font($font) {
+    // checking to see if our $theme-fonts map has that $font key
+    @if map-has-key($fonts, $font) {
+    // and if so, it will get that font for us in the map-get syntax
+    @return map-get($fonts, $font);
+  }
+    // if not, it will give us a helpful error when we compile
+  @error "Unknown `#{$font}` in $fonts.";
+  @return null;
+}
+
+
+@font-face {
+  font-family: 'proxima_novaregular';
+  src: url('../fonts/proximanova-regular-webfont.woff2') format('woff2'),
+       url('../fonts/proximanova-regular-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+
+}
+@font-face {
+  font-family: 'proxima_novasemibold';
+  src: url('../fonts/proximanova-semibold-webfont.woff2') format('woff2'),
+       url('../fonts/proximanova-semibold-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+
+}
+
+$fontRg: 'proxima_novaregular';
+$fontBd: 'proxima_novasemibold';
+
+$imageurl       :    "../images";
+$fonturl        :    "../fonts";

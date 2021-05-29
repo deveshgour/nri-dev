@@ -1,0 +1,88 @@
+&--treatmentModal {
+    .modal-body {
+        position: relative;
+        padding: 50px;
+    }
+    .modal-title {
+        margin-bottom: 45px;
+    }
+    .form-group {
+        textarea {
+            height: 250px;
+            resize: none;
+        }
+    }
+    .detailBox {
+        &--title {
+            margin-bottom: 10px;
+            font-size: 20px;
+        }
+        &--info {
+            border: 1px solid #e3e3e3;
+            padding: 15px;
+            color: #828282;
+            font-size: 15px;
+            line-height: 19px;
+            min-height: 150px;
+            ul {
+                margin: 0;
+                li {
+                    position: relative;
+                    padding-left: 15px;
+                    &:before {
+                        content: "";
+                        position: absolute;
+                        height: 6px;
+                        width: 6px;
+                        border-radius: 100%;
+                        background: color(900);
+                        left: 0;
+                        top: 7px;
+                    }
+                    &:not(:last-child) {
+                        margin-bottom: 15px;
+                    }
+                }
+            }
+        }
+    }
+    @media (max-width: 1599px) {
+        .modal-body {
+            padding: 30px;
+        }
+        .modal-title {
+            margin-bottom: 30px;
+        }
+    }
+    @include media-breakpoint-down(md) {
+        .modal-body {
+            padding: 20px;
+        }
+        .modal-title {
+            margin-bottom: 20px;
+        }
+        .detailBox {
+            &--title {
+                font-size: 17px;
+            }
+        }
+        .form-group {
+            textarea {
+                height: 200px;
+            }
+        }
+    }
+    @include media-breakpoint-down(sm) {
+        .modal-title {
+            margin-bottom: 15px;
+        }
+        .detailBox {
+            &:not(:last-child) {
+                margin-bottom: 15px;
+            }
+            &--title {
+                font-size: 15px;
+            }
+        }
+    }
+}

@@ -1,0 +1,67 @@
+.commonBreadcrumb {
+	padding-top: 20px;
+	padding-bottom: 25px; 
+	display: block;
+	.breadcrumb{ 
+		background-color: transparent;
+		margin-bottom: 0;
+		padding: 0;
+		.breadcrumb-item {
+			font-family: font(md);
+			+.breadcrumb-item{
+				&:before{
+					content: "\e919";
+					font-family: "icomoon";
+					font-size: 10px; 
+				} 
+			}
+			a { 
+				color: color(120);				
+				font-size: 13px;
+				&:hover {
+					color: color(900);
+				}
+			}
+			&:before {
+				padding-right: 5px; 
+				color: color(90);
+			}
+			+ .breadcrumb-item {
+				padding-left: 5px;
+			}
+			&.active {
+				color: color(900);
+			}
+		}
+     }
+	.current {
+		color: color(700);
+		padding-left: 5px;
+		position: relative;
+		&:before {
+			display: inline-block;
+			padding-right: 0.5rem;
+			content: "/";
+			color: #000;
+		}
+	}
+	&--gray {
+		.breadcrumb-item {
+			a {
+				color: color(900);
+			}
+			&:before {
+				color: color(900);
+			}
+			&.active {
+				color: color(700);
+			}
+		}
+	}
+	// @include media-breakpoint-down(lg) {
+	// 	margin-bottom: 25px;
+	// }
+	// @include media-breakpoint-down(md) {
+	// 	margin: 20px 0;
+	// }
+}

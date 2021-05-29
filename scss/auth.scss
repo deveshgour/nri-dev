@@ -1,0 +1,45 @@
+@import "tools/tools.mixin";
+@import "settings/settings.breakpoints";
+@import "settings/settings.variables";
+.authPage{
+	&__wrapper{
+		background: rgba(255,255,255,.8) !important;
+		max-width: 600px;
+		margin: 0 auto;
+		border-radius: 10px;
+		overflow: hidden;
+		box-shadow: 0px 0px 10px rgba(0,0,0,0.2);
+		padding: 30px;
+	}
+	.form-control{
+		border-radius: 3px;
+	}
+		h1{
+			text-align: center;
+			font-size: 22px;
+			margin-bottom: 30px;
+			font-weight: bold;
+			color: #ff9733;
+		}
+
+		label{
+			font-weight: bold;
+		}
+		
+		.btn{
+			background-color: transparent;
+			color: #010080;
+			transition:ease-in-out 0.5s;
+			&:hover, &:focus{
+				background-color: #010080;
+				color: #FFF;
+			}
+		}
+
+		@include media-breakpoint-down(sm){
+			&__wrapper{
+			padding: 20px 0;
+			}
+		}
+	
+}

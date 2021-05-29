@@ -1,0 +1,89 @@
+&--makePaymentModal {
+    h3 {
+        margin-top: 20px;
+        text-align: center;
+    }
+    .detailBox {
+        margin-top: 10px;
+        padding: 0 50px;
+        h4 {
+            font-family: font(sbd);
+            font-size: 24px;
+            line-height: 45px;
+            color: color(500);
+        }
+        .price {
+            p {
+                font-size: 14px;
+                margin-left: 12px;
+                margin-bottom: 0;
+            }
+        }
+    }
+    .SelectPaymentMethod {
+        &--payPal {
+            padding: 20px 15px;
+            border: 1px solid color(500);
+            img {
+                margin-left: 15px;
+            }
+            .custom-control-label {
+                &:before {
+                    width: 24px;
+                    height: 24px;
+                    border-radius: 50%;
+                    border-width: 2px;
+                    border-color: color(500);
+                    top: 0;
+                }
+            }
+            .custom-control-input {
+                &:checked ~ {
+                    .custom-control-label {
+                        &:after {
+                            content: "";
+                            width: 14px;
+                            height: 14px;
+                            background-color: #edb17e;
+                            border-radius: 50%;
+                            top: 5px;
+                            left: -19px;
+                        }
+                    }
+                }
+            }
+        }
+        margin-top: 25px;
+        margin-bottom: 35px;
+        h5 {
+            font-size: 20px;
+            font-family: font(sbd);
+            margin-bottom: 20px;
+        }
+    }
+    @include media-breakpoint-down(lg) {
+        .detailBox {
+            margin-top: 0;
+            padding: 0 30px;
+            h4 {
+                margin-bottom: 0;
+                font-size: 18px;
+                line-height: 30px;
+            }
+        }
+        .SelectPaymentMethod {
+            margin-top: 15px;
+            margin-bottom: 20px;
+            &--payPal {
+                padding: 15px;
+                img {
+                    max-width: 90px;
+                }
+            }
+            h5 {
+                font-size: 18px;
+                margin-bottom: 10px;
+            }
+        }
+    }
+}

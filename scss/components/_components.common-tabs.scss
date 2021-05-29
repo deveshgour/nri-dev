@@ -1,0 +1,138 @@
+.customTabs {
+	.nav-tabs {
+		flex-wrap: nowrap;
+		overflow-x: auto;
+		overflow-y: hidden;
+		.nav-item {
+			a {
+				padding: 20px 30px;
+				border-radius: 0;
+				border: transparent;
+				border-bottom-width: 3px;
+				color: rgba(color(900), 0.5);
+				font-family: font(md);
+				position: relative;
+				text-transform: capitalize;
+				background-color: transparent;
+				white-space: nowrap;
+				&.active,
+				&:hover {
+					color: color(500);
+				}
+				&:after {
+					width: 0%;
+					content: "";
+					height: 3px;
+					background: color(500);
+					left: 0;
+					bottom: 0;
+					display: block;
+					position: absolute;
+					transition: width .5s;
+				}
+				&.active {
+					&:after {
+						width: 100%;
+					}
+				}
+			}
+		}
+	}
+	.row {
+		&.box {
+			box-shadow: none;
+		}
+	}
+	.tab-content {
+		border-bottom: 0;
+		border-left: 0;
+		border-right: 0;
+		padding: 30px 25px;
+		.service-category {
+			max-width: 435px;
+			margin: 10px 0 25px;
+			.dropdown-menu {
+				top: -2px !important;
+			}
+		}
+		.procedures {
+			table {
+				tr {
+					&:not(:last-child) {
+						td,
+						th {
+							border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+							border-top: 0;
+						}
+					}
+					td,
+					th {
+						border-top: 0;
+					}
+				}
+			}
+		}
+		.action-btn {
+			text-align: right;
+			margin-bottom: 10px;
+		}
+	}
+	p {
+		margin-bottom: 0;
+	}
+	.info-set {
+		margin-bottom: 15px;
+		video {
+			margin-top: 10px;
+		}
+	}
+	.common-table {
+		box-shadow: none;
+	}
+	.left-side {
+		h3 {
+			margin-top: 15px;
+		}
+	}
+	@media (max-width: 1599px) {
+		.nav-tabs {
+			.nav-item {
+				a {
+					padding: 15px 25px;
+				}
+			}
+		}
+	}
+	@include media-breakpoint-down(md) {
+		.nav-tabs {
+			.nav-item {
+				a {
+					padding: 15px 20px;
+				}
+			}
+		} 
+		.tab-content {
+			padding: 30px 20px;
+		}
+	}
+	@include media-breakpoint-down(sm) {
+		.nav-tabs {
+			.nav-item {
+				a {
+					padding: 10px 20px;
+				}
+			}
+        }
+        .tab-content{
+            padding: 30px 15px;
+			.filter_section {
+				margin: 0;
+			}
+        }
+	}
+	@include media-breakpoint-down(xs) {
+		.tab-content {
+			padding: 30px 10px;
+		}
+	}
+}

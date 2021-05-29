@@ -1,0 +1,103 @@
+&--transactionModal {
+    .modal-body {
+        position: relative;
+        padding: 40px;
+        .transactionDetail {
+            &__top {
+                padding-bottom: 35px;
+                border-bottom: 1px solid #ebebeb;
+            }
+            &__Img {
+                margin-right: 20px;
+            }
+            &__info {
+                .ratingstarIcons {
+                    margin-bottom: 15px;
+                    i {
+                        margin-right: 5px;
+                    }
+                    .icon-star-fill {
+                        color: #edb17e;
+                        font-size: 12px;
+                    }
+                }
+            }
+            &__bottom {
+                padding: 35px 25px 0;
+                .clinicDetail {
+                    margin-bottom: 50px;
+                }
+                .form-group {
+                    textarea {
+                        resize: none;
+                        height: 112px;
+                    }
+                }
+                .bottomText{
+                    color: rgba($color: color(900), $alpha: .5);
+                    a{color: color(500);
+                        &:hover{color: darken(color(500), 8%);}
+                    }
+                }
+            }
+        }
+    }
+    @media (max-width: 1599px) {
+        .modal-body {
+            padding: 30px;
+            .transactionDetail {
+                &__top {
+                    padding-bottom: 25px;
+                }
+                &__bottom {
+                    padding: 25px 15px 0;
+                    .clinicDetail {
+                        margin-bottom: 30px;
+                    }
+                    .form-group {
+                        textarea {
+                            height: 80px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    @include media-breakpoint-down(md) {
+        .modal-body {
+            padding: 20px;
+            .transactionDetail {
+                &__top {
+                    padding-bottom: 20px;
+                }
+                &__bottom {
+                    padding: 20px 0;
+                    .clinicDetail {
+                        margin-bottom: 20px;
+                    }
+                }
+            }
+        }
+    }
+    @include media-breakpoint-down(xs) {
+        .modal-body {
+            padding: 15px;
+            .transactionDetail {
+                &__top {
+                    padding-bottom: 15px;
+                }
+                &__Img {
+                    margin-right: 0;
+                    text-align: center;
+                    margin-bottom: 15px;
+                }
+                &__bottom {
+                    padding: 15px 0;
+                    .clinicDetail {
+                        margin-bottom: 15px;
+                    }
+                }
+            }
+        }
+    }
+}

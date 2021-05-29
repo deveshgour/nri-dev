@@ -1,0 +1,15 @@
+@import "tools/tools.mixin";
+@import "settings/settings.breakpoints";
+@import "settings/settings.variables";
+
+.editProfile{
+    &__form {
+        .form-group{
+            .upload_photo{
+                .img-box{
+                    border-radius: 0;
+                } 
+            }
+        }   
+    }  
+} 

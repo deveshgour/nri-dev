@@ -1,0 +1,130 @@
+.modal-backdrop.show {
+    opacity: 0.4;
+}
+
+.fade {
+    visibility: hidden;
+    @include transition(all 0.3s);
+    .modal-content {
+        @include scale(0.7);
+        opacity: 0;
+        @include transition(all 0.3s);
+        border: 0;
+    }
+    &.show {
+        visibility: visible;
+        .modal-content {
+            @include scale(1);
+            opacity: 1;
+        }
+    }
+}
+
+.modal-default {
+    @include media-breakpoint-up(xs) {
+        max-width: 460px;
+    }
+}
+.modal-lg {
+    @include media-breakpoint-up(md) {
+        max-width: 720px;
+    }
+    @include media-breakpoint-up(lg) {
+        max-width: 960px;
+    }
+    @include media-breakpoint-up(xl) {
+        max-width: 1140px;
+    }
+    @media (min-width: 1600px) {
+        max-width: 1495px;
+    }
+}
+.modal-md {
+    @include media-breakpoint-up(md) {
+        max-width: 720px;
+    }
+    @include media-breakpoint-up(lg) {
+        max-width: 930px;
+    }
+}
+.commonModal {
+    .modal-body {
+        background-color: color(130);
+    }
+    .close {
+        width: 54px;
+        height: 54px;
+        font-size: 20px;
+        color: color(900);
+        opacity: 1;
+        transition: all 1s;
+        position: absolute;
+        right: 10px;
+        top: 10px;
+        &:hover {
+            color: color(500);
+        }
+    }
+    .modal-content {
+        border-radius: 0;
+        .modal-footer {
+            padding: 25px;
+            .btn {
+                min-width: 175px;
+                margin: 0;
+                + .btn {
+                    margin-left: 15px;
+                }
+            }
+        }
+    }
+    @include media-breakpoint-down(lg) {
+        .close {
+            width: 46px;
+            height: 46px;
+            font-size: 16px;
+        }
+    }
+    @include media-breakpoint-down(md) {
+        .close {
+            width: 40px; 
+            height: 40px;
+            font-size: 15px;
+        }
+        .modal-content {
+            .modal-footer {
+                padding: 20px;
+                .btn {
+                    min-width: auto;
+                }
+            }
+        }
+    }
+    @include media-breakpoint-down(xs) {
+        .close {
+            width: 34px;
+            height: 34px;
+            font-size: 12px;
+        }
+        .modal-content {
+            .modal-footer {
+                padding: 15px;
+            }
+        }
+    }
+     
+    @import 'treatment-modal';
+    @import 'transaction-modal';
+    @import 'term-condition-modal';
+    @import 'gift-voucher-modal';  
+    @import 'gift-card-payment-modal';  
+    @import 'verification-modal'; 
+    @import 'enquire-modal'; 
+    @import 'make-payment-modal';
+    @import 'modal-picture';
+    @import 'edit-schedule';
+    @import 'readmore-modal';
+    @import 'asksignup-modal';
+    @import 'addSchedule-modal';
+
+}

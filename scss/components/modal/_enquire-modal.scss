@@ -1,0 +1,108 @@
+&--enquireModal {
+    .modal-body {
+        padding: 50px 35px;
+        background-color: color(50);
+    }
+    p {
+        color: rgba(color(900), 0.5);
+    }
+    .detailBox {
+        margin-top: 20px;
+        .form-control {
+            border: 1px solid rgba(0, 0, 0, 0.15);
+            box-shadow: none;
+            border-radius: 3px;
+            color: rgba(color(900), 0.6);
+            &:focus {
+                border-color: color(500);
+                box-shadow: none;
+                outline: none;
+                ~ .custom-file-label {
+                    box-shadow: none;
+                    border-color: color(500);
+                }
+            }
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+    }
+    .custom-file {
+        height: 44px; 
+        label {
+            font-family: font(rg);
+            font-size: 14px;
+            height: 44px;
+            line-height: 2.4;
+            &:focus {
+                box-shadow: none;
+                border-color: color(500);
+                outline: none;
+            }
+        }
+        .custom-file-label {
+            &:after {
+                height: 42px;
+                padding: 10px 40px;
+                content: "Upload";
+                font-family: "CeraPro-Medium";
+                color: color(900);
+                background-color: #dbdbdb;
+            }
+        }
+    }
+    .g-recaptcha {
+        margin-top: 10px;
+        margin-bottom: 30px;
+    }
+    .link {
+        color: color(500);
+        //margin-left: 15px;
+    }
+    @include media-breakpoint-down(lg) {
+        .modal-body {
+            .link {
+                margin-left: 0;
+            }
+            .save {
+                margin-top: 15px;
+            }
+            p {
+                margin-bottom: 15px;
+            }
+        }
+        .g-recaptcha {
+            margin: 0;
+        }
+    }
+    @include media-breakpoint-down(md) {
+        .detailBox {
+            .form-group {
+                margin-bottom: 15px; 
+            }
+        }
+    } 
+    @include media-breakpoint-down(xs) {
+        .modal-body {
+            padding: 30px 20px;
+            .link {
+                margin-top: 10px;
+            }
+        }
+        .custom-file {
+            .custom-file-label {
+                &:after {
+                    padding: 7px 8px;
+                    line-height: 2;
+                }
+            }
+        }
+        .g-recaptcha {
+            margin: 0;
+            transform: scale(0.77);
+            -webkit-transform: scale(0.77);
+            transform-origin: 0 0;
+            -webkit-transform-origin: 0 0;
+        }
+    }
+}

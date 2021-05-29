@@ -1,0 +1,160 @@
+&--giftCardPaymentModal{
+    .close {
+        color: color(50);
+        &:hover {
+            opacity: 1; 
+        }
+    }
+    .modal-content {
+        background-color: color(130);
+    }
+    .modal-banner {
+        background-image: url("#{$imageurl}/cosmetic-modal-banner.png");
+        background-color: color(900);
+        background-repeat: no-repeat;
+        background-size: cover;
+        padding: 25px;
+        text-align: center;
+    }
+    .modal-body {
+        padding: 0;
+        h3 {
+            color: color(50);
+            margin-top: 40px;
+        }
+    }  
+    .detailBox {
+        padding: 35px 15px;
+        max-width: 800px;
+        margin: auto;
+        .dropdown-toggle {
+            font-family: font(rg);
+        }
+        .giftAmount {
+            margin-top: 10px;
+            font-family: font(md);
+            font-size: 12px;
+            span {
+                color: color(500);
+                font-size: 12px;
+            }
+        }
+        &__content {
+            margin-bottom: 40px;
+        }
+        &__title{
+            p {
+                margin-bottom: 12px;
+            }  
+        } 
+        &__text{
+            span{
+                font-family: font(bd);
+            }
+        }
+        &__SelectPaymentMethod{
+            margin-top: 0;
+            margin-bottom: 35px;
+            h5 {
+                font-size: 20px;
+                font-family: font(sbd);
+                margin-bottom: 20px;
+            } 
+        }
+        &__payPal {
+            padding: 20px 15px;
+            border: 1px solid color(500);
+            img {
+                margin-left: 15px;
+            }
+            .custom-control-label {
+                &:before {
+                    width: 24px;
+                    height: 24px;
+                    border-radius: 50%;
+                    border-width: 2px;
+                    border-color: color(500);
+                    top: 0;
+                }
+            }
+            .custom-control-input {
+                &:checked ~ {
+                    .custom-control-label {
+                        &:after {
+                            content: "";
+                            width: 14px;
+                            height: 14px;
+                            background-color: #edb17e;
+                            border-radius: 50%;
+                            top: 5px;
+                            left: -19px;
+                        }
+                    }
+                }
+            }
+        }
+    } 
+    @include media-breakpoint-down(lg) {
+        .detailBox {
+            padding: 25px 15px;
+            &__payPal {
+                padding: 15px;
+                img {
+                    max-width: 90px;
+                }
+            }
+            &__SelectPaymentMethod{
+                margin-bottom: 30px;
+            }
+        }
+    }
+    @include media-breakpoint-down(md) {
+        .detailBox {
+            padding: 20px 15px;
+            &__content{
+                margin-bottom: 20px;
+            }
+            &__title{
+                p {
+                    margin-bottom: 8px;
+                }  
+            }
+
+        }
+        .modal-banner {
+            background-position: 0 12px;
+        }
+        .modal-body {
+            h3 {
+                margin-top: 20px;
+            }
+        }
+        .modal-content-detail {
+            padding: 0 25px; 
+        } 
+    }
+    @include media-breakpoint-down(sm) {
+        .detailBox {
+            &__content{
+                margin-bottom: 15px;
+            }
+            &__SelectPaymentMethod{
+                margin-bottom: 25px;
+            }
+            &__title{
+                p {
+                    margin-bottom: 5px;
+                }  
+            }
+        }
+        .modal-banner {
+            background-image: none;
+        }
+        .save {
+            margin-top: 0;
+        }
+        .modal-content-detail {
+            padding: 0 15px; 
+        } 
+    }
+}

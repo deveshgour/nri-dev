@@ -1,0 +1,9 @@
+{
+	"version": 3,
+	"file": "food-detail.min.css",
+	"sources": [
+		"../scss/food-detail.scss"
+	],
+	"names": [],
+	"mappings": "AAAA,AACI,eADW,CACX,QAAQ,AAAA,CACJ,KAAK,CAAE,KAAK,CACZ,MAAM,CAAE,KAAK,CAChB,AAJL,AAQgB,eARD,CAKX,SAAS,CACL,SAAS,CACL,cAAc,CACV,EAAE,AAAA,CACE,SAAS,CAAE,IAAI,CAClB,AAVjB,AAcY,eAdG,CAKX,SAAS,CAQL,QAAQ,CACJ,CAAC,AAAA,CACG,SAAS,CAAE,IAAI,CACf,WAAW,CAAE,IAAI,CACpB"
+}

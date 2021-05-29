@@ -1,0 +1,21 @@
+html {
+    height: 100%;
+}
+body {
+    font-size: 14px;
+    line-height: 19px;
+    font-family: font(rg);
+    color: color(900);
+    min-height: 100%;
+    position: relative; 
+    background-color: color(130);
+}
+a,
+.btn {
+    text-decoration: none;
+    @include transition(all 0.4s);
+    &:hover {
+        text-decoration: none;
+    }
+}
+

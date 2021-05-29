@@ -1,0 +1,162 @@
+.videochatBox {
+  background-color: #fff;
+  width: 450px;
+  position: absolute;
+  bottom: 120px;
+  right: 40px;
+  border-radius: 10px;
+  z-index: 1;
+  &__header {
+    padding: 20px 25px 15px;
+    border-bottom: 1px solid #e9eaf2;
+    &--Img{
+      margin-right: 20px;
+      height: 45px;width: 45px;
+      border-radius: 50%;
+      overflow: hidden;
+      img{
+        border-radius: 50%;
+      }
+    }
+    h3 {
+      font-size: 24px;
+      font-family: font(sbd);
+      margin-bottom: 0px;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+    }
+  }
+  &__body {
+    padding: 25px;
+    max-height: 500px;
+    overflow-y: auto;
+    .msg {
+      &:not(:last-child) {
+        margin-bottom: 20px;
+      }
+      &__inner {
+        padding: 10px 15px;
+        font-family: font(rg);
+        font-size: 18px;
+        line-height: 28px;
+        border-radius: 10px;
+      }
+
+      &--me {
+        float: right;
+        margin-left: 50px;
+        .msg__inner {
+          background-color: color(50);
+          @include box-shadow(0, 3px, 20px, rgba(0,0,0,0.06));
+        }
+      }
+      &--you {
+        float: left;
+        margin-right: 50px;
+        .msg__inner {
+          background-color: #DBDBDB;
+          color: #737374;
+        }
+        .msg__time {
+          text-align: right;
+        }
+      }
+    }
+  }
+  &__footer {
+    border-top: 1px solid #e9eaf2;
+    position: relative;
+    padding: 20px;
+    .inputMsg {
+      width: 100%;
+      input {
+        border: none;
+        height: 44px;
+        padding-right: 40px;
+        background: #EBEBEB;
+        border: 1px solid transparent;
+        border-radius: 5px;
+        &:focus{
+          box-shadow: none;
+          border-color: color(500);
+          background: color(50);
+        }
+      }
+      .attachFile{
+        font-size: 20px;
+        top: 50%;right: 15px;
+        transform: translateY(-50%);
+        color: rgba(0,0,0,0.4);
+      }
+    }
+    .btnSend{
+      margin-left: 20px;
+      .btn{
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 48px;height: 48px;
+        color: color(50);
+        border-radius: 100%;
+        background: color(900);
+        font-size: 22px;
+      }
+    }
+  }
+  @media (max-width: 1599px) {
+    bottom: 86px;
+    right: 15px;
+    width: 380px;
+    &__header {
+      padding: 20px;
+      h3 {
+        font-size: 20px;
+      }
+    }
+    &__body {
+      max-height: 350px;
+      padding: 20px;
+      .msg {
+        &:not(:last-child) {
+          margin-bottom: 15px;
+        }
+        &__inner {
+          font-size: 14px;
+          line-height: 20px;
+        }
+        &__time {
+          font-size: 12px;
+        }
+      }
+    }
+    &__footer {
+      padding: 20px;
+    }
+  }  
+  @include media-breakpoint-down(xs) {
+    width: 280px;
+    bottom: 70px;
+    &__header {
+      padding: 10px 15px;
+    }
+    &__body {
+      max-height: 275px;
+      .msg {
+        padding: 0 15px;
+        &__inner{
+            padding: 10px;
+        }
+      }
+    }
+    &__footer {
+      padding: 10px 15px;
+      .inputMsg {
+        input {
+          height: 50px;
+          padding: 10px;
+        }
+      }
+    }
+  }
+}

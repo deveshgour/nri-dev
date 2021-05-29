@@ -1,0 +1,113 @@
+&--asksignupModal {
+    text-align: center;
+    .modal-body{
+        padding: 80px;
+    }
+    h4{
+        font-size: 30px;
+        font-family: font(bd);
+        margin-bottom: 50px;
+    }
+    .btn-signup {
+        padding: 10px 25px;
+        border: 1px solid #d9d9d9;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 450px;
+        margin: 0 auto;
+        &:not(:last-child) {
+            margin-bottom: 20px;
+        }
+        &__icon,
+        &__txt,
+        &__arrow {
+            display: inline-block;
+            vertical-align: middle;
+        }
+        &__icon {
+            margin-right: 32px;
+        }
+        &__txt1 {
+            color: #666666;
+            font-family: font(rg);
+            font-size: 14px;
+            margin-bottom: 10px;
+            position: relative;
+            padding-left: 46px;
+            &:before {
+                content: "";
+                position: absolute;
+                width: 41px;
+                height: 1px;
+                background-color: #666666;
+                left: 0;
+                bottom: 3px;
+            }
+        }
+        &__txt2 {
+            font-family: font(bd);
+            font-size: 14px;
+            color: color(900);
+        }
+        &__arrow {
+            background-color: #b2b2b2;
+            padding: 10px;
+            width: 44px;
+            height: 44px;
+            transition: ease-in-out 0.3s;
+        }
+        &:hover {
+            border-color: #aaaaaa;
+            .btn-signup__arrow {
+                background-color: color(900);
+            }
+        }
+    }
+
+    @media(max-width:1399px){
+        &.modal-md{
+            max-width: 700px;
+        }
+        .modal-body{
+            padding: 50px;
+        }
+        h4{
+            font-size: 22px;
+            margin-bottom: 40px;
+        }
+        .btn-signup{
+            width: 400px;
+        }
+    }
+
+    @include media-breakpoint-down(md){
+        .modal-body{
+            padding: 40px;
+        }
+        h4{
+            font-size: 20px;
+            margin-bottom: 30px;
+        }
+        .btn-signup{
+            width: 380px;
+        }
+    }
+
+    @include media-breakpoint-down(sm){
+        .modal-body{
+            padding: 45px 15px 30px;
+        }
+        h4{
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+        .btn-signup{
+            width: 269px;
+            padding: 10px;
+            &__icon{
+                margin-right: 10px;
+            }
+        }
+    }
+}

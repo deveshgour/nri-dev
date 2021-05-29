@@ -1,0 +1,72 @@
+&--giftVoucherModal {
+    .close {
+        color: color(50);
+        &:hover {
+            opacity: 1;
+        }
+    }
+    .modal-content {
+        background-color: color(130);
+    }
+    .modal-banner {
+        background-image: url("#{$imageurl}/cosmetic-modal-banner.png");
+        background-color: color(900);
+        background-repeat: no-repeat;
+        background-size: cover;
+        padding: 25px;
+        text-align: center;
+    }
+    .modal-body {
+        padding: 0;
+        h3 {
+            color: color(50);
+            margin-top: 40px;
+        }
+    }
+    .detailBox {
+        padding: 35px 15px;
+        max-width: 800px;
+        margin: auto;
+        .dropdown-toggle {
+            font-family: font(rg);
+        }
+        .giftAmount {
+            margin-top: 10px;
+            font-family: font(md);
+            font-size: 12px;
+            span {
+                color: color(500);
+                font-size: 12px;
+            }
+        }
+    }
+    @include media-breakpoint-down(lg) {
+        .detailBox {
+            padding: 25px 15px;
+        }
+    }
+    @include media-breakpoint-down(md) {
+        .detailBox {
+            padding: 20px 15px;
+        }
+        .modal-banner {
+            background-position: 0 12px;
+        }
+        .modal-body {
+            h3 {
+                margin-top: 20px;
+            }
+        }
+        .modal-content-detail {
+            padding: 0 25px;
+        }
+    }
+    @include media-breakpoint-down(sm) {
+        .modal-banner {
+            background-image: none;
+        }
+        .save {
+            margin-top: 0;
+        }
+    }
+}

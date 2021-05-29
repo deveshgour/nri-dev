@@ -1,0 +1,63 @@
+&--addSchedule{
+    .modal-body{
+        background: color(50);
+        padding: 25px 50px;
+        .form-group{
+            position: relative;
+            span[class*="icon-"] {
+                position: absolute;
+                top: 50%;
+                transform: translateY(-50%);
+                right: 10px;
+                color: rgba($color: color(900), $alpha: 0.6);
+                pointer-events: none;
+            }
+        }
+        .selectDay{
+            .custom-control{
+                padding-left: 0;
+                &:not(:last-child) {
+                    margin-right: 10px;
+                }
+                .custom-control-label {
+                    cursor: pointer;
+                    background: #EFEFEF;
+                    height: 50px;
+                    width: 50px;
+                    border-radius: 50%;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    padding-top: 0;
+                    color: #A1A1A2; 
+                    font-family: font(rg);
+                    &:before, &:after{
+                        display: none;
+                    }
+                }
+                .custom-control-input:checked ~ .custom-control-label {
+                    background: color(500);
+                    color: color(50);
+                }
+            }
+        }
+        @media (max-width: 1599px){
+            padding: 20px 30px;
+        }
+        @media (max-width: 575px){
+            padding: 15px;
+            .selectDay{
+                .custom-control{
+                    .custom-control-label {
+                        height: 35px;
+                        width: 35px;
+                        font-size: 12px;
+                    }
+                    &:not(:last-child) {
+                        margin-right: 4px;
+                    }
+                }
+            }
+        } 
+    }
+}
