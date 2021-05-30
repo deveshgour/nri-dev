@@ -472,9 +472,9 @@ $getallcomment = $this->Common_model->commentpagination(array("post_id" => $row-
 
                                         <b><a href="javascript:;" class="link-dark replyshow" data-commentid="<?php echo  $allcomment->comment_id; ?>">Reply</a></b>
 
-										<b><a href="javascript:void(0)" class="link-dark comment_like_post" <?php if($getmylikecomment){ ?>style="color:#009688;"<?php } ?> id="likecomment-<?php echo $allcomment->comment_id; ?>" data-status="1" data-type="1" data-author="<?php echo $allcomment->user_id; ?>" data-postid="<?php echo $allcomment->post_id; ?>" data-commentid="<?php echo $allcomment->comment_id; ?>">
+										<b><a href="javascript:void(0)" class="link-dark comment_like_post" <?php if($getmylikecomment){ ?><?php } ?> id="likecomment-<?php echo $allcomment->comment_id; ?>" data-status="1" data-type="1" data-author="<?php echo $allcomment->user_id; ?>" data-postid="<?php echo $allcomment->post_id; ?>" data-commentid="<?php echo $allcomment->comment_id; ?>">
 
-							   <div class="cmtdivcls" id="likecommentcountbox-<?php echo $allcomment->comment_id; ?>"><span class="cmtspan"><?php echo count($comment_like_count); ?></span></div>Like</a></b>
+							   <span class="cmtdivcls" id="likecommentcountbox-<?php echo $allcomment->comment_id; ?>"><span class="cmtspan"><?php echo count($comment_like_count); ?></span></span> Like</a></b>
 
 
 
@@ -558,7 +558,7 @@ $getallcomment = $this->Common_model->commentpagination(array("post_id" => $row-
 
 										<b><a href="javascript:void(0)" class="link-dark replycomment_like_post" <?php if($getmyreplylikecomment){ ?>style="color:#009688;"<?php } ?> id="likereplycomment-<?php echo $reply_val->reply_id; ?>" data-status="1" data-postid="<?php echo $reply_val->post_id; ?>" data-commentid="<?php echo $reply_val->comment_id; ?>" data-replycommentid="<?php echo $reply_val->reply_id; ?>">
 
-							   <div class="replycmtdivcls" id="likereplycommentcountbox-<?php echo $reply_val->reply_id; ?>"><span class="replycmtspan"><?php echo count($replycomment_like_count); ?></span></div>Like</a></b>
+							   <span class="replycmtdivcls" id="likereplycommentcountbox-<?php echo $reply_val->reply_id; ?>"><span class="replycmtspan"><?php echo count($replycomment_like_count); ?></span></span> Like</a></b>
 
 
 
