@@ -174,8 +174,9 @@ if ( ! function_exists('get_clickable_smileys'))
 			}
 
 			//$link[] = '<a href="javascript:void(0);" onclick="insert_smiley(\''.$key.'\', \''.$alias.'\')"><img src="'.$image_url.$smileys[$key][0].'" alt="'.$smileys[$key][3].'" style="width: '.$smileys[$key][1].'; height: '.$smileys[$key][2].'; border: 0;" /></a>';
-			$link[] = '<a href="javascript:void(0);" class="smilyshow" data-id="'.$key.'" data-image="'.$smileys[$key][0].'"><img src="'.$image_url.$smileys[$key][0].'" alt="'.$smileys[$key][3].'" style="width: '.$smileys[$key][1].'; height: '.$smileys[$key][2].'; border: 0;" /></a>';
-
+			
+	
+	$link[] = '<a href="javascript:void(0);" class="smilyshow" data-id="'.$key.'" data-image="'.$smileys[$key][0].'"><img src="'.$image_url.$smileys[$key][0].'" alt="'.$smileys[$key][3].'" style="width: '.$smileys[$key][1].'; height: '.$smileys[$key][2].'; border: 0;" /></a>';
 			$used[$smileys[$key][0]] = TRUE;
 		}
 
