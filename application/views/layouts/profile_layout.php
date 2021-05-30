@@ -40,6 +40,14 @@
 
         <nav class="navbar fixed-top">
 
+            <a class="navbar-brand" href="<?php echo base_url(); ?>">
+
+                <img src="<?php echo base_url(); ?>images/logo.png" alt="logo">
+
+            </a>
+
+
+
             <div class="searchForm">
 
                 <form method="post" action="" name="search">
@@ -50,13 +58,15 @@
 
                     </a>
 
-                    <div class="collapse form-search d-lg-block position-relative" id="collapseSearch">
+                    <div class="collapse form-search position-relative d-lg-block" id="collapseSearch">
+
                         <div class="position-relative">
+
                         <input type="text" class="form-control" placeholder="Search" name="friend_search" id="friend_search">
 
                         <span class="icon-search1"></span>
-                        </div>
-						
+
+					</div>	
 
 						<div id="display" class="autosuggestDrop"></div>
 
@@ -68,13 +78,9 @@
 
             </div>
 
-            <a class="navbar-brand" href="<?php echo base_url(); ?>">
 
-            <img src="<?php echo base_url(); ?>images/logo.png" alt="logo">
 
-            </a>
-            <div class="d-flex align-items-center">
-            <ul class="list-inline centerNav mb-0 mr-4">
+            <ul class="list-inline centerNav mb-0">
 
                 <li class="list-inline-item">
 
@@ -92,7 +98,7 @@
 
                 <li class="list-inline-item">
 
-                    <a href="javascript:;">
+                    <a href="<?php echo base_url(); ?>buzz_list">
 
                         <span class="icon icon-users-feed"></span>
 
@@ -106,7 +112,7 @@
 
                 <li class="list-inline-item">
 
-                    <a href="trending.html">
+                    <a href="<?php echo base_url(); ?>gov_detail">
 
                         <span class="icon icon-trending"></span>
 
@@ -131,19 +137,41 @@
                 </li>
 
             </ul>
-            <ul class="list-inline rightNav mb-0">
+
+
+
+          <?php $getemoji = $this->Common_model->getsingle("smiley_table",array("user_id" => $this->session->userdata("userId")['user_id'])); 
+
+		//echo '<pre>';print_r($getemoji);die;
+
+		?> 
+
+
+
+            <ul class="list-inline rightNav mb-0 ml-lg-auto order-2">
 
                 <li class="list-inline-item">
 
-                    <a href="javascript:;" class="link-dark"><span class="icon-mood"></span></a>
+                    <?php if(!empty($getemoji)){ ?>
+                      <div class="dropdown moodDropdoown">
+                        <a href="javascript:;" class="link-dark dropdown-toggle" id="moodDropdoown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="<?php echo $getemoji->image; ?>" ></a>
+                            <div class="dropdown-menu" aria-labelledby="moodDropdoown">
+                                <?php echo $smiley_table; ?>
+                            </div>
+                        </div>
+					   <?php }else{ ?>
+
+					  <a href="javascript:;" class="link-dark"><span class="icon-mood"></span></a>
+
+					   <?php } ?>
 
                 </li>
 
-                <li class="list-inline-item">
+                <!--<li class="list-inline-item">
 
                     <a href="javascript:;" class="link-dark"><span class="icon-settings1"></span></a>
 
-                </li>
+                </li>-->
 
                 <li class="list-inline-item">
 
@@ -196,7 +224,7 @@
                 </li>
 
             </ul>
-            </div>
+
         </nav>
 
     </header>

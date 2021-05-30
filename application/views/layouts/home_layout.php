@@ -10,6 +10,12 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
+    <meta name="title" content="First Title">
+
+<meta name="description" content="First Description">
+
+<meta property="og:url" content="<?php echo base_url(); ?>home">  
+
     <link rel="stylesheet" href="<?php echo base_url() ?>css/bootstrap.min.css">
 
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
@@ -48,12 +54,15 @@
 
                     </a>
 
-                    <div class="collapse d-lg-block form-search position-relative" id="collapseSearch">
-                        <div class="position-relative">
-                            <input type="text" class="form-control" placeholder="Search" name="friend_search" id="friend_search">
+                    <div class="collapse form-search position-relative d-lg-block" id="collapseSearch">
 
-                            <span class="icon-search1"></span>
-                        </div>
+                        <div class="position-relative">
+
+                        <input type="text" class="form-control" placeholder="Search" name="friend_search" id="friend_search">
+
+                        <span class="icon-search1"></span>
+
+						</div>
 
 						<div id="display" class="autosuggestDrop"></div>
 
@@ -95,29 +104,29 @@
 
                     <li class="list-inline-item">
 
-                        <a href="javascript:;">
+                    <a href="<?php echo base_url(); ?>buzz_list">
 
-                            <span class="icon icon-users-feed"></span>
+                        <span class="icon icon-users-feed"></span>
 
-                            <span class="nav-text">buzz</span>
+                        <span class="nav-text">buzz</span>
 
-                        </a>
+                    </a>
 
+                   
 
+                </li>
 
-                    </li>
+                <li class="list-inline-item">
 
-                    <li class="list-inline-item">
+                    <a href="<?php echo base_url(); ?>gov_detail">
 
-                        <a href="trending.html">
+                        <span class="icon icon-trending"></span>
 
-                            <span class="icon icon-trending"></span>
+                        <span class="nav-text">let's Gov</span>
 
-                            <span class="nav-text">let's Gov</span>
+                    </a>
 
-                        </a>
-
-                    </li>
+                </li>
 
                     <li class="list-inline-item">
 
@@ -135,6 +144,14 @@
 
                 </ul>
 
+                
+
+                <?php $getemoji = $this->Common_model->getsingle("smiley_table",array("user_id" => $this->session->userdata("userId")['user_id'])); 
+
+		//echo '<pre>';print_r($getemoji);die;
+
+		?>
+
 
 
                 <ul class="list-inline rightNav mb-0">
@@ -143,15 +160,23 @@
 
                     <li class="list-inline-item">
 
-                        <a href="javascript:;" class="link-dark"><span class="icon-mood"></span></a>
+                       <?php if(!empty($getemoji)){ ?>
+
+					  <a href="javascript:;" onclick="moodModal()" class="link-dark"><img src="<?php echo $getemoji->image; ?>" ></a>
+
+					   <?php }else{ ?>
+
+					  <a href="javascript:;" onclick="moodModal()" class="link-dark"><span class="icon-mood"></span></a>
+
+					   <?php } ?>
 
                     </li>
 
-                    <li class="list-inline-item">
+                    <!--<li class="list-inline-item">
 
                         <a href="javascript:;" class="link-dark"><span class="icon-settings1"></span></a>
 
-                    </li>
+                    </li>-->
 
                     <li class="list-inline-item">
 

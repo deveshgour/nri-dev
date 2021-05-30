@@ -332,4 +332,350 @@ public function getsingle($table,$where)
 		$this->db->where($where);
 		return $this->db->get()->result();
 	}
+	
+	function jointwotableorderby($table, $field_first, $table1, $field_second,$where='',$field,$order_id,$order_by) {
+
+        $this->db->select($field);
+		$this->db->order_by($order_id, $order_by);	
+        $this->db->from("$table");
+        $this->db->join("$table1", "$table1.$field_second = $table.$field_first"); 
+        if($where !=''){
+        $this->db->where($where); 
+        }
+        $q = $this->db->get();
+        if($q->num_rows() > 0) {
+            foreach($q->result() as $rows) {
+                $data[] = $rows;
+            }
+            $q->free_result();
+            return $data;
+        }
+    }
+	
+	function joint_major($postid){
+	$sql = "SELECT `users`.`user_id`, `users`.`firstname`, `users`.`lastname`, `like_major`.`like_major_id` FROM `like_major` JOIN `users` ON `users`.`user_id` = `like_major`.`user_id` WHERE `major_id` = '".$postid."' ORDER BY like_major.major_id DESC LIMIT 1";
+	$q = $this->db->query($sql);
+        
+		  $data =  array() ;
+		  
+		  
+		 foreach($q->result_array() as $row)
+			{
+				 $data[]  = $row;
+			}
+			
+			return $data; 
+	}
+	
+	function commentpaginationmajor($where,$num,$offset,$sort_by, $sort_order)
+    {   
+		
+		$this->db->select('*');
+		$this->db->where($where);
+		
+		$this->db->order_by($sort_by, $sort_order);
+		$q = $this->db->get('comment_major', $num, $offset);
+   
+        $num_rows = $q->num_rows();
+        if ($num_rows > 0)
+        {
+            foreach ($q->result() as $rows)
+            {
+                $data[] = $rows;
+            }
+            $q->free_result();
+            $ret['rows'] = $data;
+        }
+
+        $this->db->select('*');
+		
+		$this->db->where($where);
+		
+		$this->db->order_by($sort_by, $sort_order);	
+		$q = $this->db->get('comment_major');
+        $ret['num_rows'] = $q->num_rows();
+        return $ret;
+	}
+	
+	function joint_visit($postid){
+	$sql = "SELECT `users`.`user_id`, `users`.`firstname`, `users`.`lastname`, `like_visit`.`like_visit_id` FROM `like_visit` JOIN `users` ON `users`.`user_id` = `like_visit`.`user_id` WHERE `visit_id` = '".$postid."' ORDER BY like_visit.visit_id DESC LIMIT 1";
+	$q = $this->db->query($sql);
+        
+		  $data =  array() ;
+		  
+		  
+		 foreach($q->result_array() as $row)
+			{
+				 $data[]  = $row;
+			}
+			
+			return $data; 
+	}
+	
+	function commentpaginationvisit($where,$num,$offset,$sort_by, $sort_order)
+    {   
+		
+		$this->db->select('*');
+		$this->db->where($where);
+		
+		$this->db->order_by($sort_by, $sort_order);
+		$q = $this->db->get('comment_visit', $num, $offset);
+   
+        $num_rows = $q->num_rows();
+        if ($num_rows > 0)
+        {
+            foreach ($q->result() as $rows)
+            {
+                $data[] = $rows;
+            }
+            $q->free_result();
+            $ret['rows'] = $data;
+        }
+
+        $this->db->select('*');
+		
+		$this->db->where($where);
+		
+		$this->db->order_by($sort_by, $sort_order);	
+		$q = $this->db->get('comment_visit');
+        $ret['num_rows'] = $q->num_rows();
+        return $ret;
+	}
+	
+	function jointwotablenum($table, $field_first, $table1, $field_second,$where='',$field,$limit) {
+
+        $this->db->select($field);
+        $this->db->from("$table");
+        $this->db->join("$table1", "$table1.$field_second = $table.$field_first"); 
+        if($where !=''){
+        $this->db->where($where); 
+        }
+		 if ($limit != '')
+        {
+            $this->db->limit($limit);
+        }
+        $q = $this->db->get();
+        if($q->num_rows() > 0) {
+            foreach($q->result() as $rows) {
+                $data[] = $rows;
+            }
+            $q->free_result();
+			//$data['nm'] = $q->num_rows();
+            return $data;
+        }
+    }
+    
+    function joint_event($postid){
+	$sql = "SELECT `users`.`user_id`, `users`.`firstname`, `users`.`lastname`, `like_event`.`like_event_id` FROM `like_event` JOIN `users` ON `users`.`user_id` = `like_event`.`user_id` WHERE `event_id` = '".$postid."' ORDER BY like_event.event_id DESC LIMIT 1";
+	$q = $this->db->query($sql);
+        
+		  $data =  array() ;
+		  
+		  
+		 foreach($q->result_array() as $row)
+			{
+				 $data[]  = $row;
+			}
+			
+			return $data; 
+	}
+	
+	function commentpaginationevent($where,$num,$offset,$sort_by, $sort_order)
+    {   
+		
+		$this->db->select('*');
+		$this->db->where($where);
+		
+		$this->db->order_by($sort_by, $sort_order);
+		$q = $this->db->get('comment_event', $num, $offset);
+   
+        $num_rows = $q->num_rows();
+        if ($num_rows > 0)
+        {
+            foreach ($q->result() as $rows)
+            {
+                $data[] = $rows;
+            }
+            $q->free_result();
+            $ret['rows'] = $data;
+        }
+
+        $this->db->select('*');
+		
+		$this->db->where($where);
+		
+		$this->db->order_by($sort_by, $sort_order);	
+		$q = $this->db->get('comment_event');
+        $ret['num_rows'] = $q->num_rows();
+        return $ret;
+	}
+	
+	function joint_gov($postid){
+	$sql = "SELECT `users`.`user_id`, `users`.`firstname`, `users`.`lastname`, `like_gov`.`like_gov_id` FROM `like_gov` JOIN `users` ON `users`.`user_id` = `like_gov`.`user_id` WHERE `gov_id` = '".$postid."' ORDER BY like_gov.gov_id DESC LIMIT 1";
+	$q = $this->db->query($sql);
+        
+		  $data =  array() ;
+		  
+		  
+		 foreach($q->result_array() as $row)
+			{
+				 $data[]  = $row;
+			}
+			
+			return $data; 
+	}
+	function commentpaginationgov($where,$num,$offset,$sort_by, $sort_order)
+    {   
+		
+		$this->db->select('*');
+		$this->db->where($where);
+		
+		$this->db->order_by($sort_by, $sort_order);
+		$q = $this->db->get('comment_gov', $num, $offset);
+   
+        $num_rows = $q->num_rows();
+        if ($num_rows > 0)
+        {
+            foreach ($q->result() as $rows)
+            {
+                $data[] = $rows;
+            }
+            $q->free_result();
+            $ret['rows'] = $data;
+        }
+
+        $this->db->select('*');
+		
+		$this->db->where($where);
+		
+		$this->db->order_by($sort_by, $sort_order);	
+		$q = $this->db->get('comment_gov');
+        $ret['num_rows'] = $q->num_rows();
+        return $ret;
+	}
+	
+	function joint_buzz($postid){
+	$sql = "SELECT `users`.`user_id`, `users`.`firstname`, `users`.`lastname`, `like_buzz`.`like_buzz_id` FROM `like_buzz` JOIN `users` ON `users`.`user_id` = `like_buzz`.`user_id` WHERE `buzz_id` = '".$postid."' ORDER BY like_buzz.buzz_id DESC LIMIT 1";
+	$q = $this->db->query($sql);
+        
+		  $data =  array() ;
+		  
+		  
+		 foreach($q->result_array() as $row)
+			{
+				 $data[]  = $row;
+			}
+			
+			return $data; 
+	}
+	function commentpaginationbuzz($where,$num,$offset,$sort_by, $sort_order)
+    {   
+		
+		$this->db->select('*');
+		$this->db->where($where);
+		
+		$this->db->order_by($sort_by, $sort_order);
+		$q = $this->db->get('comment_buzz', $num, $offset);
+   
+        $num_rows = $q->num_rows();
+        if ($num_rows > 0)
+        {
+            foreach ($q->result() as $rows)
+            {
+                $data[] = $rows;
+            }
+            $q->free_result();
+            $ret['rows'] = $data;
+        }
+
+        $this->db->select('*');
+		
+		$this->db->where($where);
+		
+		$this->db->order_by($sort_by, $sort_order);	
+		$q = $this->db->get('comment_buzz');
+        $ret['num_rows'] = $q->num_rows();
+        return $ret;
+	}
+	
+	 //Get all values from single table
+    function getAllusers($num, $offset, $where, $type = 1, $table, $sort_by, $sort_order,  $sort_columns)
+    {
+      
+		
+		$this->db->select('*');	
+            $q = $this->db->order_by($sort_by, $sort_order);
+            $q = $this->db->get_where($table, $where, $num, $offset);
+		$num_rows = $q->num_rows();
+		
+		
+        if ($num_rows > 0)
+        {
+            foreach ($q->result() as $rows)
+            {
+                $data[] = $rows;
+            }
+            $q->free_result();
+            $ret['rows'] = $data;
+        }
+		 // count Values
+        $this->db->select('*');	
+        $q = $this->db->get_where($table, $where);
+       $ret['num_rows'] = $q->num_rows();
+        return $ret;
+    }
+    
+    public function searchgrouplikenew($like,$where)
+	{ 
+		$this->db->select('*');
+		$this->db->from('create_group');
+		$this->db->like("CONCAT(title)",$like);
+		$this->db->where($where);
+		return $this->db->get()->result();
+	}
+	
+	function joint_root($postid){
+	$sql = "SELECT `users`.`user_id`, `users`.`firstname`, `users`.`lastname`, `like_root`.`like_root_id` FROM `like_root` JOIN `users` ON `users`.`user_id` = `like_root`.`user_id` WHERE `root_id` = '".$postid."' ORDER BY like_root.root_id DESC LIMIT 1";
+	$q = $this->db->query($sql);
+        
+		  $data =  array() ;
+		  
+		  
+		 foreach($q->result_array() as $row)
+			{
+				 $data[]  = $row;
+			}
+			
+			return $data; 
+	}
+	
+	function commentpaginationroot($where,$num,$offset,$sort_by, $sort_order)
+    {   
+		
+		$this->db->select('*');
+		$this->db->where($where);
+		
+		$this->db->order_by($sort_by, $sort_order);
+		$q = $this->db->get('comment_root', $num, $offset);
+   
+        $num_rows = $q->num_rows();
+        if ($num_rows > 0)
+        {
+            foreach ($q->result() as $rows)
+            {
+                $data[] = $rows;
+            }
+            $q->free_result();
+            $ret['rows'] = $data;
+        }
+
+        $this->db->select('*');
+		
+		$this->db->where($where);
+		
+		$this->db->order_by($sort_by, $sort_order);	
+		$q = $this->db->get('comment_root');
+        $ret['num_rows'] = $q->num_rows();
+        return $ret;
+	}
 }

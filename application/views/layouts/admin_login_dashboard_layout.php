@@ -67,6 +67,19 @@
                                 <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                                 Users
                             </a>
+							
+							<a class="nav-link" href="<?php echo base_url(); ?>Admin_dashboard/buzz_list">
+                                <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                                Buzz
+                            </a>
+							<a class="nav-link" href="<?php echo base_url(); ?>Admin_dashboard/gov_list">
+                                <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                                Lets gov
+                            </a>
+                            <a class="nav-link" href="<?php echo base_url(); ?>Admin_dashboard/fact_list">
+                                <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                                Interesting fact
+                            </a>
 							<!--<a class="nav-link" href="<?php //echo base_url(); ?>admin/connect_to_root">
                                 <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                                 Connect to root

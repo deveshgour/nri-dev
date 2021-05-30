@@ -84,6 +84,11 @@ header{
         padding: 15px 50px;
         box-shadow: 0 3px 10px rgba($color: $black, $alpha: .15);
         background: $white;
+        .navbar-brand {
+            img{
+                height: 58px;
+            }
+        }
         &--homeBg{
             background: #fdfcfa63 !important;
         }
@@ -145,6 +150,14 @@ header{
                     box-shadow: none;
                     &:after{
                         display: none;
+                    }
+                }
+                &.moodDropdoown{
+                    .dropdown-menu{
+                            padding:10px;
+                            img{
+                                width: 24px;
+                            }
                     }
                 }
                 .dropdown-menu{
@@ -409,7 +422,7 @@ body{
                     }
                 }
                 .comment-list{
-                    li+li{margin-top: 15px;}
+                    li{margin-top: 15px;}
                     .imgBox{
                         height: 36px;
                         width: 36px;
@@ -707,4 +720,5 @@ body{
 @import 'profile.scss';
 @import 'pages/user-profile.scss';
 @import 'pages/friend-request.scss';
+@import 'pages/letgov-detail.scss';
 @import 'food-detail.scss';

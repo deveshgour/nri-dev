@@ -38,6 +38,16 @@ class Userprofile extends CI_Controller {
 				$data['post_data'] = '';
 				$data['count_total'] = '';
 			}
+			
+				/*---------------------------mood-------------------------------*/
+		 $this->load->helper('smiley');
+             $this->load->library('table');
+            $image = base_url().'smiley/';
+                $image_array = get_clickable_smileys($image, 'comments');
+                $col_array = $this->table->make_columns($image_array, 8);
+
+                $data['smiley_table'] = $this->table->generate($col_array);
+		/*--------------------------------------------------------------*/
 		
 		$this->load->view('layouts/profile_layout',$data);
 		$this->load->view('home/userprofile',$data);  
@@ -210,8 +220,8 @@ public function friend_user()
 		$data["userDetail"] = $this->Common_model->getsingle("users",array("user_id" => $user_id));
 		$data["allphoto"] = $this->Common_model->getAllwhereorder("user_images",array("user_id" => $user_id,"photo_type" => "image"),"image_id","desc");
 		$data["allvideo"] = $this->Common_model->getAllwhereorder("user_images",array("user_id" => $user_id,"photo_type" => "video"),"image_id","desc");
-		$data["checkfriend"] = $this->Common_model->getsingle("friend",array("friend_user_id" => $user_id,"user_id" => $session_id));
-		$data["checknewfriend"] = $this->Common_model->getsingle("friend",array("friend_user_id" => $session_id,"user_id" => $user_id));
+	$where = '(friend_user_id ='.$session_id.' and user_id ='.$user_id.') or (friend_user_id ='.$user_id.' and user_id ='.$session_id.')';
+		$data["checkfriend"] = $this->Common_model->getsingle("friend",$where);
 		
 		if(!empty($result['rows'])) {
 				$data['post_data'] = $result['rows'];
@@ -220,6 +230,16 @@ public function friend_user()
 				$data['post_data'] = '';
 				$data['count_total'] = '';
 			}
+		
+			/*---------------------------mood-------------------------------*/
+		 $this->load->helper('smiley');
+             $this->load->library('table');
+            $image = base_url().'smiley/';
+                $image_array = get_clickable_smileys($image, 'comments');
+                $col_array = $this->table->make_columns($image_array, 8);
+
+                $data['smiley_table'] = $this->table->generate($col_array);
+		/*--------------------------------------------------------------*/
 		
 		$this->load->view('layouts/profile_layout',$data);
 		$this->load->view('home/friend_user',$data);  
@@ -260,15 +280,578 @@ public function friend_user()
 		echo json_encode($response);
 	}
 	
+	public function deletefriendRequest()
+	{
+		$user = $this->input->post('userid');		
+		$session_id = $this->session->userdata('userId')['user_id'];
+		
+		$this->Common_model->deleteRecords("friend",array("friend_user_id" => $session_id,"user_id" => $user));
+		$response = array("success" => true, 'message'=>'Request remove successfully');
+		echo json_encode($response);
+	}
+	
 	public function friendRequest_list()
 	{
 		$user_id = $this->session->userdata('userId')['user_id'];	
-		$data['friendrequest_list'] = $this->Common_model->jointwotable("friend", "friend_user_id", "users", "user_id",array("friend.user_id" => $user_id,"friend.request_status" => 0),"*");
+		$data['friendrequest_list'] = $this->Common_model->jointwotableorderby("friend", "user_id", "users", "user_id",array("friend.friend_user_id" => $user_id,"friend.request_status" => 0),"*","friend_id","desc");
 		
+		
+			/*---------------------------mood-------------------------------*/
+		 $this->load->helper('smiley');
+             $this->load->library('table');
+            $image = base_url().'smiley/';
+                $image_array = get_clickable_smileys($image, 'comments');
+                $col_array = $this->table->make_columns($image_array, 8);
+
+                $data['smiley_table'] = $this->table->generate($col_array);
+		/*--------------------------------------------------------------*/
 		
 		$this->load->view('layouts/profile_layout',$data);
 		$this->load->view('home/friendRequest_list',$data);  
 		$this->load->view('layouts/footer_layout',$data);
 	}
+	
+	public function respondRequest()
+	{ 
+		$friend_id = $this->input->post('frnd_id');	
+		$frndsug = $this->input->post('frndsug');		
+		$user_id = $this->session->userdata('userId')['user_id'];
+		$list_id = $this->input->post('listid');	
+		$array = array(		  
+			   'create_at' => date('Y:m:d H:i:s'),		  
+			   'request_status' => 1
+			);
+			$this->Common_model->updateRecords('friend',$array,array('friend_user_id' => $user_id,'user_id' => $friend_id));	
+			$response = array("success" => true, 'message'=>'Friend Request Sent Successfully');
+			echo json_encode($response); 
+	}
+	
+	public function buzz_list()
+	{
+		$data = array();
+		$data['buzz_list'] = $this->Common_model->getAllwhereorder("buzz",array("status" => "1"),"buzz_id","desc");
+		 
+			/*---------------------------mood-------------------------------*/
+		 $this->load->helper('smiley');
+             $this->load->library('table');
+            $image = base_url().'smiley/';
+                $image_array = get_clickable_smileys($image, 'comments');
+                $col_array = $this->table->make_columns($image_array, 8);
+
+                $data['smiley_table'] = $this->table->generate($col_array);
+		/*--------------------------------------------------------------*/
+		$this->load->view('layouts/profile_layout',$data);
+		$this->load->view('home/buzz_list',$data);  
+		$this->load->view('layouts/footer_layout',$data);
+	}
+	
+	public function buzz_detail()
+	{
+		$data = array();
+		
+		$buzz_id = $this->uri->segment("2");
+		$data["detail"] = $this->Common_model->getsingle("buzz",array("buzz_id" => $buzz_id));
+		$data["userDetail"] = $this->Common_model->getsingle("users",array("user_id" => $this->session->userdata("userId")["user_id"]));
+		$data['connect_to_root'] = $this->Common_model->getAllwhereorder("connect_to_root",array("status" => 1),"root_id","asc");
+		
+			/*---------------------------mood-------------------------------*/
+		 $this->load->helper('smiley');
+             $this->load->library('table');
+            $image = base_url().'smiley/';
+                $image_array = get_clickable_smileys($image, 'comments');
+                $col_array = $this->table->make_columns($image_array, 8);
+
+                $data['smiley_table'] = $this->table->generate($col_array);
+		/*--------------------------------------------------------------*/
+		
+		$this->load->view('layouts/profile_layout',$data);
+		$this->load->view('home/buzz_detail',$data);  
+		$this->load->view('layouts/footer_layout',$data);
+	}
+	
+	public function gov_list()
+	{
+		$data = array();
+		$data['gov_list'] = $this->Common_model->getAllwhereorder("lets_gov",array("status" => "1"),"gov_id","desc");
+		 
+		
+		$this->load->view('layouts/profile_layout',$data);
+		$this->load->view('home/gov_list',$data);  
+		$this->load->view('layouts/footer_layout',$data);
+	}
+	
+	public function gov_detail_bkp()
+	{
+		$data = array();
+		
+		$gov_id = $this->uri->segment("2");
+		$data["detail"] = $this->Common_model->getsingle("lets_gov",array("gov_id" => $gov_id));
+		$data["userDetail"] = $this->Common_model->getsingle("users",array("user_id" => $this->session->userdata("userId")["user_id"]));
+		$data['connect_to_root'] = $this->Common_model->getAllwhereorder("connect_to_root",array("status" => 1),"root_id","asc");
+		
+		$this->load->view('layouts/profile_layout',$data);
+		$this->load->view('home/gov_detail',$data);  
+		$this->load->view('layouts/footer_layout',$data);
+	}
+	
+	public function gov_detail()
+	{ 
+		$data = array();
+		
+		$data['page'] = 0;
+			
+		$pagecon['per_page'] = 3;
+		$data['per_page'] = 3;
+		
+		$session_id = $this->session->userdata('userId')['user_id'];
+		$data["foruserimage"] = $this->Common_model->getsingle("users",array("user_id" => $session_id));
+		
+		$var_search = 'status = 1';
+		$var_type = 1;
+		$sort_columns = array();
+		$sort_order = 'desc';
+		$sort_by = 'create_date';
+		$field = "lets_gov.gov_id,lets_gov.url,lets_gov.description,lets_gov.title,lets_gov.image,lets_gov.status,lets_gov.create_date,users.user_id,users.firstname,users.lastname,users.user_image,users.email,users.country_id";
+		//$result = $this->Common_model->getAllJoin($pagecon['per_page'], $data['page'], $var_search, $var_type, 'lets_gov', "user_id", "users", "user_id",$sort_by, $sort_order, $sort_columns, $field,$search = ''); 
+		$result = $this->Common_model->getAllusers($pagecon['per_page'], $data['page'], $var_search, $var_type, 'lets_gov', $sort_by, $sort_order,  $sort_columns);
+		//print_r($this->db->last_query()); 
+		
+		$data['connect_to_root'] = $this->Common_model->getAllwhereorder("connect_to_root",array("status" => 1),"root_id","asc");
+		
+		
+		 
+		if(!empty($result['rows'])) {
+				$data['post_data'] = $result['rows'];
+				$data['count_total'] = $result['num_rows'];
+			} else {
+				$data['post_data'] = '';
+				$data['count_total'] = '';
+			}
+			
+				/*---------------------------mood-------------------------------*/
+		 $this->load->helper('smiley');
+             $this->load->library('table');
+            $image = base_url().'smiley/';
+                $image_array = get_clickable_smileys($image, 'comments');
+                $col_array = $this->table->make_columns($image_array, 8);
+
+                $data['smiley_table'] = $this->table->generate($col_array);
+		/*--------------------------------------------------------------*/
+		 $this->load->view('layouts/profile_layout',$data);
+		$this->load->view('home/gov_detail',$data);  
+		$this->load->view('layouts/footer_layout',$data);
+	} 
+	
+		public function get_govoffset()
+	{
+		$data['offset'] = $this->input->post('offset');
+        
+		$data['page'] = 3;
+		//$var_search = array();
+		$session_id = $this->session->userdata('userId')['user_id'];
+		$var_search = 'status = 1';
+
+		
+        
+		$var_type = 1;
+
+		$sort_columns = array();
+		$sort_order = 'desc';
+		$sort_by = 'create_date';
+		
+        //$field = "post.post_id,post.post,post.media_path,post.media_type,post.status,post.date_added,users.user_id,users.firstname,users.lastname,users.email,users.country_id";
+		$result = $this->Common_model->getAllusers($data['page'], $data['offset'], $var_search, $var_type, 'lets_gov', $sort_by, $sort_order,  $sort_columns);
+		//echo "<pre>";print_r($result);die;
+		//echo $this->db->last_query();die;
+		if(!empty($result['rows'])) {
+			$data['post_data'] = $result['rows'];
+			$data['count_total'] = $result['num_rows'];
+		} else {
+			$data['post_data'] = '';
+			$data['count_total'] = '';
+		}	
+
+		$this->load->view('home/ajax_govvalue',$data);
+	}
+	
+	public function fact_list()
+	{
+		$data = array();
+		$data['fact_list'] = $this->Common_model->getAllwhereorder("fact",array("status" => "1"),"fact_id","desc");
+		
+			/*---------------------------mood-------------------------------*/
+		 $this->load->helper('smiley');
+             $this->load->library('table');
+            $image = base_url().'smiley/';
+                $image_array = get_clickable_smileys($image, 'comments');
+                $col_array = $this->table->make_columns($image_array, 8);
+
+                $data['smiley_table'] = $this->table->generate($col_array);
+		/*--------------------------------------------------------------*/
+		 
+		
+		$this->load->view('layouts/profile_layout',$data);
+		$this->load->view('home/fact_list',$data);  
+		$this->load->view('layouts/footer_layout',$data);
+	}
+	
+	public function like_gov()
+	{
+		$data['title'] = 'Like';	
+		$user_id = $this->session->userdata('userId')['user_id'];
+		$post_id = $this->input->post('post');		
+		$status = $this->input->post('status');
+		$author = $this->input->post('author');
+		
+		  
+		
+		$liked = $this->Common_model->getsingle('like_gov',array('gov_id'=>$post_id,'user_id'=>$this->session->userdata('userId')['user_id']));
+		if($liked){
+			if($liked->status == $status){
+			$response = array("status" => $status,"success" => false, 'message'=>'Successfully insert');
+			}else{
+			$this->Common_model->updateData('like_gov',array('status'=>$status),array('like_gov_id'=>$liked->like_gov_id));
+			$count_like_one = $this->Common_model->jointwotable('like_gov', 'user_id', 'users', 'user_id',array('gov_id' => $post_id,'like_gov.status'=>1),'users.user_id,users.firstname,users.lastname,like_gov.like_gov_id');
+		 
+			$response = array("status" => $status, "success" => true, 'message'=>'Successfully insert','like'=>count($count_like_one));
+			}
+            $this->Common_model->deleteRecords('like_gov',array("like_id" => $liked->like_id));
+			$count_like_one = $this->Common_model->jointwotable('like_gov', 'user_id', 'users', 'user_id',array('gov_id' => $post_id,'like_gov.status'=>1),'users.user_id,users.firstname,users.lastname,like_gov.like_gov_id');
+			$response = array("status" => "0","success" => false, 'message'=>'Successfully delete','like'=>count($count_like_one));
+		}else{
+		if($status == 1){
+			$array = array(
+			'gov_id' => $post_id,
+			'user_id' => $user_id,
+			//'create_at' => date('Y:m:d H:i:s'),
+			'status' => $status
+			);
+			$insert_id = $this->Common_model->addRecords('like_gov',$array);
+			if($insert_id > 0){
+			
+			$count_like_one = $this->Common_model->jointwotable('like_gov', 'user_id', 'users', 'user_id',array('gov_id' => $post_id,'like_gov.status'=>1),'users.user_id,users.firstname,users.lastname,like_gov.like_gov_id');
+		 
+			
+			$response = array("status" => $status, "type"=>$type, "success" => true, 'message'=>'Successfully insert','like_gov'=>count($count_like_one));
+			}else{
+				$response = array("status" => $status, "type"=>$type, "success" => false, 'message'=>'Not Liked');
+
+			}
+
+			}else{
+				$response = array("success" => false, 'message'=>'Not Liked');
+
+			}
+
+		}
+
+		echo json_encode($response);
+	}
+	
+	public function addcommentgov()
+	{
+		
+		$post_id = $this->input->post("postId");
+		$userIds = $this->input->post("userIds");
+		$post_comment = $this->input->post("post_comment");
+		$array = array(
+			"comment" => $post_comment,
+			"gov_id" => $post_id,
+			"user_id" => $userIds,
+			"create_date" => date("Y-m-d,H:i:s")
+			);
+		$insertid = $this->Common_model->addRecords("comment_gov",$array);
+		
+		$data['getallcomment'] = $this->Common_model->commentpaginationgov(array("gov_id" => $post_id),3,0,"comment_gov_id", "desc");
+		$data['totalcommentcount'] = $this->Common_model->countwhereuser("comment_gov",array("gov_id" => $post_id));
+		$data['post_id'] = $this->input->post("postId");
+		
+		$list = $this->load->view('home/ajax_gov_comment', array('getallcomment'=>$data['getallcomment'],'post_id'=>$post_id), true);
+					
+		$this->output->set_content_type('application/json');
+		
+		$return = array('success'=>true, 'list'=> $list,'totalcommentcount' => $data['totalcommentcount']);
+		echo json_encode($return);
+       
+	}
+	
+		public function get_gov_comments()
+	{
+		$offset = $this->input->post('offset');
+		
+		$postid = $this->input->post('postid');
+		$off = $offset + 1;
+		$limit = 3;
+		$offset = $offset * $limit;
+		
+		
+		
+		$data['getallcomment'] = $this->Common_model->commentpaginationgov(array("gov_id" => $postid),$limit,$offset,"comment_gov_id", "desc");
+		
+		$list = $this->load->view('home/ajax_newgovcomment', array('getallcomment'=>$data['getallcomment'],'post_id'=>$postid,'offset'=>$off), true);
+					
+		$this->output->set_content_type('application/json');
+		
+		$return = array('success'=>true, 'list'=> $list);
+		echo json_encode($return);
+	}
+	
+	public function delete_gov_comment()
+	{
+		$comment_id = $this->input->post("comment_id");
+		$postid = $this->input->post("postid");
+		
+		$this->Common_model->deleteRecords("comment_gov",array("comment_gov_id" => $comment_id,"gov_id" => $postid));
+	}
+	
+	/*----------------------------------------buzz--------------------------------------*/
+	
+	public function like_buzz()
+	{
+		$data['title'] = 'Like';	
+		$user_id = $this->session->userdata('userId')['user_id'];
+		$post_id = $this->input->post('post');		
+		$status = $this->input->post('status');
+		$author = $this->input->post('author');
+		
+		  
+		
+		$liked = $this->Common_model->getsingle('like_buzz',array('buzz_id'=>$post_id,'user_id'=>$this->session->userdata('userId')['user_id']));
+		if($liked){
+			if($liked->status == $status){ 
+			$response = array("status" => $status,"success" => false, 'message'=>'Successfully insert');
+			}else{
+			$this->Common_model->updateData('like_buzz',array('status'=>$status),array('like_buzz_id'=>$liked->like_buzz_id));
+			$count_like_one = $this->Common_model->jointwotable('like_buzz', 'user_id', 'users', 'user_id',array('buzz_id' => $post_id,'like_buzz.status'=>1),'users.user_id,users.firstname,users.lastname,like_buzz.like_buzz_id');
+		 
+			$response = array("status" => $status, "success" => true, 'message'=>'Successfully insert','like'=>count($count_like_one));
+			}
+            $this->Common_model->deleteRecords('like_buzz',array("like_buzz_id" => $liked->like_buzz_id));
+			$count_like_one = $this->Common_model->jointwotable('like_buzz', 'user_id', 'users', 'user_id',array('buzz_id' => $post_id,'like_buzz.status'=>1),'users.user_id,users.firstname,users.lastname,like_buzz.like_buzz_id');
+			$response = array("status" => "0","success" => false, 'message'=>'Successfully delete','like'=>count($count_like_one));
+		}else{
+		if($status == 1){
+			$array = array(
+			'buzz_id' => $post_id,
+			'user_id' => $user_id,
+			//'create_at' => date('Y:m:d H:i:s'),
+			'status' => $status
+			);
+			$insert_id = $this->Common_model->addRecords('like_buzz',$array);
+			if($insert_id > 0){
+			
+			$count_like_one = $this->Common_model->jointwotable('like_buzz', 'user_id', 'users', 'user_id',array('buzz_id' => $post_id,'like_buzz.status'=>1),'users.user_id,users.firstname,users.lastname,like_buzz.like_buzz_id');
+		// echo $this->db->last_query();die;
+			//echo "<pre>";print_r();die;
+			$response = array("status" => $status, "type"=>$type, "success" => true, 'message'=>'Successfully insert','like'=>count($count_like_one));
+			}else{
+				$response = array("status" => $status, "type"=>$type, "success" => false, 'message'=>'Not Liked');
+
+			}
+
+			}else{
+				$response = array("success" => false, 'message'=>'Not Liked');
+
+			}
+
+		}
+
+		echo json_encode($response);
+	}
+	
+	public function addcommentbuzz()
+	{
+		
+		$post_id = $this->input->post("postId");
+		$userIds = $this->input->post("userIds");
+		$post_comment = $this->input->post("post_comment");
+		$array = array(
+			"comment" => $post_comment,
+			"buzz_id" => $post_id,
+			"user_id" => $userIds,
+			"create_date" => date("Y-m-d,H:i:s")
+			);
+		$insertid = $this->Common_model->addRecords("comment_buzz",$array);
+		
+		$data['getallcomment'] = $this->Common_model->commentpaginationbuzz(array("buzz_id" => $post_id),3,0,"comment_buzz_id", "desc");
+		$data['totalcommentcount'] = $this->Common_model->countwhereuser("comment_buzz",array("buzz_id" => $post_id));
+		$data['post_id'] = $this->input->post("postId");
+		
+		$list = $this->load->view('home/ajax_buzz_comment', array('getallcomment'=>$data['getallcomment'],'post_id'=>$post_id), true);
+					
+		$this->output->set_content_type('application/json');
+		
+		$return = array('success'=>true, 'list'=> $list,'totalcommentcount' => $data['totalcommentcount']);
+		echo json_encode($return);
+       
+	}
+	
+		public function get_buzz_comments()
+	{
+		$offset = $this->input->post('offset');
+		
+		$postid = $this->input->post('postid');
+		$off = $offset + 1;
+		$limit = 3;
+		$offset = $offset * $limit;
+		
+		
+		
+		$data['getallcomment'] = $this->Common_model->commentpaginationbuzz(array("buzz_id" => $postid),$limit,$offset,"comment_buzz_id", "desc");
+		
+		$list = $this->load->view('home/ajax_newbuzzcomment', array('getallcomment'=>$data['getallcomment'],'post_id'=>$postid,'offset'=>$off), true);
+					
+		$this->output->set_content_type('application/json');
+		
+		$return = array('success'=>true, 'list'=> $list);
+		echo json_encode($return);
+	}
+	
+	public function delete_buzz_comment()
+	{
+		$comment_id = $this->input->post("comment_id");
+		$postid = $this->input->post("postid");
+		
+		$this->Common_model->deleteRecords("comment_buzz",array("comment_buzz_id" => $comment_id,"buzz_id" => $postid));
+	}
+	 
+	/* ---------------------------------------------------------------------------------- */
+	
+	public function fact_detail()
+	{
+		$data = array();
+		
+		$fact = $this->uri->segment("2");
+		$data["detail"] = $this->Common_model->getsingle("fact",array("fact_id" => $fact));
+		$data["userDetail"] = $this->Common_model->getsingle("users",array("user_id" => $this->session->userdata("userId")["user_id"]));
+		$data['connect_to_root'] = $this->Common_model->getAllwhereorder("connect_to_root",array("status" => 1),"root_id","asc");
+		
+			/*---------------------------mood-------------------------------*/
+		 $this->load->helper('smiley');
+             $this->load->library('table');
+            $image = base_url().'smiley/';
+                $image_array = get_clickable_smileys($image, 'comments');
+                $col_array = $this->table->make_columns($image_array, 8);
+
+                $data['smiley_table'] = $this->table->generate($col_array);
+		/*--------------------------------------------------------------*/
+		
+		$this->load->view('layouts/profile_layout',$data);
+		$this->load->view('home/fact_detail',$data);  
+		$this->load->view('layouts/footer_layout',$data);
+	} 
+	
+	/*----------------------------------------root--------------------------------------*/
+	
+	public function like_root()
+	{
+		$data['title'] = 'Like';	
+		$user_id = $this->session->userdata('userId')['user_id'];
+		$post_id = $this->input->post('post');		
+		$status = $this->input->post('status');
+		$author = $this->input->post('author');
+		
+		  
+		
+		$liked = $this->Common_model->getsingle('like_root',array('root_id'=>$post_id,'user_id'=>$this->session->userdata('userId')['user_id']));
+		if($liked){
+			if($liked->status == $status){ 
+			$response = array("status" => $status,"success" => false, 'message'=>'Successfully insert');
+			}else{
+			$this->Common_model->updateData('like_root',array('status'=>$status),array('like_root_id'=>$liked->like_root_id));
+			$count_like_one = $this->Common_model->jointwotable('like_root', 'user_id', 'users', 'user_id',array('root_id' => $post_id,'like_root.status'=>1),'users.user_id,users.firstname,users.lastname,like_root.like_root_id');
+		 
+			$response = array("status" => $status, "success" => true, 'message'=>'Successfully insert','like'=>count($count_like_one));
+			}
+            $this->Common_model->deleteRecords('like_root',array("like_root_id" => $liked->like_root_id));
+			$count_like_one = $this->Common_model->jointwotable('like_root', 'user_id', 'users', 'user_id',array('root_id' => $post_id,'like_root.status'=>1),'users.user_id,users.firstname,users.lastname,like_root.like_root_id');
+			$response = array("status" => "0","success" => false, 'message'=>'Successfully delete','like'=>count($count_like_one));
+		}else{
+		if($status == 1){
+			$array = array(
+			'root_id' => $post_id,
+			'user_id' => $user_id,
+			//'create_at' => date('Y:m:d H:i:s'),
+			'status' => $status
+			);
+			$insert_id = $this->Common_model->addRecords('like_root',$array);
+			if($insert_id > 0){
+			
+			$count_like_one = $this->Common_model->jointwotable('like_root', 'user_id', 'users', 'user_id',array('root_id' => $post_id,'like_root.status'=>1),'users.user_id,users.firstname,users.lastname,like_root.like_root_id');
+		// echo $this->db->last_query();die;
+			//echo "<pre>";print_r();die;
+			$response = array("status" => $status, "type"=>$type, "success" => true, 'message'=>'Successfully insert','like'=>count($count_like_one));
+			}else{
+				$response = array("status" => $status, "type"=>$type, "success" => false, 'message'=>'Not Liked');
+
+			}
+
+			}else{
+				$response = array("success" => false, 'message'=>'Not Liked');
+
+			}
+
+		}
+
+		echo json_encode($response);
+	}
+	
+	public function addcommentroot()
+	{
+		
+		$post_id = $this->input->post("postId");
+		$userIds = $this->input->post("userIds");
+		$post_comment = $this->input->post("post_comment");
+		$array = array(
+			"comment" => $post_comment,
+			"root_id" => $post_id,
+			"user_id" => $userIds,
+			"create_date" => date("Y-m-d,H:i:s")
+			);
+		$insertid = $this->Common_model->addRecords("comment_root",$array);
+		
+		$data['getallcomment'] = $this->Common_model->commentpaginationroot(array("root_id" => $post_id),3,0,"comment_root_id", "desc");
+		$data['totalcommentcount'] = $this->Common_model->countwhereuser("comment_root",array("root_id" => $post_id));
+		$data['post_id'] = $this->input->post("postId");
+		
+		$list = $this->load->view('home/ajax_root_comment', array('getallcomment'=>$data['getallcomment'],'post_id'=>$post_id), true);
+					
+		$this->output->set_content_type('application/json');
+		
+		$return = array('success'=>true, 'list'=> $list,'totalcommentcount' => $data['totalcommentcount']);
+		echo json_encode($return);
+       
+	}
+	
+		public function get_root_comments()
+	{
+		$offset = $this->input->post('offset');
+		
+		$postid = $this->input->post('postid');
+		$off = $offset + 1;
+		$limit = 3;
+		$offset = $offset * $limit;
+		
+		
+		
+		$data['getallcomment'] = $this->Common_model->commentpaginationroot(array("root_id" => $postid),$limit,$offset,"comment_root_id", "desc");
+		
+		$list = $this->load->view('home/ajax_newrootcomment', array('getallcomment'=>$data['getallcomment'],'post_id'=>$postid,'offset'=>$off), true);
+					
+		$this->output->set_content_type('application/json');
+		
+		$return = array('success'=>true, 'list'=> $list);
+		echo json_encode($return);
+	}
+	
+	public function delete_root_comment()
+	{
+		$comment_id = $this->input->post("comment_id");
+		$postid = $this->input->post("postid");
+		
+		$this->Common_model->deleteRecords("comment_buzz",array("comment_root_id" => $comment_id,"root_id" => $postid));
+	}
+	 
+	/* ---------------------------------------------------------------------------------- */
 	
 }

@@ -90,6 +90,56 @@
                                     </div>
                                 </div>
                             </div>
+                            
+                          <?php $country = $this->Common_model->getAll("country","id","asc"); ?>
+							<div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <select class="form-control selectpicker" name="permanent_country" id="permanent_country" title="Country">
+										<option value="">Select Permanent Country</option>
+                                            <?php if(!empty($country)){
+                                                   foreach($country as $permanent_country){
+												?>
+												<option value="<?php echo $permanent_country->id; ?>" <?php if($myprofile->permanent_country == $permanent_country->id){echo "selected";} ?>><?php echo $permanent_country->name; ?></option>
+											<?php }} ?>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                       <textarea name="permanent_address" class="form-control" id="permanent_address" placeholder="Permanent Address"><?php if(!empty($myprofile->permanent_address)){ echo $myprofile->permanent_address; } ?></textarea>
+                                    </div>
+                                </div>
+                            </div>
+							
+							<div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <select class="form-control selectpicker" name="local_country" id="local_country" title="Country">
+										<option value="">Select Local Country</option>
+                                            <?php if(!empty($country)){
+                                                   foreach($country as $local_country){
+												?>
+												<option value="<?php echo $local_country->id; ?>" <?php if($myprofile->local_country == $local_country->id){echo "selected";} ?>><?php echo $local_country->name; ?></option>
+											<?php }} ?>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                       <textarea name="local_address" class="form-control" id="local_address" placeholder="Local Address"><?php if(!empty($myprofile->local_address)){ echo $myprofile->local_address; } ?></textarea>
+                                    </div>
+                                </div>
+                            </div>  
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
                             <div class="row">
                                 <div class="col-sm-6 mx-auto">
                                     

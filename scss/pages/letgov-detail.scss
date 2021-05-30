@@ -1,0 +1,15 @@
+.letsGovDetailPage{
+    .feeds{
+        .feed-box{
+            padding: 0;
+            &:after, &:before{
+                display: none;
+            }
+            .feedCaption{
+                a{
+                    color: color(900);
+                }
+            }
+        }
+    }
+}

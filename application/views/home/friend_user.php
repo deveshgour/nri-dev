@@ -14,15 +14,19 @@
                                             <?php } ?>
                                     </div>
                                     
-                                    <div class="c-info">
+                                   <div class="c-info">
                                         <h2 class="h2"><?php echo $userDetail->firstname.' '.$userDetail->lastname; ?></h2>
                                         <!--<p class="text-130">Frontend Developer</p>-->
-										<?php if(empty($checkfriend) && $checknewfriend->friend_user_id != $this->session->userdata('userId')["user_id"]){ ?>
+										<?php if(empty($checkfriend)){ ?>
 										<p class="text-130 hideshow"><a class="adfriend btn btn-primary" data-userid="<?php echo $foruserimage->user_id; ?>" href="javascript:void(0);">Add Friend</a></p>
-										<?php }elseif(empty($checknewfriend)){ ?>
-										<p class="text-130"><a class="request_delete btn btn-primary" data-userid="<?php echo $foruserimage->user_id; ?>" href="javascript:void(0);">Request Sent</a></p>
-										<?php }else{ ?>
-										<p class="text-130"><a class="btn btn-primary" data-userid="<?php echo $foruserimage->user_id; ?>" href="javascript:void(0);">Respond Request</a></p>
+										<?php }if($checkfriend->user_id == $this->session->userdata('userId')['user_id'] && $checkfriend->request_status == 0){ ?>
+										<p class="text-130 hideshow"><a class="request_delete btn btn-primary" data-userid="<?php echo $foruserimage->user_id; ?>" href="javascript:void(0);">Request Sent</a></p>
+										<?php }if($checkfriend->friend_user_id == $this->session->userdata('userId')['user_id'] && $checkfriend->request_status == 0){ ?>
+										    <p class="text-130"><a class="btn btn-primary" data-userid="<?php echo $foruserimage->user_id; ?>" href="<?php echo base_url(); ?>friendRequest_list">Respond Request</a></p>
+										<?php } if($checkfriend->user_id == $this->session->userdata('userId')['user_id'] && $checkfriend->request_status == 1){?>
+										<p class="text-130"><a class="btn btn-primary" data-userid="<?php echo $foruserimage->user_id; ?>" href="javascript:void(0);">Friend</a>  <a class="btn btn-primary cancelfrnd" data-userid="<?php echo $checkfriend->friend_id; ?>" href="javascript:void(0);">Cancel</a></p>
+										<?php } if($checkfriend->friend_user_id == $this->session->userdata('userId')['user_id'] && $checkfriend->request_status == 1){?>
+										<p class="text-130"><a class="btn btn-primary" data-userid="<?php echo $foruserimage->user_id; ?>" href="javascript:void(0);">Friend</a> </p>
 										<?php } ?>
 									</div>
                                     <div class="coverletter">
@@ -254,8 +258,9 @@ $getallcomment = $this->Common_model->commentpagination(array("post_id" => $row-
 									<?php } ?>
                                 </div>
                                 <div class="inputBox position-relative">
-                                    <input type="text" class="form-control post_comment-<?php echo $row->post_id; ?>" name="post_comment" id="post_comment" value="" placeholder="Write a public comment">
-                                    <button class="border-0 bg-transparent font-sm" disabled id="postVal">Post</button>
+                                    <input type="text" class="form-control newpostcomment post_comment-<?php echo $row->post_id; ?>" name="post_comment" id="post_comment" data-cmtid="<?php echo $row->post_id; ?>" value="" placeholder="Write a public comment">
+                                    <button class="border-0 bg-transparent font-sm postVal_<?php echo $row->post_id; ?>" disabled id="postVal">Post</button>
+
                                 </div>
                             </div>
 							</form>
@@ -294,6 +299,12 @@ $getallcomment = $this->Common_model->commentpagination(array("post_id" => $row-
 							</div>
 
                         </div></div>
+                        
+                        <?php $usersId = base64_decode($this->uri->segment('2'));    
+ $where_q = "(friend.friend_user_id = ".$usersId." or friend.user_id = ".$usersId.") and request_status = 1";
+ $query_q = $this->Common_model->jointwotablenum('friend','friend_user_id','users','user_id',$where_q,'users.firstname,users.lastname,friend.friend_user_id,friend.user_id,friend.friend_id','3');
+//echo $this->db->last_query();die;
+ ?>
 
                         <div class="col-lg-3 Re-userProfile--right">
                             <div class="conversationBox conversationBox--freind rounded-10 bg-white">
@@ -301,87 +312,87 @@ $getallcomment = $this->Common_model->commentpagination(array("post_id" => $row-
                                 <h4 class="font-sm mb-3">Friends</h4>
                               
                                 <ul class="list-inline mb-0">
-                                    <li class="list-inline-item">
-                                        <a href="javascript:;" class="link-dark">
+                                   
+									 <?php 
+									 
+									 if(!empty($query_q)){
+				foreach($query_q as $qss)
+				{ ?>
+            <?php if($qss->user_id == $usersId)
+					{ 
+					   $qrp = $this->Common_model->getsingle('users',array('user_id' => $qss->friend_user_id));
+					   $country_name = $this->Common_model->getsingle('country',array('id' => $qrp->country_id));
+					   $url = '';
+					   if($qrp->user_id == $this->session->userdata('userId')['user_id']){
+						   $url = base_url().'userprofile';
+					   }else{
+						  $url =  base_url().'friend-user/'.base64_encode($qrp->user_id); 
+					   }
+					   ?>
+            <?php if(!empty($qrp->user_image)){ ?>
+            
+			<li class="list-inline-item">
+                                        <a href="<?php echo $url; ?>" class="link-dark">
                                             <div class="userImg rounded-circle overflow-hidden">
-                                                <img src="images/user-1.png" alt="img">
+                                                <img src="<?php echo base_url(); ?>upload/<?php echo $qrp->user_image; ?>" alt="img" title="<?php echo ucwords($qrp->firstname.' '. $qrp->lastname); ?>">
                                             </div>
-                                            <span class="font-sm name">Pratima Singh</span>
-                                            <span class="address">Vijay Nagar, Indore</span>
+                                            <span class="font-sm name"><?php echo ucwords($qrp->firstname.' '. $qrp->lastname); ?></span>
+                                            <span class="address"><?php echo $country_name->name; ?></span>
                                         </a>
                                     </li>
-                                    <li class="list-inline-item">
-                                        <a href="javascript:;" class="link-dark">
+			<?php }else{ ?>
+           
+                              <li class="list-inline-item">
+							  
+                                        <a href="<?php echo $url; ?>" class="link-dark">
                                             <div class="userImg rounded-circle overflow-hidden">
-                                                <img src="images/user-2.png" alt="img">
+                                                <img src="<?php echo base_url(); ?>images/user_image.png" alt="img" title="<?php echo ucwords($qrp->firstname.' '. $qrp->lastname); ?>">
                                             </div>
-                                            <span class="font-sm name">Rashmi Singh Thakur</span>
-                                            <span class="address">Vijay Nagar, Indore</span>
+                                            <span class="font-sm name"><?php echo ucwords($qrp->firstname.' '. $qrp->lastname); ?></span>
+                                            <span class="address"><?php echo $country_name->name; ?></span>
                                         </a>
                                     </li>
-                                    <li class="list-inline-item">
-                                        <a href="javascript:;" class="link-dark">
+		   <?php } ?>
+            <?php } 
+                    elseif($qss->friend_user_id == $usersId)
+					{ 
+						$qrp = $this->Common_model->getsingle('users',array('user_id' => $qss->user_id));
+						$country_name = $this->Common_model->getsingle('country',array('id' => $qrp->country_id));
+						$url = '';
+					   if($qrp->user_id == $this->session->userdata('userId')['user_id']){
+						   $url = base_url().'userprofile';
+					   }else{
+						  $url =  base_url().'friend-user/'.base64_encode($qrp->user_id); 
+					   }
+						if(!empty($qrp->user_image)){ ?>
+            
+			
+									
+				  <li class="list-inline-item">
+                                        <a href="<?php echo $url; ?>" class="link-dark">
                                             <div class="userImg rounded-circle overflow-hidden">
-                                                <img src="images/user-3.png" alt="img">
+                                                <img src="<?php echo base_url(); ?>upload/<?php echo $qrp->user_image; ?>" alt="img" title="<?php echo ucwords($qrp->firstname.' '. $qrp->lastname); ?>">
                                             </div>
-                                            <span class="font-sm name">Jaydeep Kunwar Thakur</span>
-                                            <span class="address">Vijay Nagar, Indore</span>
+                                            <span class="font-sm name"><?php echo ucwords($qrp->firstname.' '. $qrp->lastname); ?></span>
+                                            <span class="address"><?php echo $country_name->name; ?></span>
+                                        </a>
+                                    </li>					
+			
+			<?php }else{ ?>
+          <li class="list-inline-item">
+                                        <a href="<?php echo $url; ?>" class="link-dark">
+                                            <div class="userImg rounded-circle overflow-hidden">
+                                                <img src="<?php echo base_url(); ?>images/user_image.png" alt="img" title="<?php echo ucwords($qrp->firstname.' '. $qrp->lastname); ?>">
+                                            </div>
+                                            <span class="font-sm name"><?php echo ucwords($qrp->firstname.' '. $qrp->lastname); ?></span>
+                                            <span class="address"><?php echo $country_name->name; ?></span>
                                         </a>
                                     </li>
-                                    <li class="list-inline-item">
-                                        <a href="javascript:;" class="link-dark">
-                                            <div class="userImg rounded-circle overflow-hidden">
-                                                <img src="images/user-1.png" alt="img">
-                                            </div>
-                                            <span class="font-sm name">Pratima Singh</span>
-                                            <span class="address">Vijay Nagar, Indore</span>
-                                        </a>
-                                    </li>
-                                    <li class="list-inline-item">
-                                        <a href="javascript:;" class="link-dark">
-                                            <div class="userImg rounded-circle overflow-hidden">
-                                                <img src="images/user-2.png" alt="img">
-                                            </div>
-                                            <span class="font-sm name">Rashmi Singh Thakur</span>
-                                            <span class="address">Vijay Nagar, Indore</span>
-                                        </a>
-                                    </li>
-                                    <li class="list-inline-item">
-                                        <a href="javascript:;" class="link-dark">
-                                            <div class="userImg rounded-circle overflow-hidden">
-                                                <img src="images/user-3.png" alt="img">
-                                            </div>
-                                            <span class="font-sm name">Jaydeep Kunwar Thakur</span>
-                                            <span class="address">Vijay Nagar, Indore</span>
-                                        </a>
-                                    </li>
-                                    <li class="list-inline-item">
-                                        <a href="javascript:;" class="link-dark">
-                                            <div class="userImg rounded-circle overflow-hidden">
-                                                <img src="images/user-1.png" alt="img">
-                                            </div>
-                                            <span class="font-sm name">Pratima Singh</span>
-                                            <span class="address">Vijay Nagar, Indore</span>
-                                        </a>
-                                    </li>
-                                    <li class="list-inline-item">
-                                        <a href="javascript:;" class="link-dark">
-                                            <div class="userImg rounded-circle overflow-hidden">
-                                                <img src="images/user-2.png" alt="img">
-                                            </div>
-                                            <span class="font-sm name">Rashmi Singh Thakur</span>
-                                            <span class="address">Vijay Nagar, Indore</span>
-                                        </a>
-                                    </li>
-                                    <li class="list-inline-item">
-                                        <a href="javascript:;" class="link-dark">
-                                            <div class="userImg rounded-circle overflow-hidden">
-                                                <img src="images/user-3.png" alt="img">
-                                            </div>
-                                            <span class="font-sm name">Jaydeep Kunwar Thakur</span>
-                                            <span class="address">Vijay Nagar, Indore</span>    
-                                        </a>
-                                    </li>
+
+		   <?php } ?>
+            <?php }					
+				} ?>
+            <?php }else{ echo "No friends available"; } ?>
                                 </ul>
                             </div>
                         </div>
