@@ -749,35 +749,37 @@ public function friend_user()
 		$user_id = $this->session->userdata('userId')['user_id'];
 		$post_id = $this->input->post('post');		
 		$status = $this->input->post('status');
+		$root_id = $this->input->post('root_id');
 		$author = $this->input->post('author');
 		
 		  
 		
-		$liked = $this->Common_model->getsingle('like_root',array('root_id'=>$post_id,'user_id'=>$this->session->userdata('userId')['user_id']));
+		$liked = $this->Common_model->getsingle('like_root',array('detail_id'=>$post_id,'user_id'=>$this->session->userdata('userId')['user_id']));
 		if($liked){
 			if($liked->status == $status){ 
 			$response = array("status" => $status,"success" => false, 'message'=>'Successfully insert');
 			}else{
 			$this->Common_model->updateData('like_root',array('status'=>$status),array('like_root_id'=>$liked->like_root_id));
-			$count_like_one = $this->Common_model->jointwotable('like_root', 'user_id', 'users', 'user_id',array('root_id' => $post_id,'like_root.status'=>1),'users.user_id,users.firstname,users.lastname,like_root.like_root_id');
+			$count_like_one = $this->Common_model->jointwotable('like_root', 'user_id', 'users', 'user_id',array('detail_id' => $post_id,'like_root.status'=>1),'users.user_id,users.firstname,users.lastname,like_root.like_root_id');
 		 
 			$response = array("status" => $status, "success" => true, 'message'=>'Successfully insert','like'=>count($count_like_one));
 			}
             $this->Common_model->deleteRecords('like_root',array("like_root_id" => $liked->like_root_id));
-			$count_like_one = $this->Common_model->jointwotable('like_root', 'user_id', 'users', 'user_id',array('root_id' => $post_id,'like_root.status'=>1),'users.user_id,users.firstname,users.lastname,like_root.like_root_id');
+			$count_like_one = $this->Common_model->jointwotable('like_root', 'user_id', 'users', 'user_id',array('detail_id' => $post_id,'like_root.status'=>1),'users.user_id,users.firstname,users.lastname,like_root.like_root_id');
 			$response = array("status" => "0","success" => false, 'message'=>'Successfully delete','like'=>count($count_like_one));
 		}else{
 		if($status == 1){
 			$array = array(
-			'root_id' => $post_id,
+			'root_id' => $root_id,
 			'user_id' => $user_id,
+			'detail_id' => $post_id,
 			//'create_at' => date('Y:m:d H:i:s'),
 			'status' => $status
 			);
 			$insert_id = $this->Common_model->addRecords('like_root',$array);
 			if($insert_id > 0){
 			
-			$count_like_one = $this->Common_model->jointwotable('like_root', 'user_id', 'users', 'user_id',array('root_id' => $post_id,'like_root.status'=>1),'users.user_id,users.firstname,users.lastname,like_root.like_root_id');
+			$count_like_one = $this->Common_model->jointwotable('like_root', 'user_id', 'users', 'user_id',array('detail_id' => $post_id,'like_root.status'=>1),'users.user_id,users.firstname,users.lastname,like_root.like_root_id');
 		// echo $this->db->last_query();die;
 			//echo "<pre>";print_r();die;
 			$response = array("status" => $status, "type"=>$type, "success" => true, 'message'=>'Successfully insert','like'=>count($count_like_one));
@@ -801,17 +803,19 @@ public function friend_user()
 		
 		$post_id = $this->input->post("postId");
 		$userIds = $this->input->post("userIds");
+		$rootid = $this->input->post("rootid");
 		$post_comment = $this->input->post("post_comment");
 		$array = array(
 			"comment" => $post_comment,
-			"root_id" => $post_id,
+			"root_id" => $rootid,
+			"detail_id" => $post_id,
 			"user_id" => $userIds,
 			"create_date" => date("Y-m-d,H:i:s")
 			);
 		$insertid = $this->Common_model->addRecords("comment_root",$array);
 		
-		$data['getallcomment'] = $this->Common_model->commentpaginationroot(array("root_id" => $post_id),3,0,"comment_root_id", "desc");
-		$data['totalcommentcount'] = $this->Common_model->countwhereuser("comment_root",array("root_id" => $post_id));
+		$data['getallcomment'] = $this->Common_model->commentpaginationroot(array("detail_id" => $post_id),3,0,"comment_root_id", "desc");
+		$data['totalcommentcount'] = $this->Common_model->countwhereuser("comment_root",array("detail_id" => $post_id));
 		$data['post_id'] = $this->input->post("postId");
 		
 		$list = $this->load->view('home/ajax_root_comment', array('getallcomment'=>$data['getallcomment'],'post_id'=>$post_id), true);
@@ -834,7 +838,7 @@ public function friend_user()
 		
 		
 		
-		$data['getallcomment'] = $this->Common_model->commentpaginationroot(array("root_id" => $postid),$limit,$offset,"comment_root_id", "desc");
+		$data['getallcomment'] = $this->Common_model->commentpaginationroot(array("detail_id" => $postid),$limit,$offset,"comment_root_id", "desc");
 		
 		$list = $this->load->view('home/ajax_newrootcomment', array('getallcomment'=>$data['getallcomment'],'post_id'=>$postid,'offset'=>$off), true);
 					
@@ -849,9 +853,167 @@ public function friend_user()
 		$comment_id = $this->input->post("comment_id");
 		$postid = $this->input->post("postid");
 		
-		$this->Common_model->deleteRecords("comment_buzz",array("comment_root_id" => $comment_id,"root_id" => $postid));
+		$this->Common_model->deleteRecords("comment_root",array("comment_root_id" => $comment_id));
 	}
 	 
 	/* ---------------------------------------------------------------------------------- */
 	
+		public function add_root_reply_comment()
+	{
+		$where = array();
+		
+		$post_id = $this->input->post('post_id');
+		$comment_id = $this->input->post('comment_id');
+		$comment_user_id = $this->input->post('comment_user_id');
+		$user_id = $this->input->post('user_id');
+		$reply_val = $this->input->post('reply_val');
+        $array = array();
+		$array = array(
+		  'post_id' => $post_id,
+		  'comment_root_id' => $comment_id,
+		  'comment_root_user_id' => $comment_user_id,
+		  'reply_comment' => $reply_val,
+		  'user_id' => $user_id,
+		  'create_date' => date("Y-m-d,H:i:s")
+		);
+		$update = $this->Common_model->addRecords('replycomment_root',$array);
+		
+		$data['getallcomment'] = $this->Common_model->getAllwhereorder("replycomment_root",array("comment_root_id" =>$comment_id),"replyroot_id","asc");
+		
+		
+		$list = $this->load->view('home/ajax_replyrootcomment', array('getallcomment'=>$data['getallcomment'],'comment_id'=>$comment_id), true);
+					
+		$this->output->set_content_type('application/json');
+		
+		$return = array('success'=>true, 'list'=> $list);
+		echo json_encode($return);
+		
+	}
+	
+	
+	public function change_rootcomment()
+	{ 
+		$where = array();
+		
+		$value = $this->input->post('value');
+		$comment_id = $this->input->post('comment_id');
+		
+		$userid = $this->session->userdata('userId')['user_id'];
+        $array = array();
+		$array = array(
+		  'comment' => $value
+		);
+		$update = $this->Common_model->updateRecords('comment_root',$array,array('user_id' => $userid,'comment_root_id' =>$comment_id));
+		
+		$response = array("code" => 100, "success" => true, 'message'=>'Post Change Successfully');
+		
+
+		echo json_encode($response); 
+	}
+	
+	public function delete_replycomment()
+	{
+		$comment_id = $this->input->post("comment_id");
+		$replycommentid = $this->input->post("replycommentid");
+		$postid = $this->input->post("postid");
+		
+		
+		$this->Common_model->deleteRecords("replycomment_root",array("replyroot_id" => $replycommentid));
+		//$this->Common_model->deleteRecords("reply_comment",array("reply_id" => $replycommentid));
+	}
+	
+	public function replycomment_like()
+	{
+		$data['title'] = 'Like';	
+		$user_id = $this->session->userdata('userId')['user_id'];
+		$post_id = $this->input->post('postid');		
+		$comment_id = $this->input->post('commentid');
+		$replycomment_id = $this->input->post('replycommentid');
+		
+		  
+		
+		$liked = $this->Common_model->getsingle('replycomment_root_like',array('replycomment_root_id'=>$replycomment_id,'user_id'=>$this->session->userdata('userId')['user_id']));
+		if(!empty($liked)){
+			 $this->Common_model->deleteRecords('replycomment_root_like',array("replycomment_root_id" => $liked->replycomment_root_id));
+			 $count_like_one = $this->Common_model->jointwotable('replycomment_root_like', 'user_id', 'users', 'user_id',array('replycomment_root_id' => $replycomment_id,'replycomment_root_like.status'=>1),'users.user_id,users.firstname,users.lastname,replycomment_root_like.replycomment_root_like_id');
+			$response = array("success" => false, 'message'=>'Successfully delete','replycommentlike'=>count($count_like_one));
+
+		}else{
+			$array = array(
+			'post_id' => $post_id,
+			'replycomment_root_id' => $replycomment_id,
+			'user_id' => $this->session->userdata('userId')['user_id'],
+			'comment_root_id' => $comment_id,
+			'status' => 1
+			);
+			$insert_id = $this->Common_model->addRecords('replycomment_root_like',$array);
+			if($insert_id > 0){
+			
+			$count_like_one = $this->Common_model->jointwotable('replycomment_root_like', 'user_id', 'users', 'user_id',array('replycomment_root_id' => $replycomment_id,'replycomment_root_like.status'=>1),'users.user_id,users.firstname,users.lastname,replycomment_root_like.replycomment_root_like_id');
+		   $response = array("success" => true, 'message'=>'Successfully add','replycommentlike'=>count($count_like_one));
+
+		}
+		
+		}
+		echo json_encode($response);
+		
+		
+	}
+	
+	public function comment_like()
+	{
+		$data['title'] = 'Like';	
+		$user_id = $this->session->userdata('userId')['user_id'];
+		$post_id = $this->input->post('postid');		
+		$comment_id = $this->input->post('commentid');
+		$author = $this->input->post('userid');
+		
+		  
+		
+		$liked = $this->Common_model->getsingle('comment_root_like',array('comment_root_id'=>$comment_id,'user_id'=>$this->session->userdata('userId')['user_id']));
+		if(!empty($liked)){
+			 $this->Common_model->deleteRecords('comment_root_like',array("comment_root_like_id" => $liked->comment_root_like_id));
+			 $count_like_one = $this->Common_model->jointwotable('comment_root_like', 'user_id', 'users', 'user_id',array('comment_root_id' => $comment_id,'comment_root_like.status'=>1),'users.user_id,users.firstname,users.lastname,comment_root_like.comment_root_like_id');
+			$response = array("success" => false, 'message'=>'Successfully delete','commentlike'=>count($count_like_one));
+
+		}else{
+			$array = array(
+			'post_id' => $post_id,
+			'user_id' => $this->session->userdata('userId')['user_id'],
+			'comment_root_id' => $comment_id,
+			'status' => 1
+			);
+			$insert_id = $this->Common_model->addRecords('comment_root_like',$array);
+			if($insert_id > 0){
+			
+			$count_like_one = $this->Common_model->jointwotable('comment_root_like', 'user_id', 'users', 'user_id',array('comment_root_id' => $comment_id,'comment_root_like.status'=>1),'users.user_id,users.firstname,users.lastname,comment_root_like.comment_root_like_id');
+		   $response = array("success" => true, 'message'=>'Successfully add','commentlike'=>count($count_like_one));
+
+		}
+		
+		}
+		echo json_encode($response);
+		
+		
+	}
+	
+	public function change_replycomment()
+	{ 
+		$where = array();
+		
+		$value = $this->input->post('value');
+		$reply_id = $this->input->post('reply_id');
+		
+		$userid = $this->session->userdata('userId')['user_id'];
+        
+		$array = array(
+		  'reply_comment' => $value
+		);
+		$update = $this->Common_model->updateRecords('replycomment_root',$array,array('user_id' => $userid,'replyroot_id' =>$reply_id));
+		
+		$response = array("code" => 100, "success" => true, 'message'=>'Post Change Successfully');
+		
+
+		echo json_encode($response); 
+	}
 }
