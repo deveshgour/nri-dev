@@ -97,7 +97,7 @@
                             <div class="likeShare d-flex align-items-center justify-content-between">
                                 <div class="left">
                                <a href="javascript:void(0)" class="link-dark like_gov" <?php if($likeType){ ?>style="color:#009688;"<?php } ?> id="like-<?php echo $detail->gov_id; ?>" data-status="1" data-type="1" data-author="<?php echo $detail->user_id; ?>" data-postid="<?php echo $detail->gov_id; ?>">
-							   <span class="icon-like pr-2"></span>Like</a>
+							   <span class="icon-star pr-2"></span>Like</a>
 			<?php /*if($like_govType){ ?><a class="like_gov_post" id="like_gov-<?php echo $detail->gov_id; ?>" style="color:#009688;" href="javascript:void(0)" data-status="1" data-type="1" data-author="<?php echo $detail->user_id; ?>" data-postid="<?php echo $detail->gov_id; ?>" ><i class="fa fa-thumbs-up"></i>like_gov</a> <?php }else{ ?> <a class="like_gov_post" id="like_gov-<?php echo $detail->gov_id; ?>" href="javascript:void(0)" data-type="1" data-postid="<?php echo $detail->gov_id; ?>" data-author="<?php echo $detail->user_id; ?>" data-status="1"><i class="fa fa-thumbs-up"></i>like_gov</a> <?php } */?>
           
 		  

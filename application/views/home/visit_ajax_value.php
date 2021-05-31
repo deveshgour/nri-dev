@@ -58,7 +58,7 @@ $totalcommentcount = $this->Common_model->countwhereuser("comment_visit",array("
                             <div class="likeShare d-flex align-items-center justify-content-between">
                                 <div class="left">
                                    <a href="javascript:void(0)" class="link-dark like_post" <?php if($likeType){ ?>style="color:#009688;"<?php } ?> id="like-<?php echo $rows->visit_id; ?>" data-status="1" data-type="1" data-author="<?php echo $rows->user_id; ?>" data-postid="<?php echo $rows->visit_id; ?>"><span
-                                            class="icon-like pr-2"></span>Like</a>
+                                            class="icon-star pr-2"></span>Like</a>
                                     <a href="javascript:;" class="link-dark"><span
                                             class="icon-comment pr-2"></span>Comment</a>
                                 </div>

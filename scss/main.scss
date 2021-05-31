@@ -439,19 +439,17 @@ body{
                         p{margin: 0;}
                     }
                 }
-                .postComment{
-                    .inputBox{
-                        flex: 1;
-                        margin-left: 15px;
-                        .form-control{padding-right: 65px;}
-                        button{
-                            position: absolute;
-                            right: 15px;
-                            top: 50%;
-                            transform: translateY(-50%);
-                            color: $yellow;
-                        }
-                    }
+            }
+            .inputBox{
+                flex: 1;
+                margin-left: 15px;
+                .form-control{padding-right: 65px;}
+                button{
+                    position: absolute;
+                    right: 15px;
+                    top: 50%;
+                    transform: translateY(-50%);
+                    color: $yellow;
                 }
             }
             .userInfo{

@@ -26,14 +26,6 @@
 
 }
 
-.replyCmt{
-
-	    margin-top: -33px;
-
-    float: right;
-
-}
-
  </style>
 
   <main class="main-content">
@@ -234,7 +226,7 @@
 
      aria-labelledby="myModalLabel" aria-hidden="true">
 
-   <div class="modal-dialog">
+   <div class="modal-dialog modal-dialog-centered">
 
         <div class="modal-content">
 
@@ -265,29 +257,24 @@
             <!-- Modal Body -->
 
             <div class="modal-body">
-
-			
-
-			<div >
-
                    
 
-                    <div class='col-xs-12 required'>
+                    <div class='form-group'>
 
-                       <textarea rows="3" class="form-control" name="edit_post" id="edit_post_<?php echo $row->post_id; ?>"><?php echo $row->post; ?></textarea>    
+                       <textarea rows="3" class="form-control h-150" name="edit_post" id="edit_post_<?php echo $row->post_id; ?>"><?php echo $row->post; ?></textarea>    
 
 					   </div>
 
-                  </div>
+               
 
 			
 
-			  
+			 <div class="text-center"> 
 
-			<button type="submit" data-post-id = "<?php echo $row->post_id; ?>" name="editpost_submit" id="editpost_submit" class=' btn btn-primary submit-button' style="margin-left:16px;" >Submit</button>
+			<button type="submit" data-post-id = "<?php echo $row->post_id; ?>" name="editpost_submit" id="editpost_submit" class=' btn btn-primary submit-button mr-2'>Submit</button>
 
 			 <button type="button" class='btn btn-primary submit-button' data-dismiss="modal">Close</button>
-
+                                </div>
 			
 
 			
@@ -372,7 +359,7 @@
 
                                     <a href="javascript:void(0)" class="link-dark like_post" <?php if($likeType){ ?>style="color:#009688;"<?php } ?> id="like-<?php echo $row->post_id; ?>" data-status="1" data-type="1" data-author="<?php echo $row->user_id; ?>" data-postid="<?php echo $row->post_id; ?>"><span
 
-                                            class="icon-like pr-2"></span>Like</a>
+                                            class="icon-star pr-2"></span>Like</a>
 
 			<?php /*if($likeType){ ?><a class="like_post" id="like-<?php echo $row->post_id; ?>" style="color:#009688;" href="javascript:void(0)" data-status="1" data-type="1" data-author="<?php echo $row->user_id; ?>" data-postid="<?php echo $row->post_id; ?>" ><i class="fa fa-thumbs-up"></i>Like</a> <?php }else{ ?> <a class="like_post" id="like-<?php echo $row->post_id; ?>" href="javascript:void(0)" data-type="1" data-postid="<?php echo $row->post_id; ?>" data-author="<?php echo $row->user_id; ?>" data-status="1"><i class="fa fa-thumbs-up"></i>Like</a> <?php } */?>
 
@@ -394,9 +381,19 @@
 
                                 <div class="right">
 
-                                    <a href="javascript:;" onclick="soacialModal()" class="link-dark"><span
+                                <div class="dropdown shareDropdown">
+                                <a href="javascript:;" class="link-dark" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span
 
-                                            class="icon-share-2 pr-2"></span>Share</a>
+                                    class="icon-share-2 pr-2"></span>Share</a>
+
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                        <a class="dropdown-item" href="#"><em class="icon-facebook"></em> Facebook</a>
+                                        <a class="dropdown-item" href="#"><em class="icon-twitter"></em> Twitter</a>
+                                        <a class="dropdown-item" href="#"><em class="icon-instagram"></em> Instagram</a>
+                                    </div>
+                                    </div>
+
+                                   
 
                                 </div>
 
@@ -488,7 +485,7 @@ $getallcomment = $this->Common_model->commentpagination(array("post_id" => $row-
 
 													   ?>
 
-													   <ul class="list-unstyled comment-list replycomment-list replycommentshow-<?php echo $allcomment->comment_id; ?>">
+													   <ul class="list-unstyled comment-list replycomment-list replycommentshow-<?php echo $allcomment->comment_id; ?> mb-2">
 
 							<div class="sti<?php echo $allcomment->comment_id; ?>">
 
@@ -836,7 +833,7 @@ $getallcomment = $this->Common_model->commentpagination(array("post_id" => $row-
 
 							
 
-				<div class="seeComment my-3"><center style="text-align: left;color:black;"><a class="moreimage" data-postid="<?php echo $row->post_id; ?>" data-page="1" href="javascript:void(0);">See more comments</a></center></div>
+				<div class="seeComment my-3 text-center"><a class="moreimage" data-postid="<?php echo $row->post_id; ?>" data-page="1" href="javascript:void(0);">See more comments</a></div>
 
 							<?php }}else{ ?>
 

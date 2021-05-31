@@ -52,6 +52,9 @@
   }
   textarea.form-control {
     height: auto;
+    &.h-150{
+      height: 150px;
+    }
   }
 
   // upload image 

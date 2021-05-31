@@ -239,7 +239,7 @@
                             <div class="likeShare d-flex align-items-center justify-content-between">
                                 <div class="left">
                                     <a href="javascript:void(0)" class="link-dark like_event" <?php if($likeType){ ?>style="color:#009688;"<?php } ?> id="like-<?php echo $row->event_id; ?>" data-status="1" data-type="1" data-author="<?php echo $row->user_id; ?>" data-postid="<?php echo $row->event_id; ?>"><span
-                                            class="icon-like pr-2"></span>Like</a>
+                                            class="icon-star pr-2"></span>Like</a>
 			<?php /*if($likeType){ ?><a class="like_post" id="like-<?php echo $row->post_id; ?>" style="color:#009688;" href="javascript:void(0)" data-status="1" data-type="1" data-author="<?php echo $row->user_id; ?>" data-postid="<?php echo $row->post_id; ?>" ><i class="fa fa-thumbs-up"></i>Like</a> <?php }else{ ?> <a class="like_post" id="like-<?php echo $row->post_id; ?>" href="javascript:void(0)" data-type="1" data-postid="<?php echo $row->post_id; ?>" data-author="<?php echo $row->user_id; ?>" data-status="1"><i class="fa fa-thumbs-up"></i>Like</a> <?php } */?>
           
 		  

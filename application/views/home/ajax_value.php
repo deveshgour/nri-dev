@@ -101,26 +101,17 @@
             <!-- Modal Body -->
 
             <div class="modal-body">
-
-			
-
-			<div >
-
                    
 
-                    <div class='col-xs-12 required'>
+                    <div class='form-group'>
 
                        <textarea rows="3" class="form-control" name="edit_post" id="edit_post_<?php echo $rows->post_id; ?>"><?php echo $rows->post; ?></textarea>    
 
 					   </div>
 
-                  </div>
-
-			
-
 			  
 
-			<button type="submit" data-post-id = "<?php echo $rows->post_id; ?>" name="editpost_submit" id="editpost_submit" class=' btn btn-primary submit-button' style="margin-left:16px;" >Submit</button>
+			<button type="submit" data-post-id = "<?php echo $rows->post_id; ?>" name="editpost_submit" id="editpost_submit" class=' btn btn-primary submit-button' >Submit</button>
 
 			 <button type="button" class='btn btn-primary submit-button' data-dismiss="modal">Close</button>
 
@@ -214,7 +205,7 @@ $totalcommentcount = $this->Common_model->countwhereuser("comment",array("post_i
 
                                    <a href="javascript:void(0)" class="link-dark like_post" <?php if($likeType){ ?>style="color:#009688;"<?php } ?> id="like-<?php echo $rows->post_id; ?>" data-status="1" data-type="1" data-author="<?php echo $rows->user_id; ?>" data-postid="<?php echo $rows->post_id; ?>"><span
 
-                                            class="icon-like pr-2"></span>Like</a>
+                                            class="icon-star pr-2"></span>Like</a>
 
                                     <a href="javascript:;" class="link-dark"><span
 
@@ -300,7 +291,7 @@ $totalcommentcount = $this->Common_model->countwhereuser("comment",array("post_i
 
 										<b><a href="javascript:void(0)" class="link-dark comment_like_post" <?php if($getmylikecomment){ ?>style="color:#009688;"<?php } ?> id="likecomment-<?php echo $allcomment->comment_id; ?>" data-status="1" data-type="1" data-author="<?php echo $allcomment->user_id; ?>" data-postid="<?php echo $allcomment->post_id; ?>" data-commentid="<?php echo $allcomment->comment_id; ?>">
 
-							   <div class="cmtdivcls" id="likecommentcountbox-<?php echo $allcomment->comment_id; ?>"><span class="cmtspan"><?php echo count($comment_like_count); ?></span></div>Like</a></b>
+							   <span class="cmtdivcls" id="likecommentcountbox-<?php echo $allcomment->comment_id; ?>"><span class="cmtspan"><?php echo count($comment_like_count); ?></span></span> Like</a></b>
 
 
 
@@ -314,7 +305,7 @@ $totalcommentcount = $this->Common_model->countwhereuser("comment",array("post_i
 
 													   ?>
 
-													   <ul class="list-unstyled comment-list replycomment-list replycommentshow-<?php echo $allcomment->comment_id; ?>">
+													   <ul class="list-unstyled comment-list replycomment-list replycommentshow-<?php echo $allcomment->comment_id; ?> mb-2">
 
 							<div class="sti<?php echo $allcomment->comment_id; ?>">
 
@@ -382,7 +373,7 @@ $totalcommentcount = $this->Common_model->countwhereuser("comment",array("post_i
 
 										<b><a href="javascript:void(0)" class="link-dark replycomment_like_post" <?php if($getmyreplylikecomment){ ?>style="color:#009688;"<?php } ?> id="likereplycomment-<?php echo $reply_val->reply_id; ?>" data-status="1" data-postid="<?php echo $reply_val->post_id; ?>" data-commentid="<?php echo $reply_val->comment_id; ?>" data-replycommentid="<?php echo $reply_val->reply_id; ?>">
 
-							   <div class="replycmtdivcls" id="likereplycommentcountbox-<?php echo $reply_val->reply_id; ?>"><span class="replycmtspan"><?php echo count($replycomment_like_count); ?></span></div>Like</a></b>
+							   <span class="replycmtdivcls" id="likereplycommentcountbox-<?php echo $reply_val->reply_id; ?>"><span class="replycmtspan"><?php echo count($replycomment_like_count); ?></span></span> Like</a></b>
 
 		
 
@@ -654,7 +645,7 @@ $totalcommentcount = $this->Common_model->countwhereuser("comment",array("post_i
 
 							
 
-				<div class="seeComment my-3"><center style="text-align: left;color:black;"><a class="moreimage" data-postid="<?php echo $rows->post_id; ?>" data-page="1" href="javascript:void(0);">See more comments</a></center></div>
+				<div class="seeComment my-3 text-center"><a class="moreimage" data-postid="<?php echo $rows->post_id; ?>" data-page="1" href="javascript:void(0);">See more comments</a></div>
 
 							<?php }}else{ ?>
 

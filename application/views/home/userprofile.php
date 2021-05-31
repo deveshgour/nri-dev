@@ -190,7 +190,7 @@
                                             <div class="likeShare d-flex align-items-center justify-content-between">
                                                 <div class="left">
                                                     <a href="javascript:void(0)" class="link-dark like_post" <?php if($likeType){ ?>style="color:#009688;"<?php } ?> id="like-<?php echo $row->post_id; ?>" data-status="1" data-type="1" data-author="<?php echo $row->user_id; ?>" data-postid="<?php echo $row->post_id; ?>"><span
-                                            class="icon-like pr-2"></span>Like</a>
+                                            class="icon-star pr-2"></span>Like</a>
                                                     <a href="javascript:;" class="link-dark"><span
                                             class="icon-comment pr-2"></span>Comment</a>
                                                 </div>
@@ -232,7 +232,7 @@ $getallcomment = $this->Common_model->commentpagination(array("post_id" => $row-
 							<?php }
 							if($getallcomment['num_rows'] > count($getallcomment['rows'])){ ?>
 							
-				<div class="seeComment my-3"><center style="text-align: left;color:black;"><a class="moreimage" data-postid="<?php echo $row->post_id; ?>" data-page="1" href="javascript:void(0);">See more comments</a></center></div>
+				<div class="seeComment my-3 text-center"><a class="moreimage" data-postid="<?php echo $row->post_id; ?>" data-page="1" href="javascript:void(0);">See more comments</a></div>
 							<?php }}else{ ?>
 							
 							<?php } ?>
