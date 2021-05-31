@@ -3872,229 +3872,296 @@ $(document).on('click','#editcomment_submit',function(){
 
 		
 
+		
 		/*----------------------------like root------------------------------------*/
 
-
-
  $(document).on('click','.like_root',function(){
-
 	 $(this).append('<img id="loading_img" style="width:20px" src="<?php echo base_url(); ?>images/url-loader.gif" />');
-
 	 var like = $(this);
-
      var postid = $(this).attr('data-postid');
-
+	 var root_id = $(this).attr('data-rootid');
 	 var status = $(this).attr('data-status');
-
 	 var ltype = $(this).attr('data-type');
-
 	 var author = $(this).attr('data-author');
-
 	$.ajax 
-
 		({
-
 			url: "<?php echo base_url(); ?>Userprofile/like_root",
-
 			type: "POST",             
-
-			data: "post=" + postid + "&ltype=" + ltype + "&status=" + status + "&author=" + author, 
-
+			data: "post=" + postid + "&ltype=" + ltype + "&status=" + status + "&author=" + author + "&root_id=" + root_id, 
 			dataType: "json",
-
 			success: function(response)   
-
 			{ 
-
 			
-
                $("#loading_img").remove();				
-
 			   if(response.success){
-
 				   like.css('color','#009688');
-
 				    $("#likecountbox-"+postid).show();
-
 					   $("#likecountbox-"+postid).find('span').text(response.like+ " people like this");
-
 				   if(response.like == 0){
-
 					   $("#likecountbox-"+postid).hide();
-
 				   }else{
-
 					   $("#likecountbox-"+postid).show();
-
 					   $("#likecountbox-"+postid).find('a').text(response.like+ " people");
-
 				   }
-
 				   
-
 				   /*if(response.type == 1){
-
 					   $("#dislike-"+postid).css('color','#7f7f7f');
-
 				   }else{
-
 					   $("#like-"+postid).css('color','#7f7f7f');
-
 				   }*/
-
 			   }else{
-
 				    $("a").removeAttr("style");
-
 					$("#likecountbox-"+postid).show();
-
 					//$("#likecountbox-"+postid).hide();
-
 					   $("#likecountbox-"+postid).find('span').text(response.like+ " people like this");
-
 			   }
-
 			    
-
 			}
-
 	    });
-
  });
-
  
-
  	$(document).on('submit','[id^="cmtrootform-"]', function(e){ 
-
 	    var pid = $(this).attr('data-postid');
-
+		alert(pid);
 		var uid = $(this).attr('data-userid');
-
-		//alert('test');
-
-		//$("#loadermodal").modal('show');
-
-		var postComment = $("#post_comment").val();
-
 		
-
+		//alert('test');
+		//$("#loadermodal").modal('show');
+		var postComment = $("#post_comment").val();
+		
         e.preventDefault();
-
         var formData = new FormData(this);
-
      
-
         $.ajax({
-
             type:'POST',
-
             url: "<?php echo base_url().'Userprofile/addcommentroot'; ?>",
-
             data:formData,
-
             cache:false,
-
 			dataType:'json',
-
             contentType: false,
-
             processData: false,
-
             success:function(data){ 
-
 			 $('.post_comment-'+pid).val('');
-
 			//$("#loadermodal").modal('hide');
-
 				 $('.commentshow-'+pid).html(data.list);
-
 				
-
 				 $('.totalcmt'+pid).html(data.totalcommentcount);
-
 			    
-
             }
-
         });
 
-
-
     }); 
-
 	
-
 	$(document).on('click','.morerootimage',function(){
-
 		var offset = $(this).attr('data-page');
-
 		
-
 		var postid = $(this).attr('data-postid');
-
 		//$(this).remove();
-
 		$(this).parent().parent().remove();
-
 			$.post("<?php echo base_url().'Userprofile/get_root_comments'; ?>",  
-
 			{offset: offset, postid: postid },
-
 					function(response){ 
-
 						  if(response.success){
-
 							 
-
 							  $(".sds"+postid).append(response.list);
-
 						  }
-
 			}, "json");
-
 	});
-
 	
-
-	$(document).on('click','.trashrootcomment',function(){
-
+	
+		$(document).on('click','[class^="trashrootcomments"]', function(e){ 
 		  var postid = $(this).attr('data-postid');
-
 		  var commentid = $(this).attr('data-commentid'); 
-
 		  if(confirm("Are you sure you want to delete this comment?")){
-
      		$.ajax 
-
 		({
-
 			url: "<?php echo base_url(); ?>Userprofile/delete_root_comment",
-
 			type: "POST",             
-
 			data: "comment_id=" + commentid + "&postid=" + postid,
-
             dataType: "json", 			
-
 			success: function(){
-
 				
-
 				}
-
 			});
-
 			window.location.reload();
-
 		  //  $(this).parents('.newflex'+commentid).animate({ backgroundColor: "#fbc7c7" }, "fast")
-
 		//	.animate({ opacity: "hide" }, "slow");
-
 			}
-
 			return false;
-
 		});
+		
+		
+		
+			$(document).on('click','[class^="trashrootreplycmts_"]', function(e){  
+		  var postid = $(this).attr('data-postid');
+		  var commentid = $(this).attr('data-commentid'); 
+		  var replycommentid = $(this).attr('data-replycommentid');
+		  if(confirm("Are you sure you want to delete this comment?")){
+     		$.ajax 
+		({
+			url: "<?php echo base_url(); ?>Userprofile/delete_replycomment",
+			type: "POST",             
+			data: "comment_id=" + commentid + "&postid=" + postid+ "&replycommentid=" + replycommentid,
+            dataType: "json", 			
+			success: function(){
+				
+				}
+			});
+			window.location.reload();
+		  //  $(this).parents('.newflex'+commentid).animate({ backgroundColor: "#fbc7c7" }, "fast")
+		//	.animate({ opacity: "hide" }, "slow");
+			}
+			return false;
+		});
+		
+		
+		 $(document).on('click','#editrootcomment_submit',function(){ 
+        var comment_id = $(this).attr('data-comment-id');      
+	    var value = $('#edit_comment_'+ comment_id).val();
+			$.ajax 
+		({
+			url: "<?php echo base_url(); ?>Userprofile/change_rootcomment",
+			type: "POST",             
+			data: "value=" + value + "&comment_id=" + comment_id,
+            dataType: "json", 			
+			success: function(response)   
+			{
+				if(response.success)
+				{
+				   $('.edit_comment_text_'+ comment_id).text(value);
+				   $("#editcomment_"+ comment_id).modal('hide');
+				}
+			}
+	    });
+	 
+ });
+ 
+ 
+ 
+ $(document).on('click','.replyrootCmt',function(){    
+	var post_id = $(this).attr('data-post_id');
+	var comment_id = $(this).attr('data-comment_root_id');
+	var comment_user_id = $(this).attr('data-comment_user_id');
+	var user_id = $(this).attr('data-user_id');
+	var reply_val = $(".replycmtval_"+comment_id).val();
+		$.ajax 
+		({
+			url: "<?php echo base_url(); ?>Userprofile/add_root_reply_comment",
+			type: "POST",             
+			data: "post_id="+post_id+"&comment_id="+comment_id+"&comment_user_id="+comment_user_id+"&user_id="+user_id+"&reply_val="+reply_val,
+            dataType: "json", 			
+			success: function(response)   
+			{
+				if(response.success)
+				{
+				  $(".replycmtval_"+comment_id).val("");
+				  
+			//$("#loadermodal").modal('hide');
+				 $('.replycommentshow-'+comment_id).html(response.list);
+				
+				
+				}
+			}
+	    });
+	
+  });
+  
+   $(document).on('click','.replyrootcomment_like_post',function(){
+	 $(this).append('<img id="loading_img" style="width:20px" src="<?php echo base_url(); ?>images/url-loader.gif" />');
+	 var replycommentlike = $(this);
+     var postid = $(this).attr('data-postid');
+	 var commentid = $(this).attr('data-commentid');
+	 var replycommentid = $(this).attr('data-replycommentid');
+	$.ajax 
+		({
+			url: "<?php echo base_url(); ?>Userprofile/replycomment_like",
+			type: "POST",             
+			data: "postid=" + postid + "&commentid=" + commentid + "&replycommentid=" + replycommentid, 
+			dataType: "json",
+			success: function(response)   
+			{ 
+			
+               $("#loading_img").remove();				
+			   if(response.success){
+				   replycommentlike.css('color','#009688');
+				    $("#likereplycommentcountbox-"+replycommentid).show();
+				   if(response.replycommentlike == 0){
+					   $("#likereplycommentcountbox-"+replycommentid).hide();
+				   }else{
+					   $("#likereplycommentcountbox-"+replycommentid).show();
+					   $("#likereplycommentcountbox-"+replycommentid).find('span').text(response.replycommentlike);
+				   }
+				   
+				 
+			   }else{
+				    $(".replyrootcomment_like_post").removeAttr("style");
+					$("#likereplycommentcountbox-"+replycommentid).show();
+					   $("#likereplycommentcountbox-"+replycommentid).find('span').text(response.replycommentlike);
+			   }
+			    
+			}
+	    });
+ });
+ 
+  $(document).on('click','.comment_root_like_post',function(){
+	 $(this).append('<img id="loading_img" style="width:20px" src="<?php echo base_url(); ?>images/url-loader.gif" />');
+	 var commentlike = $(this);
+     var postid = $(this).attr('data-postid');
+	 var commentid = $(this).attr('data-commentid');
+	 
+	 var author = $(this).attr('data-author');
+	$.ajax 
+		({
+			url: "<?php echo base_url(); ?>Userprofile/comment_like",
+			type: "POST",             
+			data: "postid=" + postid + "&commentid=" + commentid + "&userid=" + author, 
+			dataType: "json",
+			success: function(response)   
+			{ 
+			
+               $("#loading_img").remove();				
+			   if(response.success){
+				   commentlike.css('color','#009688');
+				    $("#likecommentcountbox-"+commentid).show();
+				   if(response.commentlike == 0){
+					   $("#likecommentcountbox-"+commentid).hide();
+				   }else{
+					   $("#likecommentcountbox-"+commentid).show();
+					   $("#likecommentcountbox-"+commentid).find('span').text(response.commentlike);
+				   }
+				   
+				 
+			   }else{
+				    $(".comment_root_like_post").removeAttr("style");
+					$("#likecommentcountbox-"+commentid).show();
+					   $("#likecommentcountbox-"+commentid).find('span').text(response.commentlike);
+			   }
+			    
+			}
+	    });
+ });
+ 
+
+ $(document).on('click','[id^="editreplyrootcomment_submit"]', function(e){ 
+        var reply_id = $(this).attr('data-reply-id');      
+	    var value = $('#edit_replycomment_'+ reply_id).val();
+			$.ajax 
+		({
+			url: "<?php echo base_url(); ?>Userprofile/change_replycomment",
+			type: "POST",             
+			data: "value=" + value + "&reply_id=" + reply_id,
+            dataType: "json", 			
+			success: function(response)   
+			{
+				if(response.success)
+				{
+				   $('.edit_replycomment_text_'+ reply_id).text(value);
+				   $("#editrootreplycomment_"+ reply_id).modal('hide');
+				}
+			}
+	    });
+	 
+ });
 
 	</script>
 
