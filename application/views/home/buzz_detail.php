@@ -139,7 +139,7 @@ $getallcomment = $this->Common_model->commentpaginationbuzz(array("buzz_id" => $
                                        <p class="edit_comment_text_<?php echo $allcomment->comment_buzz_id; ?>"><?php echo $allcomment->comment; ?></p>
 										<b><a href="javascript:;" class="link-dark replyshow" data-commentid="<?php echo  $allcomment->comment_buzz_id; ?>">Reply</a></b>
 										 <b><a href="javascript:void(0)" class="link-dark comment_buzz_like_post" <?php if($getmylikecomment){ ?>style="color:#009688;"<?php } ?> id="likecomment-<?php echo $allcomment->comment_buzz_id; ?>" data-status="1" data-type="1" data-author="<?php echo $allcomment->user_id; ?>" data-commentid="<?php echo $allcomment->comment_buzz_id; ?>" data-buzzid="<?php echo $detail->buzz_id; ?>">
-							   <div class="cmtdivcls" id="likecommentcountbox-<?php echo $allcomment->comment_buzz_id; ?>"><span class="cmtspan"><?php echo count($comment_like_count); ?></span></div>Like</a></b>
+							   <span class="cmtdivcls" id="likecommentcountbox-<?php echo $allcomment->comment_buzz_id; ?>"><span class="cmtspan"><?php echo count($comment_like_count); ?></span></span>Like</a></b>
 										<!----------------------------show reply comment---------------------------- -->
 										<?php $reply_comment = $this->Common_model->getAllwhereorder("replycomment_buzz",array("comment_buzz_id" => $allcomment->comment_buzz_id),"replybuzz_id","asc"); 
 										      
@@ -179,7 +179,7 @@ $getallcomment = $this->Common_model->commentpaginationbuzz(array("buzz_id" => $
                                         <small><?php echo convert_time($reply_val->create_date,'F j, Y, g:i a'); ?></small>
                                         <p class="edit_replycomment_text_<?php echo $reply_val->replybuzz_id; ?>"><?php echo $reply_val->reply_comment; ?></p>
 										<b><a href="javascript:void(0)" class="link-dark replybuzzcomment_like_post" <?php if($getmyreplylikecomment){ ?>style="color:#009688;"<?php } ?> id="likereplycomment-<?php echo $reply_val->replybuzz_id; ?>" data-status="1" data-commentid="<?php echo $reply_val->comment_buzz_id; ?>" data-replycommentid="<?php echo $reply_val->replybuzz_id; ?>">
-							   <div class="replycmtdivcls" id="likereplycommentcountbox-<?php echo $reply_val->replybuzz_id; ?>"><span class="replycmtspan"><?php echo count($replycomment_like_count); ?></span></div>Like</a></b>
+							   <span class="replycmtdivcls" id="likereplycommentcountbox-<?php echo $reply_val->replybuzz_id; ?>"><span class="replycmtspan"><?php echo count($replycomment_like_count); ?></span></span>Like</a></b>
 	
                                     </div>
                                <!-------------------------------------------------------replycomment edit and delete dropdown--------------------- -->
