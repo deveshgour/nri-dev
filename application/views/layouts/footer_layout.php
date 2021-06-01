@@ -4162,6 +4162,216 @@ $(document).on('click','#editcomment_submit',function(){
 	    });
 	 
  });
+ 
+   $(document).on('click','.comment_buzz_like_post',function(){
+	 $(this).append('<img id="loading_img" style="width:20px" src="<?php echo base_url(); ?>images/url-loader.gif" />');
+	 var commentlike = $(this);
+     var buzz_id = $(this).attr('data-buzzid');
+	 var commentid = $(this).attr('data-commentid');
+	 
+	 var author = $(this).attr('data-author');
+	$.ajax 
+		({
+			url: "<?php echo base_url(); ?>Event/comment_like",
+			type: "POST",             
+			data: "commentid=" + commentid + "&userid=" + author+ "&buzz_id=" + buzz_id, 
+			dataType: "json",
+			success: function(response)   
+			{ 
+			
+               $("#loading_img").remove();				
+			   if(response.success){
+				   commentlike.css('color','#009688');
+				    $("#likecommentcountbox-"+commentid).show();
+				   if(response.commentlike == 0){
+					   $("#likecommentcountbox-"+commentid).hide();
+				   }else{
+					   $("#likecommentcountbox-"+commentid).show();
+					   $("#likecommentcountbox-"+commentid).find('span').text(response.commentlike);
+				   }
+				   
+				 
+			   }else{
+				    $(".comment_buzz_like_post").removeAttr("style");
+					$("#likecommentcountbox-"+commentid).show();
+					   $("#likecommentcountbox-"+commentid).find('span').text(response.commentlike);
+			   }
+			    
+			}
+	    });
+ });
+ 
+  $(document).on('click','[id^="editreplybuzzcomment_submit"]', function(e){ 
+        var reply_id = $(this).attr('data-reply-id');      
+	    var value = $('#edit_replycomment_'+ reply_id).val();
+			$.ajax 
+		({
+			url: "<?php echo base_url(); ?>Event/change_replycomment",
+			type: "POST",             
+			data: "value=" + value + "&reply_id=" + reply_id,
+            dataType: "json", 			
+			success: function(response)   
+			{
+				if(response.success)
+				{
+				   $('.edit_replycomment_text_'+ reply_id).text(value);
+				   $("#editbuzzreplycomment_"+ reply_id).modal('hide');
+				}
+			}
+	    });
+	 
+ });
+ 
+  $(document).on('click','.replybuzzCmt',function(){    
+	
+	var comment_id = $(this).attr('data-comment_buzz_id');
+	var comment_user_id = $(this).attr('data-comment_user_id');
+	var user_id = $(this).attr('data-user_id');
+	var reply_val = $(".replycmtval_"+comment_id).val();
+		$.ajax 
+		({
+			url: "<?php echo base_url(); ?>Event/add_buzz_reply_comment",
+			type: "POST",             
+			data: "comment_id="+comment_id+"&comment_user_id="+comment_user_id+"&user_id="+user_id+"&reply_val="+reply_val,
+            dataType: "json", 			
+			success: function(response)   
+			{
+				if(response.success)
+				{
+				  $(".replycmtval_"+comment_id).val("");
+				  
+			//$("#loadermodal").modal('hide');
+				 $('.replycommentshow-'+comment_id).html(response.list);
+				
+				
+				}
+			}
+	    });
+	
+  });
+  
+    $(document).on('click','.replybuzzcomment_like_post',function(){
+	 $(this).append('<img id="loading_img" style="width:20px" src="<?php echo base_url(); ?>images/url-loader.gif" />');
+	 var replycommentlike = $(this);
+     
+	 var commentid = $(this).attr('data-commentid');
+	 var replycommentid = $(this).attr('data-replycommentid');
+	$.ajax 
+		({
+			url: "<?php echo base_url(); ?>Event/replycomment_like",
+			type: "POST",             
+			data: "commentid=" + commentid + "&replycommentid=" + replycommentid, 
+			dataType: "json",
+			success: function(response)   
+			{ 
+			
+               $("#loading_img").remove();				
+			   if(response.success){
+				   replycommentlike.css('color','#009688');
+				    $("#likereplycommentcountbox-"+replycommentid).show();
+				   if(response.replycommentlike == 0){
+					   $("#likereplycommentcountbox-"+replycommentid).hide();
+				   }else{
+					   $("#likereplycommentcountbox-"+replycommentid).show();
+					   $("#likereplycommentcountbox-"+replycommentid).find('span').text(response.replycommentlike);
+				   }
+				   
+				 
+			   }else{
+				    $(".replybuzzcomment_like_post").removeAttr("style");
+					$("#likereplycommentcountbox-"+replycommentid).show();
+					   $("#likereplycommentcountbox-"+replycommentid).find('span').text(response.replycommentlike);
+			   }
+			    
+			}
+	    });
+ });
+ 
+ 
+  $(document).on('click','[id^="editbuzzcomment_submit_"]', function(e){ alert("asdas");
+
+
+        var comment_id = $(this).attr('data-comment-id');      
+
+	    var value = $('#edit_comment_'+ comment_id).val();
+
+			$.ajax 
+
+		({
+
+			url: "<?php echo base_url(); ?>Event/change_comment",
+
+			type: "POST",             
+
+			data: "value=" + value + "&comment_id=" + comment_id,
+
+            dataType: "json", 			
+
+			success: function(response)   
+
+			{
+
+				if(response.success)
+
+				{
+
+				   $('.edit_comment_text_'+ comment_id).text(value);
+
+				   $("#editcomment_"+ comment_id).modal('hide');
+
+				}
+
+			}
+
+	    });
+
+	 
+
+ });
+ 
+ 
+ 	$(document).on('click','[class^="trashbuzzcomments"]', function(e){ 
+		
+		  var commentid = $(this).attr('data-commentid'); 
+		  if(confirm("Are you sure you want to delete this comment?")){
+     		$.ajax 
+		({
+			url: "<?php echo base_url(); ?>Event/delete_buzz_comment",
+			type: "POST",             
+			data: "comment_id=" + commentid,
+            dataType: "json", 			
+			success: function(){
+				
+				}
+			});
+			window.location.reload();
+		  //  $(this).parents('.newflex'+commentid).animate({ backgroundColor: "#fbc7c7" }, "fast")
+		//	.animate({ opacity: "hide" }, "slow");
+			}
+			return false;
+		});
+		
+			$(document).on('click','[class^="trashbuzzreplycmts_"]', function(e){  
+		  
+		  var commentid = $(this).attr('data-commentid'); 
+		  var replycommentid = $(this).attr('data-replycommentid');
+		  if(confirm("Are you sure you want to delete this comment?")){
+     		$.ajax 
+		({
+			url: "<?php echo base_url(); ?>Event/delete_replycomment",
+			type: "POST",             
+			data: "comment_id=" + commentid + "&replycommentid=" + replycommentid,
+            dataType: "json", 			
+			success: function(){
+				
+				}
+			});
+			window.location.reload();
+		  //  $(this).parents('.newflex'+commentid).animate({ backgroundColor: "#fbc7c7" }, "fast")
+		//	.animate({ opacity: "hide" }, "slow");
+			}
+			return false;
+		});
 
 	</script>
 
