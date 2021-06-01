@@ -31,7 +31,7 @@
 										?>
 										<small><?php echo convert_time($allcomment->create_date,'F j, Y, g:i a'); ?></small>
                                         <p class="edit_replycomment_text_<?php echo $allcomment->replybuzz_id; ?>"><?php echo $allcomment->reply_comment; ?></p>
-										<b><a href="javascript:void(0)" class="link-dark replycomment_like_post" <?php if($getmyreplylikecomment){ ?>style="color:#009688;"<?php } ?> id="likereplycomment-<?php echo $allcomment->replybuzz_id; ?>" data-status="1" data-commentid="<?php echo $allcomment->comment_buzz_id; ?>" data-replycommentid="<?php echo $allcomment->replybuzz_id; ?>">
+										<b><a href="javascript:void(0)" class="link-dark replybuzzcomment_like_post" <?php if($getmyreplylikecomment){ ?>style="color:#009688;"<?php } ?> id="likereplycomment-<?php echo $allcomment->replybuzz_id; ?>" data-status="1" data-commentid="<?php echo $allcomment->comment_buzz_id; ?>" data-replycommentid="<?php echo $allcomment->replybuzz_id; ?>">
 							   <div class="replycmtdivcls" id="likereplycommentcountbox-<?php echo $allcomment->replybuzz_id; ?>"><span class="replycmtspan"><?php echo count($replycomment_like_count); ?></span></div>Like</a></b>
 	
                                     </div>

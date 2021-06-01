@@ -179,9 +179,14 @@ class Userprofile extends CI_Controller {
 	$data = '<ul class="list-unstyled">';
 
 	foreach($result as $re){
+		if(!empty($re->user_image)){
+		$img = base_url().'upload/'.$re->user_image;
+		}else{
+		$img = base_url().'images/user_image.png';
+		}
 		
 			$country_name = $this->Common_model->getsingle("country",array("id" => $re->country_id));
-			$data .= '<li><a href="'.base_url()."friend-user/".base64_encode($re->user_id).'" ><span value='.$re->user_id.' class="d-flex align-items-center"><span class="mr-2"><img src="https://localhost/nri-dev/images/user_image.png" class="img-fluid rounded-circle" width="30"/></span><span>'.$re->firstname.' '.$re->lastname.'<span class="country_name">'. $country_name->name.'</span></span></span></a></li>';
+			$data .= '<li><a href="'.base_url()."friend-user/".base64_encode($re->user_id).'" ><span value='.$re->user_id.' class="d-flex align-items-center"><span class="mr-2"><img src="'.$img.'" class="img-fluid rounded-circle" width="30"/></span><span>'.$re->firstname.' '.$re->lastname.'<span class="country_name">'. $country_name->name.'</span></span></span></a></li>';
 			 }  
 			 
 			 $data .= '</ul>';

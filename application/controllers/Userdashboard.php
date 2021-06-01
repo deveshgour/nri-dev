@@ -774,6 +774,15 @@ class Userdashboard extends CI_Controller {
 		$this->Common_model->deleteRecords("reply_comment",array("reply_id" => $replycommentid));
 		//$this->Common_model->deleteRecords("reply_comment",array("reply_id" => $replycommentid));
 	}
+	
+	public function chat()
+	{
+		$data = array();
+		
+		$this->load->view('layouts/profile_layout',$data);
+		$this->load->view('home/chat',$data);  
+		$this->load->view('layouts/footer_layout',$data);
+	}
 
 	public function logout()
 	{
