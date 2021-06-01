@@ -153,11 +153,12 @@ header{
                     }
                 }
                 &.moodDropdoown{
+                    img{
+                        width: 24px;
+                    }
                     .dropdown-menu{
                             padding:10px;
-                            img{
-                                width: 24px;
-                            }
+                           
                     }
                 }
                 .dropdown-menu{

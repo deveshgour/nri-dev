@@ -27,7 +27,7 @@ error_reporting(0);
 
 //$root="http://".$_SERVER['HTTP_HOST'];
 //$config['base_url'] = $root.'/nri';
-$config['base_url'] = "http://localhost/nri-dev"; 
+$config['base_url'] = "https://localhost/nri-dev"; 
 
 /*
 |--------------------------------------------------------------------------
