@@ -607,7 +607,7 @@ $getallcomment = $this->Common_model->commentpagination(array("post_id" => $row-
 
      aria-labelledby="myModalLabel" aria-hidden="true">
 
-   <div class="modal-dialog">
+   <div class="modal-dialog modal-dialog-centered">
 
         <div class="modal-content">
 
@@ -645,7 +645,7 @@ $getallcomment = $this->Common_model->commentpagination(array("post_id" => $row-
 
                    
 
-                    <div class='col-xs-12 required'>
+                    <div class='form-group'>
 
                        <textarea rows="3" class="form-control" name="edit_replycomment" id="edit_replycomment_<?php echo $reply_val->reply_id; ?>"><?php echo $reply_val->reply_comment; ?></textarea>    
 
@@ -655,12 +655,12 @@ $getallcomment = $this->Common_model->commentpagination(array("post_id" => $row-
 
 			
 
-			  
+			  <div class="text-center">
 
-			<button type="submit" data-reply-id="<?php echo $reply_val->reply_id; ?>" name="editreplycomment_submit" id="editreplycomment_submit" class=' btn btn-primary submit-button' style="margin-left:16px;" >Submit</button>
+			<button type="submit" data-reply-id="<?php echo $reply_val->reply_id; ?>" name="editreplycomment_submit" id="editreplycomment_submit" class=' btn btn-primary submit-button mr-2'>Submit</button>
 
 			 <button type="button" class='btn btn-primary submit-button' data-dismiss="modal">Close</button>
-
+                               </div>
 			
 
 			
@@ -755,7 +755,7 @@ $getallcomment = $this->Common_model->commentpagination(array("post_id" => $row-
 
      aria-labelledby="myModalLabel" aria-hidden="true">
 
-   <div class="modal-dialog">
+   <div class="modal-dialog modal-dialog-centered">
 
         <div class="modal-content">
 
@@ -789,27 +789,27 @@ $getallcomment = $this->Common_model->commentpagination(array("post_id" => $row-
 
 			
 
-			<div >
+		
 
                    
 
-                    <div class='col-xs-12 required'>
+                    <div class='form-group'>
 
                        <textarea rows="3" class="form-control" name="edit_comment" id="edit_comment_<?php echo $allcomment->comment_id; ?>"><?php echo $allcomment->comment; ?></textarea>    
 
 					   </div>
 
-                  </div>
+                  
 
 			
 
-			  
+			  <div class="text-center">
 
-			<button type="submit" data-comment-id = "<?php echo $allcomment->comment_id; ?>" name="editcomment_submit" id="editcomment_submit" class=' btn btn-primary submit-button' style="margin-left:16px;" >Submit</button>
+			<button type="submit" data-comment-id = "<?php echo $allcomment->comment_id; ?>" name="editcomment_submit" id="editcomment_submit" class=' btn btn-primary submit-button mr-2' >Submit</button>
 
 			 <button type="button" class='btn btn-primary submit-button' data-dismiss="modal">Close</button>
 
-			
+                               </div>
 
 			
 

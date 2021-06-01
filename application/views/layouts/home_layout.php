@@ -158,19 +158,22 @@
 
 
 
-                    <li class="list-inline-item">
+                <li class="list-inline-item">
 
-                       <?php if(!empty($getemoji)){ ?>
+<?php if(!empty($getemoji)){ ?>
+  <div class="dropdown moodDropdoown">
+    <a href="javascript:;" class="link-dark dropdown-toggle" id="moodDropdoown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="<?php echo $getemoji->image; ?>" ></a>
+        <div class="dropdown-menu" aria-labelledby="moodDropdoown">
+            <?php echo $smiley_table; ?>
+        </div>
+    </div>
+   <?php }else{ ?>
 
-					  <a href="javascript:;" onclick="moodModal()" class="link-dark"><img src="<?php echo $getemoji->image; ?>" ></a>
+  <a href="javascript:;" class="link-dark"><span class="icon-mood"></span></a>
 
-					   <?php }else{ ?>
+   <?php } ?>
 
-					  <a href="javascript:;" onclick="moodModal()" class="link-dark"><span class="icon-mood"></span></a>
-
-					   <?php } ?>
-
-                    </li>
+</li>
 
                     <!--<li class="list-inline-item">
 
