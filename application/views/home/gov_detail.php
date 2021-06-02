@@ -36,7 +36,7 @@
         <?php echo $message; ?></div><?php } ?>
                 <div class="feeds">
 				<form id="newuploadimage" action="" method="post" enctype="multipart/form-data">
-                    <div class="feeds-search d-sm-flex align-items-center text-center rounded-10 bg-white">
+                    <div class="feeds-search d-sm-flex align-items-center text-center rounded-10">
                         <div class="d-flex align-items-center flex-1">
                             <div class="userImg rounded-circle overflow-hidden">
                                 <?php if(!empty($userDetail->user_image)){ ?>
@@ -62,7 +62,7 @@
 						    $i = 1;
 					        foreach($post_data as $row){ 
 					?>
-                    <div class="feed-box rounded-10 bg-white" id="postdetail-<?php echo $row->gov_id; ?>">
+                    <div class="feed-box rounded-10" id="postdetail-<?php echo $row->gov_id; ?>">
 					
                         <div class="feedTop">
                             <div class="userInfo d-flex align-items-center">
