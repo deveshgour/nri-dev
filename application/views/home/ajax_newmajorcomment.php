@@ -1,10 +1,10 @@
 
 
 <?php  
-     if(!empty($getallcomment)){
-	      foreach($getallcomment['rows'] as $allcomment){
-			  $getuser = $this->Common_model->getsingle("users",array("user_id" => $allcomment->user_id)); ?>
-			  <span class="newflex<?php echo $allcomment->comment_major_id; ?>"> 
+     if(!empty($get$allcomment)){
+	      foreach($get$allcomment['rows'] as $$allcomment){
+			  $getuser = $this->Common_model->getsingle("users",array("user_id" => $$allcomment->user_id)); ?>
+			  <span class="newflex<?php echo $$allcomment->comment_major_id; ?>"> 
 			 <li class="d-flex">
                                     <div class="imgBox rounded-circle overflow-hidden">
                                         <?php if(!empty($getuser->user_image)){ ?>
@@ -15,11 +15,11 @@
                                     </div>
                                     <div class="cntText">
                                         <h6 class="font-sm mb-0"><?php echo $getuser->firstname.' '.$getuser->lastname; ?></h6>
-                                        <small><?php echo convert_time($allcomment->create_date,'F j, Y, g:i a'); ?></small>
-                                        <p class="edit_comment_text_<?php echo $allcomment->comment_major_id; ?>"><?php echo $allcomment->comment; ?></p>
-                                    <b><a href="javascript:;" class="link-dark replyshow" data-commentid="<?php echo  $allcomment->comment_major_id; ?>">Reply</a></b>
+                                        <small><?php echo convert_time($$allcomment->create_date,'F j, Y, g:i a'); ?></small>
+                                        <p class="edit_comment_text_<?php echo $$allcomment->comment_major_id; ?>"><?php echo $$allcomment->comment; ?></p>
+                                    <b><a href="javascript:;" class="link-dark replyshow" data-commentid="<?php echo  $$allcomment->comment_major_id; ?>">Reply</a></b>
 
-										<b><a href="javascript:void(0)" class="link-dark comment_major_like_post" <?php if($getmylikecomment){ ?><?php } ?> id="likecomment-<?php echo $allcomment->comment_major_id; ?>" data-status="1" data-type="1" data-author="<?php echo $allcomment->user_id; ?>" data-postid="<?php echo $row->major_id; ?>" data-commentid="<?php echo $allcomment->comment_major_id; ?>">
+										<b><a href="javascript:void(0)" class="link-dark comment_major_like_post" <?php if($getmylikecomment){ ?><?php } ?> id="likecomment-<?php echo $$allcomment->comment_major_id; ?>" data-status="1" data-type="1" data-author="<?php echo $$allcomment->user_id; ?>" data-postid="<?php echo $$allcomment->major_id; ?>" data-commentid="<?php echo $allcomment->comment_major_id; ?>">
 
 							   <span class="cmtdivcls" id="likecommentcountbox-<?php echo $allcomment->comment_major_id; ?>"><span class="cmtspan"><?php echo count($comment_like_count); ?></span></span> Like</a></b>
 
@@ -131,7 +131,7 @@
 
                                     <ul class="list-unstyled mb-0">
 
-                                        <li> <a href="javascript:void(0);" id="deletereplyComment<?php echo $reply_val->reply_id; ?>" data-replycommentid="<?php echo  $reply_val->reply_id; ?>" data-commentid="<?php echo  $reply_val->comment_id; ?>"><span class="del" data-replycommentid="<?php echo  $reply_val->reply_id; ?>" data-commentid="<?php echo  $reply_val->comment_id; ?>" data-postid="<?php echo $row->major_id; ?>">Delete</span></a></li>
+                                        <li> <a href="javascript:void(0);" id="deletereplyComment<?php echo $reply_val->reply_id; ?>" data-replycommentid="<?php echo  $reply_val->reply_id; ?>" data-commentid="<?php echo  $reply_val->comment_id; ?>"><span class="del" data-replycommentid="<?php echo  $reply_val->reply_id; ?>" data-commentid="<?php echo  $reply_val->comment_id; ?>" data-postid="<?php echo $allcomment->major_id; ?>">Delete</span></a></li>
 
                                         <li><a href="javascript:void(0);" data-target="#editreplycomment_<?php echo $reply_val->reply_id; ?>" data-toggle="modal">Edit Post</a></li>
 
@@ -249,9 +249,9 @@
 
 											<div class="inputBox position-relative hidediv replyShownew_<?php echo $allcomment->comment_major_id; ?>" style="display:none;">
 
-                                    <input type="text" class="form-control replycmtval_<?php echo $allcomment->comment_major_id; ?>" name="reply_comment" id="reply_comment" data-post_id="<?php echo $row->major_id; ?>" data-comment_id="<?php echo $allcomment->comment_major_id; ?>" data-comment_user_id="<?php echo $allcomment->user_id; ?>" data-user_id="<?php echo $this->session->userdata("userId")["user_id"]; ?>" value="" placeholder="Write a public comment">
+                                    <input type="text" class="form-control replycmtval_<?php echo $allcomment->comment_major_id; ?>" name="reply_comment" id="reply_comment" data-post_id="<?php echo $allcomment->major_id; ?>" data-comment_id="<?php echo $allcomment->comment_major_id; ?>" data-comment_user_id="<?php echo $allcomment->user_id; ?>" data-user_id="<?php echo $this->session->userdata("userId")["user_id"]; ?>" value="" placeholder="Write a public comment">
 
-                                   <button class="border-0 bg-transparent font-sm replyCombtn_<?php echo $allcomment->comment_major_id; ?>" id="postValmajor<?php echo $allcomment->comment_major_id; ?>" data-post_id="<?php echo $row->major_id; ?>" data-comment_id="<?php echo $allcomment->comment_major_id; ?>" data-comment_user_id="<?php echo $allcomment->user_id; ?>" data-user_id="<?php echo $this->session->userdata("userId")["user_id"]; ?>">Post</button>
+                                   <button class="border-0 bg-transparent font-sm replyCombtn_<?php echo $allcomment->comment_major_id; ?>" id="postValmajor<?php echo $allcomment->comment_major_id; ?>" data-post_id="<?php echo $allcomment->major_id; ?>" data-comment_id="<?php echo $allcomment->comment_major_id; ?>" data-comment_user_id="<?php echo $allcomment->user_id; ?>" data-user_id="<?php echo $this->session->userdata("userId")["user_id"]; ?>">Post</button>
 
                                 </div>
 
@@ -259,7 +259,7 @@
 
                                     </div>
 
-									<?php /* ?><div><a href="javascript:void(0);" id="deleteComment" data-commentid="<?php echo  $allcomment->comment_id; ?>"><span class="icon-trash-2 trashcomment" data-commentid="<?php echo  $allcomment->comment_id; ?>" data-postid="<?php echo $row->post_id; ?>"></span></a></div><?php */ ?>
+									<?php /* ?><div><a href="javascript:void(0);" id="deleteComment" data-commentid="<?php echo  $allcomment->comment_id; ?>"><span class="icon-trash-2 trashcomment" data-commentid="<?php echo  $allcomment->comment_id; ?>" data-postid="<?php echo $allcomment->post_id; ?>"></span></a></div><?php */ ?>
 
                                 <!-------------------------------------------------------comment edit and delete dropdown--------------------- -->
 
@@ -277,7 +277,7 @@
 
                                     <ul class="list-unstyled mb-0">
 
-                                                                                <li> <a class="trashmajorcomments<?php echo  $allcomment->comment_major_id; ?>" href="javascript:void(0);" id="deleteComment" data-postid="<?php echo $row->major_id; ?>" data-commentid="<?php echo  $allcomment->comment_major_id; ?>"><span class="del trashcomment" data-commentid="<?php echo  $allcomment->comment_major_id; ?>" data-postid="<?php echo $row->major_id; ?>">Delete</span></a></li>
+                                                                                <li> <a class="trashmajorcomments<?php echo  $allcomment->comment_major_id; ?>" href="javascript:void(0);" id="deleteComment" data-postid="<?php echo $allcomment->major_id; ?>" data-commentid="<?php echo  $allcomment->comment_major_id; ?>"><span class="del trashcomment" data-commentid="<?php echo  $allcomment->comment_major_id; ?>" data-postid="<?php echo $allcomment->major_id; ?>">Delete</span></a></li>
 
 
 
@@ -377,7 +377,7 @@
 
 							   </span>
          <?php }if($getallcomment['num_rows'] > count($getallcomment['rows'])){ ?>
-				<div class="seeComment my-3"><center style="text-align: left;color:black;"><a class="moremajorimage" data-postid="<?php echo $allcomment->major_id; ?>" data-page="<?php echo $offset; ?>" href="javascript:void(0);">See more comments</a></center></div>		
+				<div class="seeComment my-3 text-center"><center><a class="moremajorimage" data-postid="<?php echo $allcomment->major_id; ?>" data-page="<?php echo $offset; ?>" href="javascript:void(0);">See more comments</a></center></div>		
 				<?php }
 	 }else{ ?>
 				

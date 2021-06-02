@@ -833,7 +833,7 @@ $getallcomment = $this->Common_model->commentpagination(array("post_id" => $row-
 
 							
 
-				<div class="seeComment my-3 text-center"><a class="moreimage" data-postid="<?php echo $row->post_id; ?>" data-page="1" href="javascript:void(0);">See more comments</a></div>
+				<div class="seeComment my-3 text-center"><center><a class="moreimage" data-postid="<?php echo $row->post_id; ?>" data-page="1" href="javascript:void(0);">See more comments</a></center></div>
 
 							<?php }}else{ ?>
 
