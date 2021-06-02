@@ -3,8 +3,11 @@
 		<main class="main-content friendRequestpage">
 
 					<div class="container">
+					<div class="row">
+					<div class="col-lg-6 offset-lg-3">
 					<div class="friendRequestpage__wrapper">
-				<h3 class="text-center mb-3">Friend Request</h3>
+				
+					<h3 class="text-center mb-3">Friend Request</h3>
 						<div class="row">
 						   <?php if(!empty($friendrequest_list)){foreach($friendrequest_list as $frnd_sug){
 							  
@@ -30,7 +33,10 @@
                            </div>-->
 							  
         </div>
-				</div></div>
+				</div>
+				</div>
+				</div>
+				</div>
     		</main>
 
 		
