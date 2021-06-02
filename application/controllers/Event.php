@@ -287,6 +287,7 @@ class Event extends CI_Controller {
 		$postid = $this->input->post("postid");
 		
 		$this->Common_model->deleteRecords("comment_event",array("comment_event_id" => $comment_id,"event_id" => $postid));
+		echo "delete";
 	}
 	
 	public function get_comments()
@@ -540,5 +541,197 @@ public function comment_like()
 		$return = array('success'=>true, 'list'=> $list,'totalcommentcount' => $data['totalcommentcount']);
 		echo json_encode($return);
        
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	/*---------------------------------------------------event comment like------------------------------*/
+	
+	public function comment_event_like()
+	{
+		$data['title'] = 'Like';	
+		$user_id = $this->session->userdata('userId')['user_id'];
+		$post_id = $this->input->post('postid');		
+		$comment_id = $this->input->post('commentid');
+		$author = $this->input->post('userid');
+		
+		  
+		
+		$liked = $this->Common_model->getsingle('comment_event_like',array('comment_id'=>$comment_id,'user_id'=>$this->session->userdata('userId')['user_id']));
+		if(!empty($liked)){
+			 $this->Common_model->deleteRecords('comment_event_like',array("comment_like_id" => $liked->comment_like_id));
+			 $count_like_one = $this->Common_model->jointwotable('comment_event_like', 'user_id', 'users', 'user_id',array('comment_id' => $comment_id,'comment_event_like.status'=>1),'users.user_id,users.firstname,users.lastname,comment_event_like.comment_like_id');
+			$response = array("success" => false, 'message'=>'Successfully delete','commentlike'=>count($count_like_one));
+
+		}else{
+			$array = array(
+			'post_id' => $post_id,
+			'user_id' => $this->session->userdata('userId')['user_id'],
+			'comment_id' => $comment_id,
+			'status' => 1
+			);
+			$insert_id = $this->Common_model->addRecords('comment_event_like',$array);
+			if($insert_id > 0){
+			
+			$count_like_one = $this->Common_model->jointwotable('comment_event_like', 'user_id', 'users', 'user_id',array('comment_id' => $comment_id,'comment_event_like.status'=>1),'users.user_id,users.firstname,users.lastname,comment_event_like.comment_like_id');
+		   $response = array("success" => true, 'message'=>'Successfully add','commentlike'=>count($count_like_one));
+
+		}
+		
+		}
+		echo json_encode($response);
+		
+		
+	}
+	
+	public function replycomment_event_like()
+	{
+		$data['title'] = 'Like';	
+		$user_id = $this->session->userdata('userId')['user_id'];
+		$post_id = $this->input->post('postid');		
+		$comment_id = $this->input->post('commentid');
+		$replycomment_id = $this->input->post('replycommentid');
+		
+		  
+		
+		$liked = $this->Common_model->getsingle('replycomment_event_like',array('replycomment_id'=>$replycomment_id,'user_id'=>$this->session->userdata('userId')['user_id']));
+		if(!empty($liked)){
+			 $this->Common_model->deleteRecords('replycomment_event_like',array("replycomment_like_id" => $liked->replycomment_like_id));
+			 
+			 $count_like_one = $this->Common_model->jointwotable('replycomment_event_like', 'user_id', 'users', 'user_id',array('replycomment_id' => $replycomment_id,'replycomment_event_like.status'=>1),'users.user_id,users.firstname,users.lastname,replycomment_event_like.replycomment_like_id');
+			$response = array("success" => false, 'message'=>'Successfully delete','replycommentlike'=>count($count_like_one));
+
+		}else{
+			$array = array(
+			'post_id' => $post_id,
+			'replycomment_id' => $replycomment_id,
+			'user_id' => $this->session->userdata('userId')['user_id'],
+			'comment_id' => $comment_id,
+			'status' => 1
+			);
+			$insert_id = $this->Common_model->addRecords('replycomment_event_like',$array);
+			
+			if($insert_id > 0){
+			
+			$count_like_one = $this->Common_model->jointwotable('replycomment_event_like', 'user_id', 'users', 'user_id',array('replycomment_id' => $replycomment_id,'replycomment_event_like.status'=>1),'users.user_id,users.firstname,users.lastname,replycomment_event_like.replycomment_like_id');
+		   $response = array("success" => true, 'message'=>'Successfully add','replycommentlike'=>count($count_like_one));
+
+		}
+		
+		}
+		
+		echo json_encode($response);
+		
+		
+	}
+	
+	public function change_event_comment()
+	{ 
+		$where = array();
+		
+		$value = $this->input->post('value');
+		$comment_id = $this->input->post('comment_id');
+		
+		$userid = $this->session->userdata('userId')['user_id'];
+        
+		$array = array(
+		  'comment' => $value
+		);
+		$update = $this->Common_model->updateRecords('comment_event',$array,array('user_id' => $userid,'comment_event_id' =>$comment_id));
+		
+		$response = array("code" => 100, "success" => true, 'message'=>'Post Change Successfully');
+		
+
+		echo json_encode($response); 
+	}
+	
+	public function change_event_replycomment()
+	{ 
+		$where = array();
+		
+		$value = $this->input->post('value');
+		$reply_id = $this->input->post('reply_id');
+		
+		$userid = $this->session->userdata('userId')['user_id'];
+        
+		$array = array(
+		  'reply_comment' => $value
+		);
+		$update = $this->Common_model->updateRecords('replycomment_event',$array,array('user_id' => $userid,'reply_id' =>$reply_id));
+		
+		$response = array("code" => 100, "success" => true, 'message'=>'Post Change Successfully');
+		
+
+		echo json_encode($response); 
+	}
+	
+	public function delete_event_replycomment()
+	{
+		$comment_id = $this->input->post("comment_id");
+		$replycommentid = $this->input->post("replycommentid");
+		$postid = $this->input->post("postid");
+		
+		
+		$this->Common_model->deleteRecords("replycomment_event",array("reply_id" => $replycommentid));
+		//$this->Common_model->deleteRecords("reply_comment",array("reply_id" => $replycommentid));
+	}
+	
+
+	
+	public function add_event_reply_comment()
+	{
+		$where = array();
+		
+		$post_id = $this->input->post('post_id');
+		$comment_id = $this->input->post('comment_id');
+		$comment_user_id = $this->input->post('comment_user_id');
+		$user_id = $this->input->post('user_id');
+		$reply_val = $this->input->post('reply_val');
+        $array = array();
+		$array = array(
+		  'post_id' => $post_id,
+		  'comment_id' => $comment_id,
+		  'comment_user_id' => $comment_user_id,
+		  'reply_comment' => $reply_val,
+		  'user_id' => $user_id,
+		  'create_date' => date("Y-m-d,H:i:s")
+		);
+		$update = $this->Common_model->addRecords('replycomment_event',$array);
+		
+		$data['getallcomment'] = $this->Common_model->getAllwhereorder("replycomment_event",array("comment_id" =>$comment_id),"reply_id","asc");
+		
+		
+		$list = $this->load->view('home/ajax_replyeventcomment', array('getallcomment'=>$data['getallcomment'],'comment_id'=>$comment_id), true);
+					
+		$this->output->set_content_type('application/json');
+		
+		$return = array('success'=>true, 'list'=> $list);
+		echo json_encode($return);
+		
+	}
+	
+	public function change_post()
+	{ 
+		$where = array();
+		
+		$value = $this->input->post('value');
+		$post_id = $this->input->post('post_id');
+		
+		$userid = $this->session->userdata('userId')['user_id'];
+        $array = array();
+		$array = array(
+		  'post' => $value
+		);
+		$update = $this->Common_model->updateRecords('event',$array,array('user_id' => $userid,'event_id' =>$post_id));
+		
+		$response = array("code" => 100, "success" => true, 'message'=>'Post Change Successfully');
+		
+
+		echo json_encode($response); 
 	}
 }
