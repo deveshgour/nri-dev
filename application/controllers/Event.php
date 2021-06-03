@@ -201,6 +201,8 @@ class Event extends CI_Controller {
 		$this->load->view('home/event_ajax_value',$data);
 	} 
 	
+
+	
 	public function like()
 	{
 		$data['title'] = 'Like';	
@@ -212,20 +214,15 @@ class Event extends CI_Controller {
 		  
 		
 		$liked = $this->Common_model->getsingle('like_event',array('event_id'=>$post_id,'user_id'=>$this->session->userdata('userId')['user_id']));
-		if($liked){
-			if($liked->status == $status){
-			$response = array("status" => $status,"success" => false, 'message'=>'Successfully insert');
-			}else{
-			$this->Common_model->updateData('like_event',array('status'=>$status),array('like_event_id'=>$liked->like_event_id));
-			$count_like_one = $this->Common_model->jointwotable('like_event', 'user_id', 'users', 'user_id',array('event_id' => $post_id,'like_event.status'=>1),'users.user_id,users.firstname,users.lastname,like_event.like_event_id');
-		 
-			$response = array("status" => $status, "success" => true, 'message'=>'Successfully insert','like'=>count($count_like_one));
-			}
-            $this->Common_model->deleteRecords('like_event',array("like_event_id" => $liked->like_id));
-			$count_like_one = $this->Common_model->jointwotable('like_event', 'user_id', 'users', 'user_id',array('event_id' => $post_id,'like_event.status'=>1),'users.user_id,users.firstname,users.lastname,like_event.like_event_id');
-			$response = array("status" => "0","success" => false, 'message'=>'Successfully delete','like'=>count($count_like_one));
+		if(!empty($liked)){
+			$this->Common_model->deleteRecords('like_event',array("like_event_id" => $liked->like_event_id));
+			
+$count_like_one = $this->Common_model->jointwotable('like_event', 'user_id', 'users', 'user_id',array('event_id' => $post_id,'like_event.status'=>1),'users.user_id,users.firstname,users.lastname,like_event.like_event_id');		
+	
+	$response = array("status" => $status,  "success" => false, 'message'=>'Successfully delete','like'=>count($count_like_one));
+
 		}else{
-		if($status == 1){
+		
 			$array = array(
 			'event_id' => $post_id,
 			'user_id' => $user_id,
@@ -235,19 +232,12 @@ class Event extends CI_Controller {
 			$insert_id = $this->Common_model->addRecords('like_event',$array);
 			if($insert_id > 0){
 			
-			$count_like_one = $this->Common_model->jointwotable('like_event', 'user_id', 'users', 'user_id',array('event_id' => $post_id,'like_event.status'=>1),'users.user_id,users.firstname,users.lastname,like_event.like_event_id');
+$count_like_one = $this->Common_model->jointwotable('like_event', 'user_id', 'users', 'user_id',array('event_id' => $post_id,'like_event.status'=>1),'users.user_id,users.firstname,users.lastname,like_event.like_event_id');		
 		 
 			
-			$response = array("status" => $status, "type"=>$type, "success" => true, 'message'=>'Successfully insert','like'=>count($count_like_one));
-			}else{
-				$response = array("status" => $status, "type"=>$type, "success" => false, 'message'=>'Not Liked');
-
+			$response = array("status" => $status, "success" => true, 'message'=>'Successfully insert','like'=>count($count_like_one));
 			}
-
-			}else{
-				$response = array("success" => false, 'message'=>'Not Liked');
-
-			}
+			
 
 		}
 

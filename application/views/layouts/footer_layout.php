@@ -652,7 +652,7 @@
 
 		loadMoreData(offset);
 
-		<?php }elseif($this->uri->segment(1) == "myprofile"){ ?>
+		<?php }elseif($this->uri->segment(1) == "userprofile"){ ?>
 
 		loadMoremyData(offset);
 
@@ -5209,6 +5209,437 @@ $(document).on('click','[id^="deleteeventreplyComment"]', function(e){
 		({
 
 			url: "<?php echo base_url(); ?>Event/delete_comment",
+
+			type: "POST",             
+
+			data: "comment_id=" + commentid + "&postid=" + postid,
+
+            			
+
+			success: function(data){
+
+				window.location.reload();
+
+				}
+
+			});
+
+			
+
+		  //  $(this).parents('.newflex'+commentid).animate({ backgroundColor: "#fbc7c7" }, "fast")
+
+		//	.animate({ opacity: "hide" }, "slow");
+
+			}
+
+			return false;
+
+		});
+		
+		
+		
+		
+		/*-----------------------------------event like--------------------------------------*/
+		
+		 /* like post */
+
+
+
+ $(document).on('click','.comment_visit_like_post',function(){
+
+	 $(this).append('<img id="loading_img" style="width:20px" src="<?php echo base_url(); ?>images/url-loader.gif" />');
+
+	 var commentlike = $(this);
+
+     var postid = $(this).attr('data-postid');
+
+	 var commentid = $(this).attr('data-commentid');
+
+	 
+
+	 var author = $(this).attr('data-author');
+
+	$.ajax 
+
+		({
+
+			url: "<?php echo base_url(); ?>Recent_visit/comment_visit_like",
+
+			type: "POST",             
+
+			data: "postid=" + postid + "&commentid=" + commentid + "&userid=" + author, 
+
+			dataType: "json",
+
+			success: function(response)   
+
+			{ 
+
+			
+
+               $("#loading_img").remove();				
+
+			   if(response.success){
+
+				   commentlike.css('color','#009688');
+
+				    $("#likecommentcountbox-"+commentid).show();
+
+				   if(response.commentlike == 0){
+
+					   $("#likecommentcountbox-"+commentid).hide();
+
+				   }else{
+
+					   $("#likecommentcountbox-"+commentid).show();
+
+					   $("#likecommentcountbox-"+commentid).find('span').text(response.commentlike);
+
+				   }
+
+				   
+
+				 
+
+			   }else{
+
+				    $(".comment_visit_like_post").removeAttr("style");
+
+					$("#likecommentcountbox-"+commentid).show();
+
+					   $("#likecommentcountbox-"+commentid).find('span').text(response.commentlike);
+
+			   }
+
+			    
+
+			}
+
+	    });
+
+ });
+
+ 
+
+  /* like post */
+
+
+
+ $(document).on('click','.replyvisitcomment_like_post',function(){
+
+	 $(this).append('<img id="loading_img" style="width:20px" src="<?php echo base_url(); ?>images/url-loader.gif" />');
+
+	 var replycommentlike = $(this);
+
+     var postid = $(this).attr('data-postid');
+
+	 var commentid = $(this).attr('data-commentid');
+
+	 var replycommentid = $(this).attr('data-replycommentid');
+
+	$.ajax 
+
+		({
+
+			url: "<?php echo base_url(); ?>Recent_visit/replycomment_visit_like",
+
+			type: "POST",             
+
+			data: "postid=" + postid + "&commentid=" + commentid + "&replycommentid=" + replycommentid, 
+
+			dataType: "json",
+
+			success: function(response)   
+
+			{ 
+
+			
+
+               $("#loading_img").remove();				
+
+			   if(response.success){
+
+				   replycommentlike.css('color','#009688');
+
+				    $("#likereplycommentcountbox-"+replycommentid).show();
+
+				   if(response.replycommentlike == 0){
+
+					   $("#likereplycommentcountbox-"+replycommentid).hide();
+
+				   }else{
+
+					   $("#likereplycommentcountbox-"+replycommentid).show();
+
+					   $("#likereplycommentcountbox-"+replycommentid).find('span').text(response.replycommentlike);
+
+				   }
+
+				   
+
+				 
+
+			   }else{
+
+				    $(".replyvisitcomment_like_post").removeAttr("style");
+
+					$("#likereplycommentcountbox-"+replycommentid).show();
+
+					   $("#likereplycommentcountbox-"+replycommentid).find('span').text(response.replycommentlike);
+
+			   }
+
+			    
+
+			}
+
+	    });
+
+ });
+
+
+
+
+
+
+$(document).on('click','[id^="editvisitcomment_submit"]', function(e){ 
+
+        var comment_id = $(this).attr('data-comment-id');      
+
+	    var value = $('#edit_comment_'+ comment_id).val();
+
+			$.ajax 
+
+		({
+
+			url: "<?php echo base_url(); ?>Recent_visit/change_comment",
+
+			type: "POST",             
+
+			data: "value=" + value + "&comment_id=" + comment_id,
+
+            dataType: "json", 			
+
+			success: function(response)   
+
+			{
+
+				if(response.success)
+
+				{
+
+				   $('.edit_comment_text_'+ comment_id).text(value);
+
+				   $("#editcomment_"+ comment_id).modal('hide');
+
+				}
+
+			}
+
+	    });
+
+	 
+
+ });
+
+ 
+
+$(document).on('click','[id^="editvisitreplycomment_submit"]', function(e){ 
+
+        var reply_id = $(this).attr('data-reply-id');      
+
+	    var value = $('#edit_replycomment_'+ reply_id).val();
+
+			$.ajax 
+
+		({
+
+			url: "<?php echo base_url(); ?>Recent_visit/change_replycomment",
+
+			type: "POST",             
+
+			data: "value=" + value + "&reply_id=" + reply_id,
+
+            dataType: "json", 			
+
+			success: function(response)   
+
+			{
+
+				if(response.success)
+
+				{
+
+				   $('.edit_replycomment_text_'+ reply_id).text(value);
+
+				   $("#editreplycomment_"+ reply_id).modal('hide');
+
+				}
+
+			}
+
+	    });
+
+	 
+
+ });
+
+ 
+
+$(document).on('click','[id^="deletevisitreplyComment"]', function(e){ 
+
+		  var postid = $(this).attr('data-postid');
+
+		  var commentid = $(this).attr('data-commentid'); 
+
+		  var replycommentid = $(this).attr('data-replycommentid');
+
+		  if(confirm("Are you sure you want to delete this comment?")){
+
+     		$.ajax 
+
+		({
+
+			url: "<?php echo base_url(); ?>Recent_visit/delete_replycomment",
+
+			type: "POST",             
+
+			data: "comment_id=" + commentid + "&postid=" + postid+ "&replycommentid=" + replycommentid,
+		
+
+			success: function(data){
+
+				window.location.reload();
+
+
+				}
+
+			});
+
+			
+		  //  $(this).parents('.newflex'+commentid).animate({ backgroundColor: "#fbc7c7" }, "fast")
+
+		//	.animate({ opacity: "hide" }, "slow");
+
+			}
+
+			return false;
+
+		});
+		
+		
+	$(document).on('click','[id^="postValvisit"]', function(e){    
+
+	var post_id = $(this).attr('data-post_id');
+
+	var comment_id = $(this).attr('data-comment_id');
+
+	var comment_user_id = $(this).attr('data-comment_user_id');
+
+	var user_id = $(this).attr('data-user_id');
+
+	var reply_val = $(".replycmtval_"+comment_id).val();
+
+		$.ajax 
+
+		({
+
+			url: "<?php echo base_url(); ?>Recent_visit/add_reply_comment",
+
+			type: "POST",             
+
+			data: "post_id="+post_id+"&comment_id="+comment_id+"&comment_user_id="+comment_user_id+"&user_id="+user_id+"&reply_val="+reply_val,
+
+            dataType: "json", 			
+
+			success: function(response)   
+
+			{
+
+				if(response.success)
+
+				{
+
+				  $(".replycmtval_"+comment_id).val("");
+
+				  
+
+			//$("#loadermodal").modal('hide');
+
+				 $('.replycommentshow-'+comment_id).html(response.list);
+
+				
+
+				
+
+				}
+
+			}
+
+	    });
+
+	
+
+  });
+  
+ 
+		
+		$(document).on('click','[id^=editvisitpost_submit]',function(e){
+
+        var post_id = $(this).attr('data-post-id');      
+
+	    var value = $('#edit_post_'+ post_id).val();
+
+			$.ajax 
+
+		({
+
+			url: "<?php echo base_url(); ?>Recent_visit/change_post",
+
+			type: "POST",             
+
+			data: "value=" + value + "&post_id=" + post_id,
+
+            dataType: "json", 			
+
+			success: function(response)   
+
+			{
+
+				if(response.success)
+
+				{
+
+				   $('#edit_post_text_'+ post_id).text(value);
+
+				   $("#editPost_"+ post_id).modal('hide');
+
+				}
+
+			}
+
+	    });
+
+	 
+
+ });	
+ 
+ 
+ $(document).on('click','[class^=trashvisitcomments]',function(e){
+
+		//$(document).on('click','.trashcomment',function(){
+
+		  var postid = $(this).attr('data-postid');
+
+		  var commentid = $(this).attr('data-commentid'); 
+
+		  if(confirm("Are you sure you want to delete this comment?")){
+
+     		$.ajax 
+
+		({
+
+			url: "<?php echo base_url(); ?>Recent_visit/delete_comment",
 
 			type: "POST",             
 

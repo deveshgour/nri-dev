@@ -26,6 +26,7 @@ class Userprofile extends CI_Controller {
 		$sort_by = 'date_added';
 		$field = "post.post_id,post.post,post.media_path,post.media_type,post.status,post.date_added,users.user_id,users.firstname,users.lastname,users.user_image,users.email,users.country_id";
 		$result = $this->Common_model->getAllJoin($pagecon['per_page'], $data['page'], $var_search, $var_type, 'post', "user_id", "users", "user_id",$sort_by, $sort_order, $sort_columns, $field,$search = '');
+		
 		//print_r($this->db->last_query()); die;
 		$data["userDetail"] = $this->Common_model->getsingle("users",array("user_id" => $this->session->userdata("userId")["user_id"]));
 		$data["allphoto"] = $this->Common_model->getAllwhereorder("user_images",array("user_id" => $this->session->userdata("userId")["user_id"],"photo_type" => "image"),"image_id","desc");

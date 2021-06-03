@@ -1,10 +1,22 @@
 
 
 <?php  
-     if(!empty($get$allcomment)){
-	      foreach($get$allcomment['rows'] as $$allcomment){
-			  $getuser = $this->Common_model->getsingle("users",array("user_id" => $$allcomment->user_id)); ?>
-			  <span class="newflex<?php echo $$allcomment->comment_major_id; ?>"> 
+     if(!empty($getallcomment)){
+	      foreach($getallcomment['rows'] as $allcomment){
+			  $getuser = $this->Common_model->getsingle("users",array("user_id" => $allcomment->user_id)); ?>
+			   <!--------------------------------comment like--------------------------- -->	 
+
+			<?php $comment_like_count = $this->Common_model->getAllwhereorder("comment_major_like",array("comment_id" => $allcomment->comment_major_id),"comment_id","desc");
+
+
+			 $getmylikecomment = $this->Common_model->getsingle("comment_major_like",array("comment_id" => $allcomment->comment_major_id,"user_id" => $this->session->userdata('userId')['user_id']));
+
+			 ?>
+
+	   
+
+		 <!----------------------------------------------------------------------------- -->
+			  <span class="newflex<?php echo $allcomment->comment_major_id; ?>"> 
 			 <li class="d-flex">
                                     <div class="imgBox rounded-circle overflow-hidden">
                                         <?php if(!empty($getuser->user_image)){ ?>
@@ -15,11 +27,11 @@
                                     </div>
                                     <div class="cntText">
                                         <h6 class="font-sm mb-0"><?php echo $getuser->firstname.' '.$getuser->lastname; ?></h6>
-                                        <small><?php echo convert_time($$allcomment->create_date,'F j, Y, g:i a'); ?></small>
-                                        <p class="edit_comment_text_<?php echo $$allcomment->comment_major_id; ?>"><?php echo $$allcomment->comment; ?></p>
-                                    <b><a href="javascript:;" class="link-dark replyshow" data-commentid="<?php echo  $$allcomment->comment_major_id; ?>">Reply</a></b>
+                                        <small><?php echo convert_time($allcomment->create_date,'F j, Y, g:i a'); ?></small>
+                                        <p class="edit_comment_text_<?php echo $allcomment->comment_major_id; ?>"><?php echo $allcomment->comment; ?></p>
+                                    <b><a href="javascript:;" class="link-dark replyshow" data-commentid="<?php echo  $allcomment->comment_major_id; ?>">Reply</a></b>
 
-										<b><a href="javascript:void(0)" class="link-dark comment_major_like_post" <?php if($getmylikecomment){ ?><?php } ?> id="likecomment-<?php echo $$allcomment->comment_major_id; ?>" data-status="1" data-type="1" data-author="<?php echo $$allcomment->user_id; ?>" data-postid="<?php echo $$allcomment->major_id; ?>" data-commentid="<?php echo $allcomment->comment_major_id; ?>">
+										<b><a href="javascript:void(0)" class="link-dark comment_major_like_post" <?php if($getmylikecomment){ ?><?php } ?> id="likecomment-<?php echo $allcomment->comment_major_id; ?>" data-status="1" data-type="1" data-author="<?php echo $allcomment->user_id; ?>" data-postid="<?php echo $allcomment->major_id; ?>" data-commentid="<?php echo $allcomment->comment_major_id; ?>">
 
 							   <span class="cmtdivcls" id="likecommentcountbox-<?php echo $allcomment->comment_major_id; ?>"><span class="cmtspan"><?php echo count($comment_like_count); ?></span></span> Like</a></b>
 

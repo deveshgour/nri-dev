@@ -48,7 +48,7 @@
                                 </ul>
                             </div>
                         </li>
-                        <li><a href="<?php echo base_url(); ?>event_missing" >event Mising</a></li>
+                        <li><a href="<?php echo base_url(); ?>major_missing" >event Mising</a></li>
                         <li><a href="<?php echo base_url(); ?>recent_visit">My Recent Visit</a></li>
                         <li><a href="<?php echo base_url(); ?>fact_list">Interesting Facts</a></li>
                         <li><a href="<?php echo base_url(); ?>event" onclick="">Upload Events</a></li>
