@@ -53,6 +53,12 @@
 
                 <form method="post" action="" name="search">
 
+                <a class="link-dark toggleMenu d-lg-none">
+
+                    <span class="icon icon-menu"></span>
+
+                 </a>
+
                     <a class="link-dark toggleSearch d-lg-none" data-toggle="collapse" href="#collapseSearch">
 
                         <span class="icon-search1"></span>
@@ -80,8 +86,9 @@
             </div>
 
 
+            <div class="d-flex align-items-center">
 
-            <ul class="list-inline centerNav mb-0">
+            <ul class="list-inline centerNav mb-0 mr-4">
 
                 <li class="list-inline-item">
 
@@ -101,7 +108,7 @@
 
                     <a href="<?php echo base_url(); ?>buzz_list">
 
-                        <span class="icon icon-users-feed"></span>
+                        <span class="icon icon-trending"></span>
 
                         <span class="nav-text">buzz</span>
 
@@ -115,7 +122,7 @@
 
                     <a href="<?php echo base_url(); ?>gov_detail">
 
-                        <span class="icon icon-trending"></span>
+                        <span class="icon icon-menu"></span>
 
                         <span class="nav-text">let's Gov</span>
 
@@ -127,7 +134,7 @@
 
                     <a href="<?php echo base_url(); ?>friendRequest_list">
 
-                        <span class="icon icon-menu"></span>
+                        <span class="icon icon-users-feed"></span>
 
                         <span class="nav-text">Friend Request</span>
 
@@ -136,6 +143,12 @@
                    
 
                 </li>
+
+                <li class="list-inline-item">
+                        <a href="javascript:;" class="d-lg-none">
+                            <span class="icon icon-comment"></span>
+                        </a>
+                    </li>
 
             </ul>
 
@@ -149,7 +162,7 @@
 
 
 
-            <ul class="list-inline rightNav mb-0 ml-lg-auto order-2">
+            <ul class="list-inline rightNav mb-0">
 
                 <li class="list-inline-item">
 
@@ -225,6 +238,7 @@
                 </li>
 
             </ul>
+           </div>
 
         </nav>
 

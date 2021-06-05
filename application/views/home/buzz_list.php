@@ -6,7 +6,7 @@
                <?php if(!empty($buzz_list)){
                        foreach($buzz_list as $detail){
 				   ?>
-               <div class="col-md-3">
+               <div class="col-md-3 col-6">
                     <a class="trendingBox" href="<?php echo base_url(); ?>buzz_detail/<?php echo $detail->buzz_id; ?>">
 					<?php if(!empty($detail->image)){ ?>
                         <img src="<?php echo base_url(); ?>upload/<?php echo $detail->image; ?>" class="img-fluid">

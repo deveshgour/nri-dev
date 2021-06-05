@@ -18,9 +18,9 @@
   @media (max-width: 1599px) {
     padding-top: 64px;
   }
-  // @include media-breakpoint-down(md) {
-  //   padding-top: 64px;
-  // }
+  @include media-breakpoint-down(xs) {
+    padding-top: 64px;
+  }
 }
 
 .pageTitle {
@@ -290,6 +290,7 @@
   text-decoration:none;
   font-weight:600;
 }
+
 .clear {
   clear:both;
 }
@@ -440,6 +441,14 @@
   outline:0 none;
   border-color:#66afe9;
 }
+
+@include media-breakpoint-down(md){
+  .l_c_h .c_h{
+    display: none;
+  }
+}
+
+
 .left{
   float:left;
 }

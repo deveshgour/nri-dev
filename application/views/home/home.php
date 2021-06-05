@@ -30,7 +30,7 @@
 
   <main class="main-content">
 
-        <a href="javascript:;" class="d-xl-none chatIcon">
+        <a href="javascript:;" class="d-none d-xl-none d-lg-block chatIcon">
 
             <span class="icon-comment"></span>
 
@@ -73,12 +73,12 @@
                             </div>
 
                         </li>
+                        
+                        <li><a href="<?php echo base_url(); ?>fact_list">Interesting Facts</a></li>
 
                         <li><a href="<?php echo base_url(); ?>major_missing" >Major Mising</a></li>
 
                         <li><a href="<?php echo base_url(); ?>recent_visit">My Recent Visit</a></li>
-
-                        <li><a href="<?php echo base_url(); ?>fact_list">Interesting Facts</a></li>
 
                         <li><a href="<?php echo base_url(); ?>event">Upload Events</a></li>
 
@@ -128,18 +128,20 @@
 
                             </div>
 
+                            <label class="mb-0 ripple-effect" for="uploadImage">
+
+                                <input type="file" id="uploadImage" name="uploadImage">
+
+                                <i class="icon-image-gallery"></i>
+
+                            </label>
+
+
                         </div>
 
 						
 
-                        <label class="mb-0 ripple-effect" for="uploadImage">
-
-                            <input type="file" id="uploadImage" name="uploadImage">
-
-                            <i class="icon-image-gallery"></i>
-
-                        </label>
-
+                      
                        
 
 						<button name="submit" type="submit" id="postdata"  class="btn btn-primary">Post</button>

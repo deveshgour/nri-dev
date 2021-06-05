@@ -198,11 +198,12 @@
                                             <div class="search">
                                                 <input type="text" class="form-control" name="post_value" id="post_value" placeholder="Write something here....">
                                             </div>
-                                        </div>
-                                        <label class="mb-0 ripple-effect" for="uploadImage">
+                                            <label class="mb-0 ripple-effect" for="uploadImage">
                                              <input type="file" id="uploadImage" name="uploadImage">
                                             <i class="icon-image-gallery"></i>
                                         </label>
+                                        </div>
+                                       
                                         <button name="submit" type="submit" id="postdata"  class="btn btn-primary">Post</button>
                                     </div>
 									</form>

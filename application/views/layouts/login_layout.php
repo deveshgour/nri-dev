@@ -74,7 +74,7 @@
 
                     <a href="javascript:;">
 
-                        <span class="icon icon-users-feed"></span>
+                        <span class="icon icon-trending"></span>
 
                         <span class="nav-text">buzz</span>
 
@@ -88,7 +88,7 @@
 
                     <a href="trending.html">
 
-                        <span class="icon icon-trending"></span>
+                        <span class="icon icon-menu"></span>
 
                         <span class="nav-text">let's Gov</span>
 
@@ -100,7 +100,7 @@
 
 
 
-             <ul class="list-inline rightNav mb-0 ml-lg-auto order-2">
+             <ul class="list-inline rightNav mb-0 ml-auto order-2">
 
                 <li class="list-inline-item">
 
