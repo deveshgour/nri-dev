@@ -778,10 +778,48 @@ class Userdashboard extends CI_Controller {
 	public function chat()
 	{
 		$data = array();
+		$group_id = base64_decode($this->uri->segment("2"));
+		
+		$data["chatData"] = $this->Common_model->jointwotableorderby("group_chat","user_id","users", "user_id",array("group_chat.group_id"=>$group_id),"*","chat_id","asc");
+		//echo "<pre>";print_r($data["chatData"]);die;
 		
 		$this->load->view('layouts/profile_layout',$data);
 		$this->load->view('home/chat',$data);  
 		$this->load->view('layouts/footer_layout',$data);
+	}
+	
+	public function searchchat_group()
+	{
+		$search_value = $this->input->post("search_value");
+		$user_id = $this->input->post("user_id");
+		if(!empty($search_value)){
+		$data['searchData'] = $this->Common_model->searchgrouplikenew($search_value,array("user_id" => $user_id));
+		}else{
+		$data['searchData'] = $this->Common_model->getAllwhereorder("create_group",array("user_id" => $this->session->userdata("userId")["user_id"]),"group_id","desc");
+
+		}
+		$this->load->view('home/searchchatgroup_ajax',$data);
+	}
+	
+	public function create_groupchat()
+	{
+		$user_id = $this->session->userdata('userId')['user_id'];
+		$friend_user_id = $this->input->post('friend_user_id');
+		$msg = $this->input->post('msg');
+		$group_id = $this->input->post('group_id');
+		$data['group_id'] = $group_id;
+		
+		$array = array("msg" => $msg,"friend_user_id"=>$friend_user_id,"group_id" => $group_id,"user_id" => $user_id,"create_date" =>date("Y-m-d H:i:s"));
+		$this->Common_model->addRecords("group_chat",$array);
+		//redirect("chat/".base64_encode($group_id));
+		
+		$list = $this->load->view('home/createchat_ajax', array('group_id'=>$group_id), true);
+					
+		$this->output->set_content_type('application/json');
+		
+		$return = array('success'=>true, 'list'=> $list);
+		echo json_encode($return);
+		
 	}
 
 	public function logout()
