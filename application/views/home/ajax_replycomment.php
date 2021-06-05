@@ -88,9 +88,9 @@
 
                                     <ul class="list-unstyled mb-0">
 
-                                        <li> <a href="javascript:void(0);" id="deletereplyComment" data-replycommentid="<?php echo  $reply_val->reply_id; ?>" data-commentid="<?php echo  $reply_val->comment_id; ?>"><span class="del trashreplycomment" data-replycommentid="<?php echo  $reply_val->reply_id; ?>" data-commentid="<?php echo  $reply_val->comment_id; ?>" data-postid="<?php echo $row->post_id; ?>">Delete</span></a></li>
+                                        <li> <a href="javascript:void(0);" id="deletereplyComment" data-replycommentid="<?php echo  $allcomment->reply_id; ?>" data-commentid="<?php echo  $allcomment->comment_id; ?>"><span class="del trashreplycomment" data-replycommentid="<?php echo  $allcomment->reply_id; ?>" data-commentid="<?php echo  $allcomment->comment_id; ?>" data-postid="<?php echo $row->post_id; ?>">Delete</span></a></li>
 
-                                        <li><a href="javascript:void(0);" data-target="#editreplycomment_<?php echo $reply_val->reply_id; ?>" data-toggle="modal">Edit Post</a></li>
+                                        <li><a href="javascript:void(0);" data-target="#editreplycomment_<?php echo $allcomment->reply_id; ?>" data-toggle="modal">Edit Post</a></li>
 
 										</ul>
 
@@ -108,7 +108,7 @@
 
 							   							    	<!-------------------------------Edit replycomment------------------------------- -->
 
-<div class="modal fade" id="editreplycomment_<?php echo $reply_val->reply_id; ?>" tabindex="-1" role="dialog" 
+<div class="modal fade" id="editreplycomment_<?php echo $allcomment->reply_id; ?>" tabindex="-1" role="dialog" 
 
      aria-labelledby="myModalLabel" aria-hidden="true">
 
@@ -152,7 +152,7 @@
 
                     <div class='form-group'>
 
-                       <textarea rows="3" class="form-control" name="edit_replycomment" id="edit_replycomment_<?php echo $reply_val->reply_id; ?>"><?php echo $reply_val->reply_comment; ?></textarea>    
+                       <textarea rows="3" class="form-control" name="edit_replycomment" id="edit_replycomment_<?php echo $allcomment->reply_id; ?>"><?php echo $allcomment->reply_comment; ?></textarea>    
 
 					   </div>
 
@@ -162,7 +162,7 @@
 
 			  <div class="text-center">
 
-			<button type="submit" data-reply-id="<?php echo $reply_val->reply_id; ?>" name="editreplycomment_submit" id="editreplycomment_submit" class=' btn btn-primary submit-button' style="margin-left:16px;" >Submit</button>
+			<button type="submit" data-reply-id="<?php echo $allcomment->reply_id; ?>" name="editreplycomment_submit" id="editreplycomment_submit" class=' btn btn-primary submit-button' style="margin-left:16px;" >Submit</button>
 
 			 <button type="button" class='btn btn-primary submit-button' data-dismiss="modal">Close</button>
                                     </div>

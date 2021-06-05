@@ -463,7 +463,7 @@ $getallcomment = $this->Common_model->commentpagination(array("post_id" => $row-
 
                                         <h6 class="font-sm mb-0"><?php echo $getuser->firstname.' '.$getuser->lastname; ?></h6>
 
-                                        <small><?php echo time_diff_string($to_cmttime,$current_time); ?></small>
+                                        <small><?php echo convert_time($allcomment->create_date,'F j, Y, g:i a'); ?></small>
 
                                         <p class="edit_comment_text_<?php echo $allcomment->comment_id; ?>"><?php echo $allcomment->comment; ?></p>
 
