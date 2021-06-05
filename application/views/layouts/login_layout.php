@@ -100,7 +100,7 @@
 
 
 
-             <ul class="list-inline rightNav mb-0 ml-lg-auto order-2">
+             <ul class="list-inline rightNav mb-0 ml-auto order-2">
 
                 <li class="list-inline-item">
 

@@ -4,13 +4,6 @@
 @import 'common.scss';
 
 
-// variables
-$black : #000000;
-$blue  : #010080;
-$grey  : #ced4da;
-$yellow: #ff9733;
-$white : #ffffff;
-
 body{
     font-family: 'proxima_novaregular';
     color: $black;
@@ -78,191 +71,7 @@ a{transition: .5s;
     }
 }
 
-// header
-header{
-    .navbar{
-        padding: 15px 50px;
-        box-shadow: 0 3px 10px rgba($color: $black, $alpha: .15);
-        background: $white;
-        .navbar-brand {
-            img{
-                height: 67px;
-            }
-        }
-        &--homeBg{
-            background: #fdfcfa63 !important;
-        }
-        .form-search{
-            width: 530px;
-            .form-control{
-                padding-left: 40px;
-            }
-            .icon-search1{
-                position: absolute;
-                top: 50%;
-                left: 15px;
-                transform: translateY(-50%);
-            }
-        }
-        .centerNav{margin-left: 65px;
-            li{
-               
-                &:not(:last-child){margin-right: 15px;}
-                text-align: center;
-              
-                a{
-                    .icon{
-                        display: flex;
-                        align-items: center;
-                        justify-content: center;
-                        height: 45px;
-                        width: 45px;
-                        border-radius: 50%;
-                        border: 1px solid $grey;
-                        color: $black;
-                        transition: .5s;
-                        margin: 0 auto;
-                    }
-                    .nav-text{
-                        font-size: 14px;
-                        display: block;
-                        margin-top: 5px;
-                        color: #333;
-                    }
-                    &:hover, &.active{
-                        .icon, .nav-text{
-                            color: $yellow;
-                            border-color: $yellow;
-                        }
-                    }
-                }
-            }
-        }
-        .rightNav{
-            li{
-                vertical-align: middle;
-                span{font-size: 20px;}
-                &:not(:last-child){margin-right: 15px;}
-            }
-            .dropdown{
-                .dropdown-toggle{
-                    padding: 0;
-                    box-shadow: none;
-                    &:after{
-                        display: none;
-                    }
-                }
-                &.moodDropdoown{
-                    img{
-                        width: 24px;
-                    }
-                    .dropdown-menu{
-                            padding:10px;
-                           
-                    }
-                }
-                .dropdown-menu{
-                    right:0;
-                    left: auto;
-                    border:none;
-                    box-shadow: 0px 0px 5px rgba(0,0,0,0.2);
-                    a{
-                        &:hover{
-                            color: $yellow;
-                            background-color: transparent;
-                        }
-                    }
-                }
-            }
-        }
-    }
-    @media (max-width: 1599px){
-        .navbar{
-            padding: 15px 30px;
-            .form-search{
-                width: 400px;
-                margin-left: 30px;
-            }
-        }
-    }
-    @media (max-width: 1199px){
-        .navbar{
-            .form-search{
-                width: 300px;
-                margin-left: 20px;
-            }
-            .centerNav{
-                margin-left: 20px;
-            }
-        }
-    }
-    @media (max-width: 991px){
-        .navbar{
-            padding: 15px; 
-            .toggleSearch{
-                display: inline-block;
-                .icon-plus{display: none;transform: rotate(45deg);}
-                &[aria-expanded="true"]{
-                    .icon-search{display: none;}
-                    .icon-plus{display: block;}
-                }
-            }
-            .searchForm{
-                order: 1;
-                margin-left: auto;
-                margin-right: 20px;
-                .form-search{
-                    left: 0px;
-                    width: 100%;
-                    margin-left: 0px;
-                    top: 80px;
-                    position: fixed !important;
-                    background: $white;
-                    .form-control{
-                        border-radius: 0;
-                    }
-                }
-            }
-        }
-    }
-    @media (max-width: 767px){
-        .navbar{            
-            .centerNav{margin-left: 15px;
-                li{
-                    &:not(:last-child){margin-right: 10px;}
-                    a{
-                        height: 36px;
-                        width: 36px;
-                        font-size: 14px;
-                    }
-                }
-            }
-        }
-    }
-    @media (max-width: 575px){
-        .navbar{
-            padding: 10px 15px;
-            .navbar-brand{
-                width: 100%;
-                margin-right: 0;
-                margin-bottom: 5px;
-            }
-            .searchForm{
-                .form-search{
-                    top: 108px;
-                }
-            }
-            .centerNav{margin-left: 0;
-                li{
-                    &:not(:last-child){margin-right: 5px;}
-                }
-            }
-            .userImg{
-                height: 36px;width: 36px;
-            }
-        }
-    }
-}
+
 body{
     &.darkHeader{
         header{
@@ -277,24 +86,15 @@ body{
     padding: 30px 30px;
     margin-top: 100px;
 
-    //  .row{
-    //     margin: 0 -50px;
-    //     [class*="col-"]{
-    //         padding: 0 50px;
-    //     }
-    // }
-
-    @include media-breakpoint-down(sm){
-        padding: 15px;
+    @include media-breakpoint-down(md){
+        padding: 15px 15px 60px;
+        margin-top: 58px;
     }
 }
 
     .chatIcon{
         height: 60px;
         width: 60px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
         color: $white;
         background: $blue;
         font-size: 24px;
@@ -303,6 +103,7 @@ body{
         bottom: 20px;
         right: 20px;
         z-index: 9;
+        text-align: center;
     }
     .closeChat{
         display: inline-block;
@@ -363,6 +164,9 @@ body{
             .search{
                 flex: 1;
                 margin: 0 15px;
+            }
+            button{
+                margin-left: 10px;
             }
         }
         .feed-box{
@@ -481,7 +285,7 @@ body{
             align-items: center;
             justify-content: center;
             overflow: hidden;
-            margin-right: 10px;
+            margin-left: 10px;
             input[type="file"] {
               display: none;
             }
@@ -635,13 +439,13 @@ body{
 }
 
 
-.keeplogin {
-    a{
-        color: $blue;
+    .keeplogin {
+        a{
+            color: $blue;
+        }
     }
-}
     @media (max-width: 1599px){
-        padding: 25px 30px;
+      
         .row{
             margin: 0 -15px;
             [class*="col-"]{
@@ -685,10 +489,11 @@ body{
             top: 80px;
         }
     }
-    @media (max-width: 575px){
-        margin-top: 109px;
-        padding: 15px;
+    @include media-breakpoint-down(md){
         .leftContent{
+            position: fixed;
+            width: 250px;
+            left: -250px;
             li{padding: 12px 15px;}
         }
         .feeds{
@@ -696,21 +501,49 @@ body{
                 padding: 15px;
                 flex-wrap: wrap;
                 .search{margin-right: 0;}
-                button{
-                    margin-top: 10px;
-                }
             }
             .feed-box{
+                margin-bottom: 30px;
                 .feedTop,.feedBottom{
                     padding: 15px;
                 }
             }
         }
         .rightContent{
-            height: calc(100vh - 109px);
-            top: 109px;
+            height: calc(100vh - 103px);
+            top: 58px;
             width: 280px;
             right: -280px;
+            .closeChat{
+                position: absolute;
+                right: 15px;
+                font-size: 27px;
+                top: 10px;
+            }
+            .conversationBox{
+                height: 100%;
+                h4{
+                    font-size: 18px;
+                }
+                padding: 15px;
+                background-color: #FFF !important;
+            }
+        }
+    }
+
+    @include media-breakpoint-down(xs){
+        .feeds{
+            .feeds-search{
+                button{
+                    margin-top: 10px;
+                }
+            }
+            .feed-box{
+                padding: 30px 0;
+                &:before{
+                    bottom: -47px;
+                }
+            }
         }
     }
 

@@ -136,6 +136,12 @@
 
                 </li>
 
+                <li class="list-inline-item">
+                        <a href="javascript:;" class="d-lg-none">
+                            <span class="icon icon-comment"></span>
+                        </a>
+                    </li>
+
             </ul>
 
 

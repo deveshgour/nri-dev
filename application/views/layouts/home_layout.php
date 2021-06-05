@@ -12,13 +12,13 @@
 
     <meta name="title" content="First Title">
 
-<meta name="description" content="First Description">
+    <meta name="description" content="First Description">
 
-<meta property="og:url" content="<?php echo base_url(); ?>home">  
+    <meta property="og:url" content="<?php echo base_url(); ?>home">
 
     <link rel="stylesheet" href="<?php echo base_url() ?>css/bootstrap.min.css">
 
-	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
     <link rel="stylesheet" href="<?php echo base_url() ?>css/icomoon.css">
 
@@ -58,15 +58,16 @@
 
                         <div class="position-relative">
 
-                        <input type="text" class="form-control" placeholder="Search" name="friend_search" id="friend_search">
+                            <input type="text" class="form-control" placeholder="Search" name="friend_search"
+                                id="friend_search">
 
-                        <span class="icon-search1"></span>
+                            <span class="icon-search1"></span>
 
-						</div>
+                        </div>
 
-						<div id="display" class="autosuggestDrop"></div>
+                        <div id="display" class="autosuggestDrop"></div>
 
-						
+
 
                     </div>
 
@@ -104,47 +105,45 @@
 
                     <li class="list-inline-item">
 
-                    <a href="<?php echo base_url(); ?>buzz_list">
+                        <a href="<?php echo base_url(); ?>buzz_list">
 
-                        <span class="icon icon-users-feed"></span>
+                            <span class="icon icon-users-feed"></span>
 
-                        <span class="nav-text">buzz</span>
+                            <span class="nav-text">buzz</span>
 
-                    </a>
+                        </a>
 
-                   
 
-                </li>
 
-                <li class="list-inline-item">
-
-                    <a href="<?php echo base_url(); ?>gov_detail">
-
-                        <span class="icon icon-trending"></span>
-
-                        <span class="nav-text">let's Gov</span>
-
-                    </a>
-
-                </li>
+                    </li>
 
                     <li class="list-inline-item">
 
-                    <a href="<?php echo base_url(); ?>friendRequest_list">
+                        <a href="<?php echo base_url(); ?>gov_detail">
 
-                        <span class="icon icon-menu"></span>
+                            <span class="icon icon-trending"></span>
 
-                        <span class="nav-text">Friend Request</span>
+                            <span class="nav-text">let's Gov</span>
 
-                    </a>
+                        </a>
 
-                   
+                    </li>
 
-                </li>
+                    <li class="list-inline-item">
+                        <a href="<?php echo base_url(); ?>friendRequest_list">
+                            <span class="icon icon-menu"></span>
+                            <span class="nav-text">Friend Request</span>
+                        </a>
+                    </li>
+                    <li class="list-inline-item">
+                        <a href="javascript:;" class="d-lg-none">
+                            <span class="icon icon-comment"></span>
+                        </a>
+                    </li>
 
                 </ul>
 
-                
+
 
                 <?php $getemoji = $this->Common_model->getsingle("smiley_table",array("user_id" => $this->session->userdata("userId")['user_id'])); 
 
@@ -158,22 +157,24 @@
 
 
 
-                <li class="list-inline-item">
+                    <li class="list-inline-item">
 
-<?php if(!empty($getemoji)){ ?>
-  <div class="dropdown moodDropdoown">
-    <a href="javascript:;" class="link-dark dropdown-toggle" id="moodDropdoown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="<?php echo $getemoji->image; ?>" ></a>
-        <div class="dropdown-menu" aria-labelledby="moodDropdoown">
-            <?php echo $smiley_table; ?>
-        </div>
-    </div>
-   <?php }else{ ?>
+                        <?php if(!empty($getemoji)){ ?>
+                        <div class="dropdown moodDropdoown">
+                            <a href="javascript:;" class="link-dark dropdown-toggle" id="moodDropdoown"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img
+                                    src="<?php echo $getemoji->image; ?>"></a>
+                            <div class="dropdown-menu" aria-labelledby="moodDropdoown">
+                                <?php echo $smiley_table; ?>
+                            </div>
+                        </div>
+                        <?php }else{ ?>
 
-  <a href="javascript:;" class="link-dark"><span class="icon-mood"></span></a>
+                        <a href="javascript:;" class="link-dark"><span class="icon-mood"></span></a>
 
-   <?php } ?>
+                        <?php } ?>
 
-</li>
+                    </li>
 
                     <!--<li class="list-inline-item">
 
@@ -186,12 +187,11 @@
                         <div class="dropdown">
 
                             <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton"
-
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 
                                 <div class="userImg rounded-circle overflow-hidden">
 
-                                   <?php
+                                    <?php
 
 								$session_id = $this->session->userdata('userId')['user_id']; 
 
@@ -199,13 +199,14 @@
 
 								if(!empty($check_image->user_image)){ ?>
 
-									<img src="<?php echo base_url(); ?>upload/<?php echo $check_image->user_image; ?>" alt="img">
+                                    <img src="<?php echo base_url(); ?>upload/<?php echo $check_image->user_image; ?>"
+                                        alt="img">
 
-								<?php }else{ ?>
+                                    <?php }else{ ?>
 
-									<img src="<?php echo base_url(); ?>images/user_image.png" alt="img">
+                                    <img src="<?php echo base_url(); ?>images/user_image.png" alt="img">
 
-								<?php }
+                                    <?php }
 
 								?>
 
@@ -217,7 +218,7 @@
 
                                 <a class="dropdown-item" href="<?php echo base_url(); ?>myprofile">Edit Profile</a>
 
-							<a class="dropdown-item" href="<?php echo base_url(); ?>userprofile">My Profile</a>
+                                <a class="dropdown-item" href="<?php echo base_url(); ?>userprofile">My Profile</a>
 
                                 <a class="dropdown-item" href="javascript:void(0);">Change Password</a>
 
