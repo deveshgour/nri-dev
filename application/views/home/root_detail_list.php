@@ -6,7 +6,7 @@
                <?php if(!empty($root_detail_list)){
                        foreach($root_detail_list as $detail){
 				   ?>
-               <div class="col-md-3">
+               <div class="col-md-3 col-6">
                     <a class="trendingBox" href="<?php echo base_url(); ?>root_detail/<?php echo $detail->root_id; ?>/<?php echo $detail->detail_id; ?>">
 					<?php if(!empty($detail->media_path)){ ?>
                         <img src="<?php echo base_url(); ?>upload/<?php echo $detail->media_path; ?>" class="img-fluid">

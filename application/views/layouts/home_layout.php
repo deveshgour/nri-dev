@@ -48,6 +48,12 @@
 
                 <form method="post" action="" name="search">
 
+                <a class="link-dark toggleMenu d-lg-none">
+
+                    <span class="icon icon-menu"></span>
+
+                    </a>
+
                     <a class="link-dark toggleSearch d-lg-none" data-toggle="collapse" href="#collapseSearch">
 
                         <span class="icon-search1"></span>

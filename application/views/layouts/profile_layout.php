@@ -52,6 +52,12 @@
 
                 <form method="post" action="" name="search">
 
+                <a class="link-dark toggleMenu d-lg-none">
+
+                    <span class="icon icon-menu"></span>
+
+                 </a>
+
                     <a class="link-dark toggleSearch d-lg-none" data-toggle="collapse" href="#collapseSearch">
 
                         <span class="icon-search1"></span>
@@ -79,8 +85,9 @@
             </div>
 
 
+            <div class="d-flex align-items-center">
 
-            <ul class="list-inline centerNav mb-0">
+            <ul class="list-inline centerNav mb-0 mr-4">
 
                 <li class="list-inline-item">
 
@@ -154,7 +161,7 @@
 
 
 
-            <ul class="list-inline rightNav mb-0 ml-lg-auto order-2">
+            <ul class="list-inline rightNav mb-0">
 
                 <li class="list-inline-item">
 
@@ -230,6 +237,7 @@
                 </li>
 
             </ul>
+           </div>
 
         </nav>
 

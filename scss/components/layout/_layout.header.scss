@@ -17,6 +17,7 @@ header {
             right: 0;
             margin: 0 auto;
             text-align: center;
+            max-width: 200px;
         }
 
         .form-search {
@@ -30,6 +31,12 @@ header {
                 left: 15px;
                 transform: translateY(-50%);
             }
+        }
+        .toggleSearch, .toggleMenu{
+            font-size: 20px;
+        }
+        .toggleMenu {
+            margin-right: 10px;
         }
         .centerNav {
             margin-left: 65px;

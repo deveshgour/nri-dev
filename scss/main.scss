@@ -494,13 +494,27 @@ body{
             position: fixed;
             width: 250px;
             left: -250px;
-            li{padding: 12px 15px;}
+            top: 58px;
+            @include transition(0.5s);
+            z-index: 9999;
+            background-color: #fff !important;
+            border-radius: 0px;
+            height: calc(100vh - 58px);
+            overflow-y: auto;
+            &.menuOpen{
+                left: 0;
+            }
         }
         .feeds{
             .feeds-search{
                 padding: 15px;
                 flex-wrap: wrap;
-                .search{margin-right: 0;}
+                .search{
+                    margin-right: 0; 
+                    .form-control{
+                        font-size: 14px;
+                    }
+                }
             }
             .feed-box{
                 margin-bottom: 30px;

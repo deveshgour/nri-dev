@@ -5666,6 +5666,10 @@ $(document).on('click','[id^="deletevisitreplyComment"]', function(e){
 			return false;
 
 		});
+
+		$('.toggleMenu').click(function(){
+			$('.leftContent').toggleClass('menuOpen');
+		})
 	</script>
 
 </body>
