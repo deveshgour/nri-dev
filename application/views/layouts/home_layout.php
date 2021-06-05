@@ -10,11 +10,12 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <meta name="title" content="First Title">
-
-<meta name="description" content="First Description">
-
-<meta property="og:url" content="<?php echo base_url(); ?>home">  
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta property="og:url"           content="https://stackoverflow.com/questions/2400947/want-custom-title-image-description-in-facebook-share-link-from-a-flash-app/3858944" />
+<meta property="og:type"          content="website" />
+<meta property="og:title"         content="Your Website Title" />
+<meta property="og:description"   content="Your description" />
+<meta property="og:image"         content="https://static.e-junkie.com/sslpic/64332.ed95f53b41bc4885dd86e2b485f08a3b.jpg" />
 
     <link rel="stylesheet" href="<?php echo base_url() ?>css/bootstrap.min.css">
 

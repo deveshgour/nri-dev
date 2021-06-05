@@ -288,7 +288,7 @@
 
 
 
-    <script src="<?php echo base_url() ?>js/jquery-3.6.0.min.js"></script>
+  <script src="<?php echo base_url() ?>js/jquery-3.6.0.min.js"></script>
 
 	
 
@@ -5667,6 +5667,131 @@ $(document).on('click','[id^="deletevisitreplyComment"]', function(e){
 
 		});
 	</script>
+	<script>
+$(function() {
+  $('.pop').on('click', function() {
+	  var image_id = $(this).attr('data-img-id');
+    $('.imagepreview'+image_id).attr('src', $(this).find('img').attr('src'));
+  });
+   $('.closenew').on('click', function() {
+	   var image_id = $(this).attr('data-img-id');
+	   $("#modlcls_"+image_id).modal('hide');
+	});   
+});
+
+
+$("#searchchat_group").keyup(function(){ 
+
+	var user_id = $(this).attr('data-user_id');
+
+	var search_value = $(this).val();
+
+	
+
+		$.ajax 
+
+		({
+
+			url: "<?php echo base_url(); ?>Userdashboard/searchchat_group",
+
+			type: "POST",             
+
+			data: "user_id="+user_id+"&search_value="+search_value,            			
+
+			success: function(data)   
+
+			{
+
+				
+
+				$('.userList').html(data);
+
+				
+
+			}
+
+	    });
+
+	
+
+  });
+  
+
+
+  <!---------------------------------FOR CHAT------------------------------------ -->
+		
+				
+$(document).on('click','#submitmsg', function(event){ 
+       var oldscrollHeight = $("#chatbox")[0].scrollHeight - 20; //Scroll height before the request
+		 
+		event.preventDefault();
+			
+			
+			var msg = $("#msg").val();
+					var friend_user_id = $("#friend_user_id").val();
+					var group_id = $("#group_id").val();
+				
+				$.ajax 
+
+		({
+
+			url: "<?php echo base_url(); ?>Userdashboard/create_groupchat",
+
+			type: "POST",             
+
+			data: "msg="+msg+"&friend_user_id="+friend_user_id+"&group_id="+group_id,            			
+            dataType: "json", 
+			success: function(response)   
+
+			{
+
+				//alert('response');
+
+				$('.msg-wrap').html(response.list);
+if(response.success){
+						  $("#msg").val("");
+						
+
+			}
+		}
+
+	    });
+			
+	
+});			
+				
+	/*$(document).ready(
+            function() {
+                setInterval(function() {
+                    $('#chatbox').load(location.href + ' #chatbox');
+
+                }, 5000);
+            });	*/
+				
+	/*$(document).ready(	
+	 function() {
+	setInterval(function(){
+      $('#chatbox').load(location.href + ' #chatbox');
+ 
+   },5000);		
+    $('#chatbox').scrollTop($('#chatbox')[0].scrollHeight);
+});*/
+
+$(document).ready(	
+	 function() {
+ setInterval(function(){
+	var actid = <?php echo base64_decode($this->uri->segment('2')); ?>;
+	
+    $(".test"+actid).load(location.href + " #scrolldiv"+actid,function(){
+		
+		$(".test"+actid).scrollTop($("#scrolldiv"+actid).scrollHeight);
+		
+	});
+	
+}, 2000);
+});
+
+</script>
 
 </body>
 
