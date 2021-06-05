@@ -94,50 +94,30 @@
             <div class="d-flex align-items-center">
 
                 <ul class="list-inline centerNav mb-0 mr-4">
-
                     <li class="list-inline-item">
-
                         <a href="<?php echo base_url(); ?>home" class="active">
-
                             <span class="icon icon-home"></span>
-
                             <span class="nav-text">Home</span>
-
                         </a>
-
-
-
                     </li>
 
                     <li class="list-inline-item">
-
                         <a href="<?php echo base_url(); ?>buzz_list">
-
-                            <span class="icon icon-users-feed"></span>
-
+                            <span class="icon icon-trending"></span>
                             <span class="nav-text">buzz</span>
-
                         </a>
-
-
-
                     </li>
 
                     <li class="list-inline-item">
-
                         <a href="<?php echo base_url(); ?>gov_detail">
-
-                            <span class="icon icon-trending"></span>
-
+                            <span class="icon icon-menu"></span>
                             <span class="nav-text">let's Gov</span>
-
                         </a>
-
                     </li>
 
                     <li class="list-inline-item">
                         <a href="<?php echo base_url(); ?>friendRequest_list">
-                            <span class="icon icon-menu"></span>
+                            <span class="icon icon-users-feed"></span>
                             <span class="nav-text">Friend Request</span>
                         </a>
                     </li>

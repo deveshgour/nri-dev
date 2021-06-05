@@ -58,6 +58,19 @@ header {
                         color: $black;
                         transition: 0.5s;
                         margin: 0 auto;
+                        &.icon-users-feed{
+                            background: #276EBC;
+                            color: #fff;
+                            border: 1px solid #276EBC;
+                        }
+                        &.icon-trending{
+                            background-color: #9C251B;
+                            color: #fff;
+                        }
+                        &.icon-menu{
+                            background-color: #203864;
+                            color: #fff;
+                        }
                     }
                     .nav-text {
                         font-size: 14px;
@@ -65,14 +78,14 @@ header {
                         margin-top: 5px;
                         color: #333;
                     }
-                    &:hover,
-                    &.active {
-                        .icon,
-                        .nav-text {
-                            color: $yellow;
-                            border-color: $yellow;
-                        }
-                    }
+                    // &:hover,
+                    // &.active {
+                    //     .icon,
+                    //     .nav-text {
+                    //         color: $yellow;
+                    //         border-color: $yellow;
+                    //     }
+                    // }
                 }
             }
         }

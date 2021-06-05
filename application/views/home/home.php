@@ -73,12 +73,12 @@
                             </div>
 
                         </li>
+                        
+                        <li><a href="<?php echo base_url(); ?>fact_list">Interesting Facts</a></li>
 
                         <li><a href="<?php echo base_url(); ?>major_missing" >Major Mising</a></li>
 
                         <li><a href="<?php echo base_url(); ?>recent_visit">My Recent Visit</a></li>
-
-                        <li><a href="<?php echo base_url(); ?>fact_list">Interesting Facts</a></li>
 
                         <li><a href="<?php echo base_url(); ?>event">Upload Events</a></li>
 

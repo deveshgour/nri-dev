@@ -107,7 +107,7 @@
 
                     <a href="<?php echo base_url(); ?>buzz_list">
 
-                        <span class="icon icon-users-feed"></span>
+                        <span class="icon icon-trending"></span>
 
                         <span class="nav-text">buzz</span>
 
@@ -121,7 +121,7 @@
 
                     <a href="<?php echo base_url(); ?>gov_detail">
 
-                        <span class="icon icon-trending"></span>
+                        <span class="icon icon-menu"></span>
 
                         <span class="nav-text">let's Gov</span>
 
@@ -133,7 +133,7 @@
 
                     <a href="<?php echo base_url(); ?>friendRequest_list">
 
-                        <span class="icon icon-menu"></span>
+                        <span class="icon icon-users-feed"></span>
 
                         <span class="nav-text">Friend Request</span>
 
