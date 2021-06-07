@@ -74,16 +74,16 @@
                     </button>
 					</div>
 					<form id="creategroupimage" action="<?php echo base_url(); ?>Userdashboard/create_group" method="post" enctype="multipart/form-data">
-                <div class="modal-body">
-                
-				
+              		  <div class="modal-body">
 					
                         <div class="form-group">                            
 							<input type="text" name="group_title" id="group_title" value="" class="form-control" placeholder="Group Title" >
                         </div>
+
+						<h5 class="mb-4">Group Members</h5>
 						
 						<div class="form-group">
-						<h5>Group Members</h5>
+								
 						<?php  
 						 $where_q = "(friend.friend_user_id = ".$this->session->userdata('userId')['user_id']." or friend.user_id = ".$this->session->userdata('userId')['user_id'].") and request_status = 1";
                        $query_q = $this->Common_model->jointwotable('friend','friend_user_id','users','user_id',$where_q,'users.firstname,users.lastname,friend.friend_user_id,friend.user_id,friend.friend_id');
@@ -102,9 +102,10 @@
                                                       $img = base_url().'images/user_image.png';
 													 }														 
 												   ?>
-							<input type="checkbox" id="groupmem" name="groupmem[]" value="<?php echo $qrp->user_id; ?>" >
+												   <div class="d-flex align-items-center groupMember">
+							<input type="checkbox" id="groupmem" name="groupmem[]" value="<?php echo $qrp->user_id; ?>" class="mr-2">
 										
-							<!--<label for="coding">--><a href="<?php echo base_url(); ?>friend-user/<?php echo base64_encode($qrp->user_id); ?>" ><img class="rounded-circle tag-img" src="<?php echo $img; ?>" width="50px" height="50px" style="object-fit:cover"><?php echo $qrp->firstname.' '.$qrp->lastname; ?></a><!--</label>-->
+							<!--<label for="coding">--><a href="<?php echo base_url(); ?>friend-user/<?php echo base64_encode($qrp->user_id); ?>" ><img class="rounded-circle tag-img" src="<?php echo $img; ?>" width="50px" height="50px"> <span class="groupMember__name"><?php echo $qrp->firstname.' '.$qrp->lastname; ?> </span></a><!--</label>-->
 					    
 						<?php   }elseif($qss->user_id == $this->session->userdata('userId')['user_id']){ 
 											$qrp = $this->Common_model->getsingle('users',array('user_id' => $qss->friend_user_id));
@@ -115,13 +116,20 @@
                                                       $img = base_url().'images/user_image.png';
 													 }
 											?>	
-							<input type="checkbox" id="groupmem" name="groupmem[]" value="<?php echo $qrp->user_id; ?>" >
+							<input type="checkbox" id="groupmem" name="groupmem[]" value="<?php echo $qrp->user_id; ?>">
 										
-							<a href="<?php echo base_url(); ?>friend-user/<?php echo base64_encode($qrp->user_id); ?>" ><img class="rounded-circle tag-img" src="<?php echo $img; ?>" width="50px" height="50px" style="object-fit:cover"><?php echo $qrp->firstname.' '.$qrp->lastname; ?></a>			
+							<a href="<?php echo base_url(); ?>friend-user/<?php echo base64_encode($qrp->user_id); ?>" ><img class="rounded-circle tag-img" src="<?php echo $img; ?>" width="50px" height="50px" style="object-fit:cover"> 
+							<span class="userName"><?php echo $qrp->firstname.' '.$qrp->lastname; ?> </span>
+							</div>
+						
+							</a>			
 											<?php }
 										}
 									 }
 									   ?>
+					
+						</div>
+
 						</div>
 
                         <div class="form-group">
@@ -133,7 +141,7 @@
 					
 										
 									
-								</div>
+							
 								<div class="modal-footer">
 									
 								<input type="submit" name="submit" id="submit" value="Submit" class="btn btn-primary">

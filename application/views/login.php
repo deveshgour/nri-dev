@@ -1,7 +1,13 @@
     
 	
 	<main class="main-content authPage">
-        <div class="authPage__wrapper">
+        <div class="container">
+        <div class="row">
+        <div class="col-lg-6 bg-white p-0 left d-none d-lg-block">
+            <img class="img-fluid h-100" src="<?php echo base_url(); ?>images/hands.jpg"/>  
+        </div>
+        <div class="col-lg-6 bg-white">
+            <div class="p-4">
 
              <form method="POST" name="login" id="login" class="w-100" action="<?php echo base_url();?>">
                 <h1>Sign in</h1>
@@ -57,6 +63,9 @@
              
             </form>
            
+        </div>
+        </div>
+        </div>
         </div>
     </main>
 	<script>
