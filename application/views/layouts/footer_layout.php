@@ -5804,6 +5804,7 @@ $(document).ready(
 		   $('.msg-wrap').html(response.list);
 
 						  $("#msg").val("");
+						   $('#attachedFIle').val('');  
 						
 
 			

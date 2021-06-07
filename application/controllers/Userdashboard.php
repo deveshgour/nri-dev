@@ -637,8 +637,9 @@ class Userdashboard extends CI_Controller {
 		$email = $this->input->post("email_id");
 		//$email = "swati.it03@gmail.com";
 		$mobile_number = $this->input->post("mobile_number");
+		$user_id = $this->Common_model->getsingle("users",array("email"=>$email));
 		
-		$array = array("your_name" => $your_name,"email_id" => $email,"mobile_number"=>$mobile_number,"create_date" => date("Y-m-d H:i:s"));
+		$array = array("your_name" => $your_name,"email_id" => $email,"mobile_number"=>$mobile_number,"user_id" => $user_id->user_id,"create_date" => date("Y-m-d H:i:s"));
 		$this->Common_model->addRecords("ask_me",$array);
 		$subject = "Ask me";
 		$msg = "Hello Admin,<br/>";
