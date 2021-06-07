@@ -7,7 +7,7 @@
         <meta name="description" content="" />
         <meta name="author" content="" />
         <title>Dashboard - Admin</title>
-        <link href="<?php echo base_url(); ?>admin_css/styles.css" rel="stylesheet" />
+        <link href="<?php echo base_url(); ?>admin_css/styles.css" rel="stylesheet" /> 
 		<link href="<?php echo base_url(); ?>css/local.css" rel="stylesheet" />
         <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
@@ -79,7 +79,7 @@
                             <a class="nav-link" href="<?php echo base_url(); ?>Admin_dashboard/fact_list">
                                 <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                                 Interesting fact
-                            </a>
+                            </a>														<a class="nav-link" href="<?php echo base_url(); ?>Admin_support/support_list">                                <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>                                Support                            </a>
 							<!--<a class="nav-link" href="<?php //echo base_url(); ?>admin/connect_to_root">
                                 <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                                 Connect to root
