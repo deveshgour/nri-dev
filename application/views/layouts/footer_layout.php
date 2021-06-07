@@ -5675,6 +5675,7 @@ $(document).on('click','[id^="deletevisitreplyComment"]', function(e){
 $(function() {
   $('.pop').on('click', function() {
 	  var image_id = $(this).attr('data-img-id');
+	  //alert(image_id);
     $('.imagepreview'+image_id).attr('src', $(this).find('img').attr('src'));
   });
    $('.closenew').on('click', function() {
@@ -5725,11 +5726,13 @@ $("#searchchat_group").keyup(function(){
   <!---------------------------------FOR CHAT------------------------------------ -->
 		
 				
-$(document).on('click','#submitmsg', function(event){ 
-       var oldscrollHeight = $("#chatbox")[0].scrollHeight - 20; //Scroll height before the request
+/*$(document).on('click','#submitmsg', function(event){ 
+       
 		 
 		event.preventDefault();
 			
+			var attachedFIle = $("#attachedFIle").val();
+			alert(attachedFIle);
 			
 			var msg = $("#msg").val();
 					var friend_user_id = $("#friend_user_id").val();
@@ -5762,25 +5765,11 @@ if(response.success){
 	    });
 			
 	
-});			
+});	*/		
 				
-	/*$(document).ready(
-            function() {
-                setInterval(function() {
-                    $('#chatbox').load(location.href + ' #chatbox');
+	
 
-                }, 5000);
-            });	*/
-				
-	/*$(document).ready(	
-	 function() {
-	setInterval(function(){
-      $('#chatbox').load(location.href + ' #chatbox');
- 
-   },5000);		
-    $('#chatbox').scrollTop($('#chatbox')[0].scrollHeight);
-});*/
-
+<?php if($this->uri->segment("1") == "chat"){ ?>
 $(document).ready(	
 	 function() {
  setInterval(function(){
@@ -5794,6 +5783,134 @@ $(document).ready(
 	
 }, 2000);
 });
+<?php } ?>
+
+   $("#creategroupchat").on("submit", function(e){
+        e.preventDefault();
+        var formData = new FormData(this);
+		
+        $.ajax({
+          url  : "<?php echo base_url(); ?>Userdashboard/create_groupchat",
+          type : "POST",
+          cache:false,
+          data :formData,
+          contentType : false, // you can also use multipart/form-data replace of false
+          processData: false,
+          success:function(response){
+           // $("#preview").show();
+           // $("#imageView").html(response);
+           // $("#image").val('');
+		   
+		   $('.msg-wrap').html(response.list);
+
+						  $("#msg").val("");
+						
+
+			
+          }
+        });
+      });
+  
+
+
+ $(document).on('click','[class^=chatIds]',function(e){
+var chatid = $(this).attr('data-img-id');
+var group_id = "<?php echo base64_decode($this->uri->segment('2')); ?>";
+// $('#modlcls_'+chatid).modal('show');
+ 		$.ajax 
+
+		({
+
+			url: "<?php echo base_url(); ?>Userdashboard/chat_image_model",
+
+			type: "POST",             
+
+			data: "chatid="+chatid+"&group_id="+group_id,            			
+            
+			success: function(data)   
+
+			{
+              $('.ajaxcls').html(data);
+
+      // Display Modal
+      $('.newimagemodal').modal('show');
+				
+		    }
+
+	    });
+});
+
+
+$(document).on('click','.closechatimg', function(){
+
+$(".newimagemodal").removeClass("in");
+  $(".modal-backdrop").remove();
+  $(".newimagemodal").hide();
+});
+
+
+$(document).on('click','.closechatvideo', function(){
+
+$(".videoModal").removeClass("in");
+  $(".modal-backdrop").remove();
+  $(".videoModal").hide();
+});
+
+
+ $(document).on('click','[class^=chatvideoIds]',function(e){
+var chatid = $(this).attr('data-img-id');
+var group_id = "<?php echo base64_decode($this->uri->segment('2')); ?>";
+// $('#modlcls_'+chatid).modal('show');
+ 		$.ajax 
+
+		({
+
+			url: "<?php echo base_url(); ?>Userdashboard/chat_video_model",
+
+			type: "POST",             
+
+			data: "chatid="+chatid+"&group_id="+group_id,            			
+            
+			success: function(data)   
+
+			{
+              $('.ajaxvideo').html(data);
+
+      // Display Modal
+      $('.videoModal').modal('show');
+				
+		    }
+
+	    });
+});
+
+
+
+$(document).on('click','.downloadpdf', function(){
+	var chatid = $(this).attr('data-img-id');
+	$.ajax 
+
+		({
+
+			url: "<?php echo base_url(); ?>Userdashboard/downloadpdf",
+
+			type: "POST",             
+
+			data: "chatid="+chatid,            			
+            
+			success: function(data)   
+
+			{
+              alert("success");
+				
+		    }
+
+	    });
+	});
+
+		$('.toggleMenu').click(function(){
+			$('.leftContent').toggleClass('menuOpen');
+		})
 
 </script>
 

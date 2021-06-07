@@ -15,10 +15,7 @@
                     </div>
                     <ul class="list-unstyled mb-0 groupsearchval">
 				 <?php 
-				// $groupShow = $this->Common_model->getAllwhereorder("create_group",array("user_id" => $this->session->userdata("userId")["user_id"]),"group_id","desc");
-				//$where_chat = "create_group.user_id=".$this->session->userdata("userId")["user_id"].' or group_members.members='.$this->session->userdata("userId")["user_id"];
-				//$groupShow = $this->Common_model->jointwotableorderby("create_group", "group_id", "group_members", "group_id",$where_chat,"*","create_group.group_id","desc");
-				$groupShow = $this->Common_model->getAll("create_group","group_id","desc");
+						$groupShow = $this->Common_model->getAll("create_group","group_id","desc");
 				
 				//echo $this->db->last_query();die;
 				 if(!empty($groupShow)){

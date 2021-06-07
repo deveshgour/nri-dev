@@ -806,12 +806,98 @@ class Userdashboard extends CI_Controller {
 		$user_id = $this->session->userdata('userId')['user_id'];
 		$friend_user_id = $this->input->post('friend_user_id');
 		$msg = $this->input->post('msg');
+		
 		$group_id = $this->input->post('group_id');
 		$data['group_id'] = $group_id;
 		
-		$array = array("msg" => $msg,"friend_user_id"=>$friend_user_id,"group_id" => $group_id,"user_id" => $user_id,"create_date" =>date("Y-m-d H:i:s"));
-		$this->Common_model->addRecords("group_chat",$array);
-		//redirect("chat/".base64_encode($group_id));
+		$media_name = $_FILES['attachedFIle']['name'];
+		$media_type_name = $_FILES['attachedFIle']['type'];		
+		$media_type = explode('/',$media_type_name);
+		
+		if(!empty($msg) || !empty($media_name)){
+		$array = array("msg" => $msg,"friend_user_id"=>$friend_user_id,"real_video_name"=> $media_name,"group_id" => $group_id,"user_id" => $user_id,"create_date" =>date("Y-m-d H:i:s"));
+		$insertid = $this->Common_model->addRecords("group_chat",$array);
+		
+		if(!empty($media_type[0])){
+			
+		   if($media_type[0] == 'image'){
+		
+			if(!empty($media_type[0])){
+              $media_type_new = $media_type[0];
+			}else{
+              $media_type_new = $media_type_name;
+			}				
+			
+		    $data['upload_path'] = 'chat_images/';
+			$data['allowed_types'] = 'gif|jpg|png|jpeg';
+			
+			$data['encrypt_name'] = true;
+			
+			$this->load->library('upload',$data);
+			$uploadfile ='';
+			
+			if($this->upload->do_upload('attachedFIle'))
+			{ 
+			   $attachment_data = array('upload_data' => $this->upload->data());
+			   $uploadfile = $attachment_data['upload_data']['file_name'];
+			  
+		
+		
+		$array = array("friend_user_id"=>$friend_user_id,"group_id" => $group_id,"user_id" => $user_id,"media_type" => $media_type_new,"media_path"=>$uploadfile);
+		$this->Common_model->updateRecords("group_chat",$array,array("chat_id" => $insertid));
+			}
+
+		
+		}elseif($media_type[0] == 'video'){
+			
+			if(!empty($media_type[0])){
+              $media_type_new = $media_type[0];
+			}else{
+              $media_type_new = $media_type_name;
+			}				
+			
+		$data['upload_path'] = 'chat_images/';
+		$data['allowed_types'] = '3gp|mp4|mpeg|mpg|ogg|avi|ogg';
+		//$data['max_size'] = '20480';
+		
+		$data['encrypt_name'] = true;
+			
+			$this->load->library('upload',$data);
+			$uploadfile ='';
+			
+			if($this->upload->do_upload('attachedFIle'))
+			{ 
+			   $attachment_data = array('upload_data' => $this->upload->data());
+			   $uploadfile = $attachment_data['upload_data']['file_name'];
+			  
+		
+		$array = array("friend_user_id"=>$friend_user_id,"group_id" => $group_id,"user_id" => $user_id,"media_type" => $media_type_new,"media_path"=>$uploadfile);
+		$this->Common_model->updateRecords("group_chat",$array,array("chat_id" => $insertid));
+
+		}
+		}else{
+			 $data['upload_path'] = 'chat_images/';
+			$data['allowed_types'] = 'pdf|doc|xml|zip|docx|csv';
+			
+			$data['encrypt_name'] = true;
+			
+			$this->load->library('upload',$data);
+			$uploadfile ='';
+			
+			if($this->upload->do_upload('attachedFIle'))
+			{ 
+			   $attachment_data = array('upload_data' => $this->upload->data());
+			   $uploadfile = $attachment_data['upload_data']['file_name'];
+			   $array = array("friend_user_id"=>$friend_user_id,"group_id" => $group_id,"user_id" => $user_id,"media_type" => $media_type_new,"media_path"=>$uploadfile);
+		$this->Common_model->updateRecords("group_chat",$array,array("chat_id" => $insertid));
+
+			   
+			}
+		}
+		}
+		
+		
+	  }
 		
 		$list = $this->load->view('home/createchat_ajax', array('group_id'=>$group_id), true);
 					
@@ -820,6 +906,40 @@ class Userdashboard extends CI_Controller {
 		$return = array('success'=>true, 'list'=> $list);
 		echo json_encode($return);
 		
+	}
+	
+	public function chat_image_model()
+	{
+		$data['chat_id'] = $this->input->post('chatid');
+		$data['chata_image_show'] = $this->Common_model->getsingle("group_chat",array("chat_id" => $data['chat_id']));
+		
+		$this->load->view('home/chat_image_model',$data);
+	}
+	
+	public function chat_video_model()
+	{
+		$data['chat_id'] = $this->input->post('chatid');
+		$data['chata_image_show'] = $this->Common_model->getsingle("group_chat",array("chat_id" => $data['chat_id']));
+		
+		$this->load->view('home/chat_video_model',$data);
+	}
+	
+	public function downloadpdf()
+	{ 
+		$this->load->helper('download');
+		$chatid = $this->uri->segment('3');
+       //$chatid = $this->input->post('chatid');
+		$chata_pdf = $this->Common_model->getsingle("group_chat",array("chat_id" => $chatid));
+     // echo '<pre>';print_r($chata_pdf);die;
+        $name = $chata_pdf->media_path;
+$real_name = $chata_pdf->real_video_name;
+$data = file_get_contents(base_url()."chat_images/".$chata_pdf->media_path);
+force_download($real_name, $data);
+      
+	//$type = explode('.',$name);
+	
+	
+	redirect($_SERVER['HTTP_REFERER']);
 	}
 
 	public function logout()

@@ -140,6 +140,8 @@ $userName = $this->Common_model->getsingle("users",array("user_id" => $group_box
 								foreach($groupchatdetail as $chatdetail){
 									$chatuserImg = $this->Common_model->getsingle("users",array("user_id"=>$chatdetail->user_id));
 									if($chatdetail->user_id == $this->session->userdata("userId")['user_id']){
+										//$session_chat = $this->session->set_userdata('chatId', $chatdetail->chat_id; );
+										
 								?>
 								
                                     <div class="send-msg">
@@ -147,7 +149,33 @@ $userName = $this->Common_model->getsingle("users",array("user_id" => $group_box
                                         <div class="msg-body position-relative">
                                             <div class="chat_box">
                                                 <div class="msg">
-                                                    <span class="d-inline-block bgGray"><?php echo $chatdetail->msg; ?></span>
+                                                   <?php if(!empty($chatdetail->msg)){ ?> <span class="d-inline-block bgGray"><?php echo $chatdetail->msg; ?></span><?php } ?>
+													<?php if(!empty($chatdetail->media_path)){ 
+													      if($chatdetail->media_type == "image"){
+													?>
+													<span class="d-inline-block bgGray">
+													 <a href="javascript:void(0);" class="chatIds<?php  echo $chatdetail->chat_id; ?>" data-img-id="<?php echo $chatdetail->chat_id; ?>">
+                                                        <img  width="100px;" class="chat_width_img chatIds<?php  echo $chatdetail->chat_id; ?>" data-chatIds="<?php  echo $chatdetail->chat_id; ?>" src="<?php echo base_url(); ?>chat_images/<?php echo $chatdetail->media_path; ?>" alt="trending"
+                                                             />
+                                                    </a>
+														  <?php }elseif($chatdetail->media_type == "video"){ ?>
+													<?php /* ?><video controls width="30%" height="50%" class="chatvideoIds<?php  echo $chatdetail->chat_id; ?>" data-img-id="<?php echo $chatdetail->chat_id; ?>">
+
+				  <source src="<?php echo base_url(); ?>chat_images/<?php echo $chatdetail->media_path; ?>" type="video/mp4">
+
+				</video><?php */ ?>
+				<a href="javascript:void(0);" class="chatvideoIds<?php  echo $chatdetail->chat_id; ?>" data-img-id="<?php echo $chatdetail->chat_id; ?>">
+                              <img  width="100px;" src="<?php echo base_url(); ?>images/default_video_img.png" alt="trending" ><?php if(!empty($chatdetail->real_video_name)){ echo $chatdetail->real_video_name; } ?>
+            
+                                                    </a>
+ 
+														 <?php }elseif(empty($chatdetail->media_type)){ ?>
+				<a href="<?php echo base_url(); ?>Userdashboard/downloadpdf/<?php echo $chatdetail->chat_id; ?>" data-img-id="<?php echo $chatdetail->chat_id; ?>" >
+                              <img  width="100px;" src="<?php echo base_url(); ?>images/pdf_icon.png" class="pdficon downloadpdf1"  data-img-id="<?php echo $chatdetail->chat_id; ?>" alt="trending" ><?php if(!empty($chatdetail->real_video_name)){ echo $chatdetail->real_video_name; } ?>
+            
+                                                    </a>	
+														 <?php } ?>
+													<?php } ?>
                                                 </div>
                                             </div>
                                             <div class="img_wrap position-absolute overflow-hidden rounded-circle">
@@ -173,7 +201,33 @@ $userName = $this->Common_model->getsingle("users",array("user_id" => $group_box
                                             </div>
                                             <div class="chat_box">
                                                 <div class="msg">
-                                                    <span class="d-inline-block commonShadow"><?php echo $chatdetail->msg; ?></span>
+                                                    <?php if(!empty($chatdetail->msg)){ ?> <span class="d-inline-block commonShadow"><?php echo $chatdetail->msg; ?></span><?php } ?>
+													<?php if(!empty($chatdetail->media_path)){ 
+													      if($chatdetail->media_type == "image"){
+													?>
+													<span class="d-inline-block">
+													 <a href="javascript:void(0);" class="chatIds<?php  echo $chatdetail->chat_id; ?>" data-img-id="<?php echo $chatdetail->chat_id; ?>">
+                                                        <img  width="100px;" class="chat_width_img chatIds<?php  echo $chatdetail->chat_id; ?>" data-chatIds="<?php  echo $chatdetail->chat_id; ?>" src="<?php echo base_url(); ?>chat_images/<?php echo $chatdetail->media_path; ?>" alt="trending"
+                                                             />
+                                                    </a>
+														  <?php }elseif($chatdetail->media_type == "video"){ ?>
+													<?php /* ?><video controls width="30%" height="50%" class="chatvideoIds<?php  echo $chatdetail->chat_id; ?>" data-img-id="<?php echo $chatdetail->chat_id; ?>">
+
+				  <source src="<?php echo base_url(); ?>chat_images/<?php echo $chatdetail->media_path; ?>" type="video/mp4">
+
+				</video><?php */ ?>
+				<a href="javascript:void(0);" class="chatvideoIds<?php  echo $chatdetail->chat_id; ?>" data-img-id="<?php echo $chatdetail->chat_id; ?>">
+                              <img  width="100px;" src="<?php echo base_url(); ?>images/default_video_img.png" alt="trending" ><?php if(!empty($chatdetail->real_video_name)){ echo $chatdetail->real_video_name; } ?>
+            
+                                                    </a>
+ 
+														  <?php }elseif(empty($chatdetail->media_type)){ ?>
+				<a href="javascript:void(0);" data-img-id="<?php echo $chatdetail->chat_id; ?>">
+                              <img  width="100px;" src="<?php echo base_url(); ?>images/pdf_icon.png" alt="trending" ><?php if(!empty($chatdetail->real_video_name)){ echo $chatdetail->real_video_name; } ?>
+            
+                                                    </a>										  
+														<?php } ?>  
+													<?php } ?>
                                                 </div>
                                             </div>
                                         </div>
@@ -195,7 +249,7 @@ $userName = $this->Common_model->getsingle("users",array("user_id" => $group_box
 											<input type="hidden" name="friend_user_id" id="friend_user_id" value="<?php echo $group_box->group_members; ?>" >
 											<input type="hidden" name="group_id" id="group_id" value="<?php echo $group_id; ?>" >
                                             <label class="attachFile mb-0" for="attachedFIle">
-                                                <input type="file" id="attachedFIle">
+                                                <input type="file" id="attachedFIle" name="attachedFIle">
                                                 <span class="icon-paperclip position-absolute"></span>
                                             </label>
                                         </div>
@@ -214,6 +268,28 @@ $userName = $this->Common_model->getsingle("users",array("user_id" => $group_box
         </div>
    
 </main>
-
+<?php  //echo $this->session->userdata('chatId'); die;?>
+<div class="ajaxcls">
+ <div  id="" data-img-id="<?php echo $chatdetail->chat_id; ?>" class="modal newimagemodal fade">
+												  <span class="closenew" data-img-id="<?php echo $chatdetail->chat_id; ?>">&times;</span>
+												  <h2>Chat</h2>
+												 <div class="modal-body"> <img class="modal-content imagepreview<?php echo $chatdetail->chat_id; ?>" src="" id="img01"> </div>
+												  
+												</div>
+ </div>
  
  
+ <div class="ajaxvideo">
+ <div class="modal fade videoModal" id="" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-body">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <video controls width="100%">
+            <source src="" type="video/mp4">
+          </video>
+        </div>
+      </div>
+    </div>
+  </div>
+ </div>
