@@ -80,6 +80,7 @@ $route['detail_gov/(:any)'] = 'Userprofile/gov_detail/$1';
 $route['gov_detail'] = 'Userprofile/gov_detail';
 $route['root_detail_list/(:any)'] = 'Userdashboard/root_detail_list/$1';
 $route['chat/(:any)'] = 'Userdashboard/chat/$1';
+$route['support'] = 'Support/chat';
 $route['logout'] = 'Userdashboard/logout';
 
 

@@ -14,27 +14,22 @@
                                                 <th>Name</th>
                                                 <th>Email</th>
                                                 <th>Status</th>
-                                                <th>Date</th>
-                                                <th></th>
+                                                <th>Date</th>                                                <th>Support</th>
+                                                <th></th>
                                             </tr>
                                         </thead>
-										
-                                        
                                         <tbody>
-										<?php if(!empty($post_user)){
-                                                  foreach($post_user as $user){
-													
- 											?>
-                                            <tr>
+										<?php if(!empty($post_user)){
+                                                  foreach($post_user as $user){
+ 											?>
+                                            <tr>
                                                 <td><?php echo $user->firstname.' '.$user->lastname;  ?></td>
                                                 <td><?php echo $user->email; ?></td>
                                                 <td><?php if($user->status == '1'){ echo 'Deactive'; }else{ echo 'Active'; } ?></td>
-                                                <td><?php echo date('d-m-Y', strtotime($user->create_date)); ?></td>
+                                                <td><?php echo date('d-m-Y', strtotime($user->create_date)); ?></td>                                                <td><a href="<?php echo base_url(); ?>Admin_support/chat/<?php echo $user->user_id; ?>" >Support</a></td>
                                                 <td><a href="<?php echo base_url(); ?>Admin_dashboard/post_list/<?php echo $user->user_id; ?>" ><?php echo 'Post'; ?></a></td>
-                                                
                                             </tr>
 										<?php }} ?>
-                                            
                                         </tbody>
                                     </table>
                                 </div>
