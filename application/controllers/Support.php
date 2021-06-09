@@ -1,37 +1,26 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Admin_support extends CI_Controller {
-	function __construct() {
+class Support extends CI_Controller {
+ function __construct() {
 	 
         parent::__construct();
 			
-			admin_not_login();
+			not_login();
       }
 	
-
-	  public function support_list() { 
-	  $data = array();
-	  
-	  $data['support_list'] = $this->Common_model->getAll("ask_me",'ask_id','desc');
-	  
-      $this->load->view('layouts/admin_login_dashboard_layout',$data);
-      $this->load->view('admin/support_list',$data);
-      $this->load->view('layouts/admin_footer_dashboard_layout',$data);
-	}
-	
 	public function chat()
-	{ 
-	  $data = array();
-	  $this->load->view('layouts/admin_login_dashboard_layout',$data);
-      $this->load->view('admin/chat',$data);
-      $this->load->view('layouts/admin_footer_dashboard_layout',$data);
+	{
+		$data = array();
+		
+		$this->load->view('layouts/profile_layout',$data);
+		$this->load->view('home/support',$data);  
+		$this->load->view('layouts/footer_layout',$data);
 	}
 	
-	
-	public function create_chat()
+	public function chat_system()
 	{
-		$user_id = $this->input->post('friend_user_id');
+		$user_id = $this->session->userdata('userId')['user_id'];
 		$friend_user_id = $this->input->post('friend_user_id');
 		$msg = $this->input->post('msg');
 		
@@ -43,7 +32,7 @@ class Admin_support extends CI_Controller {
 		$media_type = explode('/',$media_type_name);
 		
 		if(!empty($msg) || !empty($media_name)){
-		$array = array("admin_id" => 1,"msg" => $msg,"real_video_name"=> $media_name,"user_id" => $user_id,"create_date" =>date("Y-m-d H:i:s"));
+		$array = array("msg" => $msg,"real_video_name"=> $media_name,"user_id" => $user_id,"create_date" =>date("Y-m-d H:i:s"));
 		$insertid = $this->Common_model->addRecords("support_chat",$array);
 		
 		if(!empty($media_type[0])){
@@ -71,7 +60,7 @@ class Admin_support extends CI_Controller {
 			  
 		
 		
-		$array = array("admin_id" => 1,"user_id" => $user_id,"media_type" => $media_type_new,"media_path"=>$uploadfile);
+		$array = array("user_id" => $user_id,"media_type" => $media_type_new,"media_path"=>$uploadfile);
 		$this->Common_model->updateRecords("support_chat",$array,array("chat_id" => $insertid));
 			}
 
@@ -99,7 +88,7 @@ class Admin_support extends CI_Controller {
 			   $uploadfile = $attachment_data['upload_data']['file_name'];
 			  
 		
-		$array = array("admin_id" => 1,"user_id" => $user_id,"media_type" => $media_type_new,"media_path"=>$uploadfile);
+		$array = array("user_id" => $user_id,"media_type" => $media_type_new,"media_path"=>$uploadfile);
 		$this->Common_model->updateRecords("support_chat",$array,array("chat_id" => $insertid));
 
 		}
@@ -116,7 +105,7 @@ class Admin_support extends CI_Controller {
 			{ 
 			   $attachment_data = array('upload_data' => $this->upload->data());
 			   $uploadfile = $attachment_data['upload_data']['file_name'];
-			   $array = array("admin_id" => 1,"user_id" => $user_id,"media_type" => $media_type_new,"media_path"=>$uploadfile);
+			   $array = array("user_id" => $user_id,"media_type" => $media_type_new,"media_path"=>$uploadfile);
 		$this->Common_model->updateRecords("support_chat",$array,array("chat_id" => $insertid));
 
 			   
@@ -127,20 +116,21 @@ class Admin_support extends CI_Controller {
 		
 	  }
 		
-		$list = $this->load->view('admin/createchat_ajax', array('group_id'=>$chat_id), true);
+		$list = $this->load->view('home/createsupportchat_ajax', array('group_id'=>$this->session->userdata('userId')['user_id']), true);
 					
 		$this->output->set_content_type('application/json');
 		
 		$return = array('success'=>true, 'list'=> $list);
 		echo json_encode($return);
+		
 	}
 	
 	public function chat_image_model()
 	{
 		$data['chat_id'] = $this->input->post('chatid');
 		$data['chata_image_show'] = $this->Common_model->getsingle("support_chat",array("chat_id" => $data['chat_id']));
-		
-		$this->load->view('admin/chat_image_model',$data);
+		//echo '<pre>';print_r($data['chata_image_show']);die;
+		$this->load->view('home/chat_image_model',$data);
 	}
 	
 	public function chat_video_model()
@@ -148,7 +138,7 @@ class Admin_support extends CI_Controller {
 		$data['chat_id'] = $this->input->post('chatid');
 		$data['chata_image_show'] = $this->Common_model->getsingle("support_chat",array("chat_id" => $data['chat_id']));
 		
-		$this->load->view('admin/chat_video_model',$data);
+		$this->load->view('home/chat_video_model',$data);
 	}
 	
 	public function downloadpdf()
@@ -168,4 +158,5 @@ force_download($real_name, $data);
 	
 	redirect($_SERVER['HTTP_REFERER']);
 	}
+
 }

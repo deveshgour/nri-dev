@@ -1,9 +1,12 @@
 <?php
-								$groupchatdetail = $this->Common_model->getAllwhereorder("group_chat",array("group_id" => $group_id),"chat_id","asc"); 
+								$groupchatdetail = $this->Common_model->getAllwhereorder("support_chat",array("user_id" => $this->session->userdata('userId')['user_id']),"chat_id","asc"); 
 								if(!empty($groupchatdetail)){
+									
 								foreach($groupchatdetail as $chatdetail){
-									$chatuserImg = $this->Common_model->getsingle("users",array("user_id"=>$chatdetail->user_id));
-									if($chatdetail->user_id == $this->session->userdata("userId")['user_id']){
+									$chatuserImg = $this->Common_model->getsingle("users",array("user_id"=>$this->session->userdata('userId')['user_id']));
+									if($chatdetail->user_id == $chatdetail->user_id && $chatdetail->admin_id == '0'){
+										//$session_chat = $this->session->set_userdata('chatId', $chatdetail->chat_id; );
+										
 								?>
                                     <div class="send-msg">
                                         <div class="msg-body position-relative">
@@ -21,7 +24,7 @@
                                             </div>
                                         </div>
                                     </div>
-									<?php }else{ ?>
+									<?php }elseif($chatdetail->user_id == $chatdetail->user_id && $chatdetail->admin_id == '1'){ ?>
                                     <div class="rcv-msg">
                                         <div class="msg-body position-relative">
                                             <div class="img_wrap position-absolute overflow-hidden rounded-circle">

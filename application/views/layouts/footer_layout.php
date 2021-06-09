@@ -5912,6 +5912,109 @@ $(document).on('click','.downloadpdf', function(){
 		$('.toggleMenu').click(function(){
 			$('.leftContent').toggleClass('menuOpen');
 		})
+		
+		
+		<!-----------------------------------support chat ------------------------------------ -->
+		
+		
+		 $("#createsupportchat").on("submit", function(e){
+        e.preventDefault();
+        var formData = new FormData(this);
+		
+        $.ajax({
+          url  : "<?php echo base_url(); ?>Support/chat_system",
+          type : "POST",
+          cache:false,
+          data :formData,
+          contentType : false, // you can also use multipart/form-data replace of false
+          processData: false,
+          success:function(response){
+           // $("#preview").show();
+           // $("#imageView").html(response);
+           // $("#image").val('');
+		   
+		   $('.msg-wrap').html(response.list);
+
+						  $("#msg").val("");
+						   $('#attachedFIle').val('');  
+						
+
+			
+          }
+        });
+      });
+	  
+	  <?php if($this->uri->segment("1") == "support"){ ?>
+$(document).ready(	
+	 function() {
+ setInterval(function(){
+	var actid = <?php echo $this->session->userdata('userId')['user_id']; ?>;
+	
+    $(".test"+actid).load(location.href + " #scrolldiv"+actid,function(){
+		
+		$(".test"+actid).scrollTop($("#scrolldiv"+actid).scrollHeight);
+		
+	});
+	
+}, 2000);
+});
+<?php } ?>
+
+ $(document).on('click','[class^=supportchatIds]',function(e){
+var chatid = $(this).attr('data-img-id');
+
+// $('#modlcls_'+chatid).modal('show');
+ 		$.ajax 
+
+		({
+
+			url: "<?php echo base_url(); ?>Support/chat_image_model",
+
+			type: "POST",             
+
+			data: "chatid="+chatid,            			
+            
+			success: function(data)   
+
+			{
+              $('.ajaxcls').html(data);
+
+      // Display Modal
+      $('.newimagemodal').modal('show');
+				
+		    }
+
+	    });
+});
+
+
+ $(document).on('click','[class^=supportchatvideoIds]',function(e){
+var chatid = $(this).attr('data-img-id');
+
+// $('#modlcls_'+chatid).modal('show');
+ 		$.ajax 
+
+		({
+
+			url: "<?php echo base_url(); ?>Support/chat_video_model",
+
+			type: "POST",             
+
+			data: "chatid="+chatid,            			
+            
+			success: function(data)   
+
+			{
+              $('.ajaxvideo').html(data);
+
+      // Display Modal
+      $('.videoModal').modal('show');
+				
+		    }
+
+	    });
+});
+
 
 </script>
 
