@@ -1,34 +1,5 @@
  
-
-  <style>
-
- .custommodal-header {
-
-    display: -ms-flexbox;
-
-    /* display: flex; */
-
-    -ms-flex-align: start;
-
-    align-items: flex-start;
-
-    -ms-flex-pack: justify;
-
-    justify-content: space-between;
-
-    padding: 1rem 1rem;
-
-    border-bottom: 1px solid #dee2e6;
-
-    border-top-left-radius: calc(.3rem - 1px);
-
-    border-top-right-radius: calc(.3rem - 1px);
-
-}
-
- </style>
-
-  <main class="main-content">
+<main class="main-content">
 
         <a href="javascript:;" class="d-none d-xl-none d-lg-block chatIcon">
 

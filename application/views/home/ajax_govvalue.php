@@ -36,8 +36,17 @@
                             <div class="likeShare d-flex align-items-center justify-content-between">
                               
                                 <div class="right">
-                                    <a href="javascript:;" class="link-dark"><span
-                                            class="icon-share-2 pr-2"></span>Share</a>
+                                <div class="dropdown shareDropdown">
+                                    <a href="javascript:;" class="link-dark" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span
+
+                                    class="icon-share-2 pr-2"></span>Share</a>
+
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                        <a class="dropdown-item" href="#"><em class="icon-facebook"></em> Facebook</a>
+                                        <a class="dropdown-item" href="#"><em class="icon-twitter"></em> Twitter</a>
+                                        <a class="dropdown-item" href="#"><em class="icon-instagram"></em> Instagram</a>
+                                    </div>
+                                </div>
                                 </div>
                             </div>
                            
