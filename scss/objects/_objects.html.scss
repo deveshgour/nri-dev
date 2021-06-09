@@ -588,3 +588,8 @@
   margin: 0 auto;
   display: block;
 }
+
+.scrollerBox{
+  max-height: 251px;
+  overflow-y: auto;
+}

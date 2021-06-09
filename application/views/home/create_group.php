@@ -83,7 +83,7 @@
 						<h5 class="mb-4">Group Members</h5>
 						
 						<div class="form-group">
-								
+							<div class="scrollerBox">	
 						<?php  
 						 $where_q = "(friend.friend_user_id = ".$this->session->userdata('userId')['user_id']." or friend.user_id = ".$this->session->userdata('userId')['user_id'].") and request_status = 1";
                        $query_q = $this->Common_model->jointwotable('friend','friend_user_id','users','user_id',$where_q,'users.firstname,users.lastname,friend.friend_user_id,friend.user_id,friend.friend_id');
@@ -129,6 +129,8 @@
 									   ?>
 					
 						</div>
+						</div>
+						<span for="groupmem[]" generated="true" class="error"></span>
 
 						</div>
 
@@ -142,7 +144,7 @@
 										
 									
 							
-								<div class="modal-footer">
+								<div class="text-center">
 									
 								<input type="submit" name="submit" id="submit" value="Submit" class="btn btn-primary">
 								
