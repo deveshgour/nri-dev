@@ -5769,7 +5769,7 @@ if(response.success){
 				
 	
 
-<?php if($this->uri->segment("1") == "chat"){ ?>
+<?php /*if($this->uri->segment("1") == "chat"){ ?>
 $(document).ready(	
 	 function() {
  setInterval(function(){
@@ -5783,7 +5783,7 @@ $(document).ready(
 	
 }, 2000);
 });
-<?php } ?>
+<?php }*/ ?>
 
    $("#creategroupchat").on("submit", function(e){
         e.preventDefault();
@@ -6015,6 +6015,55 @@ var chatid = $(this).attr('data-img-id');
 	    });
 });
 
+
+
+ /*$('.deletechatclsput').on('click', function(){
+	 var chatid = $(this).attr('data-delete-chat-id');
+	 //alert(chatid);
+	 
+	var values = $('input[name=deletechatbtn[]]:checked')
+               .map(() => { return this.value }).get();
+            alert(values);
+	
+
+	 $.ajax 
+
+		({
+
+			url: "<?php echo base_url(); ?>Support/delete_all_chat",
+
+			type: "POST",             
+
+			data: "chatid="+chatid,            			
+            
+			success: function(data)   
+
+			{
+              
+		    }
+
+	    });
+	});*/
+	
+	
+	
+/*	$('input[type=checkbox][name=deletechatbtn[]]').each(function () {   
+   var chatid = $(this).attr('data-delete-chat-id');
+	 alert(chatid);
+});*/
+
+
+
+$(document).ready(function() {
+
+ var array = [];
+$("input[type=checkbox]:checked").each(function(i){
+    array.push( i.value );
+	alert(array);
+});
+
+
+});
 
 </script>
 

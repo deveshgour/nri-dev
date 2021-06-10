@@ -205,6 +205,7 @@
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 
                                 <a class="dropdown-item" href="<?php echo base_url(); ?>myprofile">Edit Profile</a>
+								<a class="dropdown-item" href="<?php echo base_url(); ?>support">Support System</a>
 
                                 <a class="dropdown-item" href="<?php echo base_url(); ?>userprofile">My Profile</a>
 

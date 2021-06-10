@@ -56,7 +56,34 @@
 
             <ul class="list-inline centerNav mb-0">
 
-                <li class="list-inline-item">
+             <li class="list-inline-item">
+
+                    <a href="<?php echo base_url(); ?>about-us" class="active">
+
+                        <span class="icon icon-trending"></span>
+
+                        <span class="nav-text">About Us</span>
+
+                    </a>
+
+                    
+
+                </li>
+				<li class="list-inline-item">
+
+                    <a href="<?php echo base_url(); ?>privacypolicy" class="active">
+
+                        <span class="icon icon-menu"></span>
+
+                        <span class="nav-text">Privacy Policy</span>
+
+                    </a>
+
+                    
+
+                </li>
+
+               <?php /* ?> <li class="list-inline-item">
 
                     <a href="home.html" class="active">
 
@@ -94,7 +121,7 @@
 
                     </a>
 
-                </li>
+                </li><?php */ ?>
 
             </ul>
 

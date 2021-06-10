@@ -158,5 +158,12 @@ force_download($real_name, $data);
 	
 	redirect($_SERVER['HTTP_REFERER']);
 	}
+	
+	public function delete_all_chat()
+	{
+		$chatid = $this->input->post("chatid");
+		$implode = implode(',',$chatid);
+		print_r($implode);
+	}
 
 }

@@ -1,3 +1,4 @@
+  <?php $admin_id = $this->Common_model->getsingle("admin",array("admin_id" => 1)); ?> 
 <?php
 								$groupchatdetail = $this->Common_model->getAllwhereorder("support_chat",array("user_id" => $group_id),"chat_id","asc"); 
 								if(!empty($groupchatdetail)){
@@ -36,8 +37,8 @@
 												</div>
                                             </div>
                                             <div class="img_wrap position-absolute overflow-hidden rounded-circle">
-											<?php if(!empty($chatuserImg->user_image)){ ?>
-                                                <img src="<?php echo base_url(); ?>upload/<?php echo $chatuserImg->user_image; ?>" class="rounded-circle" alt="user img">
+											 <?php if(!empty($admin_id->image)){ ?>
+                                                <img src="<?php echo base_url(); ?>upload/<?php echo $admin_id->image; ?>" width="50px" class="rounded-circle" alt="user img">
 											<?php }else{ ?>
 											    <img src="<?php echo base_url(); ?>images/user_image.png" class="rounded-circle" alt="user img">
 											<?php } ?>
@@ -48,7 +49,7 @@
                                     <div class="rcv-msg">
                                         <div class="msg-body position-relative">
                                             <div class="img_wrap position-absolute overflow-hidden rounded-circle">
-                                                <?php if(!empty($chatuserImg->user_image)){ ?>
+                                                 <?php if(!empty($chatuserImg->user_image)){ ?>
                                                 <img src="<?php echo base_url(); ?>upload/<?php echo $chatuserImg->user_image; ?>" width="50px" class="rounded-circle" alt="user img">
 											<?php }else{ ?>
 											    <img src="<?php echo base_url(); ?>images/user_image.png" class="rounded-circle" width="50px" alt="user img">

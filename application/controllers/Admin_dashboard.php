@@ -773,6 +773,175 @@ class Admin_dashboard extends CI_Controller {
 		redirect("Admin_dashboard/fact_list");
 	}
 	
+	public function add_page()
+	{
+	  $data = array();
+		if($_POST['submit']){
+		   $this->form_validation->set_rules('title', 'Title', 'trim|required');
+		   $this->form_validation->set_rules('description', 'Description', 'trim|required');
+		   $this->form_validation->set_rules('status', 'Status', 'trim|required');		   
+		   
+		   $title = $this->input->post('title');
+		   $description = $this->input->post('description');		  
+		   $status = $this->input->post('status');
+		   
+		   if($this->form_validation->run() == true)
+           { 
+	         // print_r($_POST);die;
+			// echo $_FILES['media_path']['name'];die;
+	        $data['upload_path'] = 'upload/';
+			$data['allowed_types'] = 'gif|jpg|png|jpeg';
+			$data['encrypt_name'] = true;
+			
+			$this->load->library('upload',$data);
+			$uploadfile ='';
+			
+			if($this->upload->do_upload('image'))
+			{
+				
+			   $attachment_data = array('upload_data' => $this->upload->data());
+			   $uploadfile = $attachment_data['upload_data']['file_name'];
+			   
+	            $array = array(					  
+					  "image" => $uploadfile,
+					  "title" => $title,
+					  "description" => $description,
+					  "status" => $status,
+					  "create_date" => date("Y-m-d H:i:s")
+				);
+				$this->Common_model->addRecords("pages",$array);
+				//redirect("admin/connect_to_root");
+		   }else{
+			   $array = array(
+				     "image" => $uploadfile,
+					  "title" => $title,
+					  "description" => $description,
+					  "status" => $status,
+					  "create_date" => date("Y-m-d H:i:s")
+				);
+				$this->Common_model->addRecords("pages",$array);
+		   }
+		   redirect("Admin_dashboard/page_list");
+	        }
+		 }
+	   
+		
+	   $this->load->view('layouts/admin_login_dashboard_layout',$data);
+       $this->load->view('admin/add_page',$data);
+       $this->load->view('layouts/admin_footer_dashboard_layout',$data);
+	}
+	
+	public function page_list()
+	{
+	   $data = array();
+	   $data['page_list'] = $this->Common_model->getAll("pages","page_id","desc");
+	   //echo "<pre>";print_r($data['page_list']);die;
+	   $this->load->view('layouts/admin_login_dashboard_layout',$data);
+       $this->load->view('admin/page_list',$data);
+       $this->load->view('layouts/admin_footer_dashboard_layout',$data);
+	}
+	
+	public function edit_page()
+	{
+		$data = array();
+		$page_id = $this->uri->segment("3");
+		$data['page_data'] = $this->Common_model->getsingle("pages",array("page_id" => $page_id));
+
+		
+		if($_POST['submit']){
+		   $this->form_validation->set_rules('title', 'Title', 'trim|required');
+		   $this->form_validation->set_rules('description', 'Description', 'trim|required');
+		   $this->form_validation->set_rules('status', 'Status', 'trim|required');		   
+		   
+		   $title = $this->input->post('title');
+		   $description = $this->input->post('description');		  
+		   $status = $this->input->post('status');
+		   
+		   if($this->form_validation->run() == true)
+           { 
+	         // print_r($_POST);die;
+			// echo $_FILES['media_path']['name'];die;
+	        $data['upload_path'] = 'upload/';
+			$data['allowed_types'] = 'gif|jpg|png|jpeg';
+			$data['encrypt_name'] = true;
+			
+			$this->load->library('upload',$data);
+			$uploadfile ='';
+			
+			
+			if($data['buzz_data']->image == $_FILES['image']['name']){
+			if($this->upload->do_upload('image'))
+			{
+				
+			   $attachment_data = array('upload_data' => $this->upload->data());
+			   $uploadfile = $attachment_data['upload_data']['file_name'];
+			   
+	            $array = array(					  
+					  "image" => $uploadfile,
+					  "title" => $title,
+					  "description" => $description,
+					  "status" => $status,
+					  "create_date" => date("Y-m-d H:i:s")
+				);
+				$this->Common_model->updateRecords("pages", $array, array("page_id" => $page_id));
+				//redirect("admin/connect_to_root");
+		   }else{
+			   $array = array(
+				     
+					  "title" => $title,
+					  "description" => $description,
+					  "status" => $status,
+					  "create_date" => date("Y-m-d H:i:s")
+				);
+				$this->Common_model->updateRecords("pages", $array, array("page_id" => $page_id));
+		   }
+		   redirect("Admin_dashboard/page_list");
+	        
+		   }else{ 
+			   $data['upload_path'] = 'upload/';
+			$data['allowed_types'] = 'gif|jpg|png|jpeg';
+			$data['encrypt_name'] = true;
+			
+			$this->load->library('upload',$data);
+			$uploadfile ='';
+			
+			
+			
+			if($this->upload->do_upload('image'))
+			{
+				
+			   $attachment_data = array('upload_data' => $this->upload->data());
+			   $uploadfile = $attachment_data['upload_data']['file_name'];
+			   
+	            $array = array(					  
+					  "image" => $uploadfile,
+					  "title" => $title,
+					  "description" => $description,
+					  "status" => $status,
+					  "create_date" => date("Y-m-d H:i:s")
+				);
+				$this->Common_model->updateRecords("pages", $array, array("page_id" => $page_id));
+				//redirect("admin/connect_to_root");
+		   }else{
+			   $array = array(
+				     
+					  "title" => $title,
+					  "description" => $description,
+					  "status" => $status,
+					  "create_date" => date("Y-m-d H:i:s")
+				);
+				$this->Common_model->updateRecords("pages", $array, array("page_id" => $page_id));
+		   }
+		   redirect("Admin_dashboard/page_list");
+		 }
+		   }
+		}
+		
+		$this->load->view('layouts/admin_login_dashboard_layout',$data);
+       $this->load->view('admin/edit_page',$data);
+       $this->load->view('layouts/admin_footer_dashboard_layout',$data);
+	}
+	
 	 public function logout()
 	{
 		  $unset_data = array('email'=>'','admin_id'=>'');
