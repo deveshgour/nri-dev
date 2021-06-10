@@ -1,34 +1,5 @@
  
-
-  <style>
-
- .custommodal-header {
-
-    display: -ms-flexbox;
-
-    /* display: flex; */
-
-    -ms-flex-align: start;
-
-    align-items: flex-start;
-
-    -ms-flex-pack: justify;
-
-    justify-content: space-between;
-
-    padding: 1rem 1rem;
-
-    border-bottom: 1px solid #dee2e6;
-
-    border-top-left-radius: calc(.3rem - 1px);
-
-    border-top-right-radius: calc(.3rem - 1px);
-
-}
-
- </style>
-
-  <main class="main-content">
+<main class="main-content">
 
         <a href="javascript:;" class="d-none d-xl-none d-lg-block chatIcon">
 
@@ -395,8 +366,6 @@
                                     </div>
                                     </div>
 
-                                   
-
                                 </div>
 
                             </div>
@@ -555,7 +524,7 @@ $getallcomment = $this->Common_model->commentpagination(array("post_id" => $row-
 
                                         <p class="edit_replycomment_text_<?php echo $reply_val->reply_id; ?>"><?php echo $reply_val->reply_comment; ?></p>
 
-										<b><a href="javascript:void(0)" class="link-dark replycomment_like_post" <?php if($getmyreplylikecomment){ ?>style="color:#009688;"<?php } ?> id="likereplycomment-<?php echo $reply_val->reply_id; ?>" data-status="1" data-postid="<?php echo $reply_val->post_id; ?>" data-commentid="<?php echo $reply_val->comment_id; ?>" data-replycommentid="<?php echo $reply_val->reply_id; ?>">
+										<b><a href="javascript:void(0)" class="link-dark comment_like_post" <?php if($getmyreplylikecomment){ ?>style="color:#009688;"<?php } ?> id="likereplycomment-<?php echo $reply_val->reply_id; ?>" data-status="1" data-postid="<?php echo $reply_val->post_id; ?>" data-commentid="<?php echo $reply_val->comment_id; ?>" data-replycommentid="<?php echo $reply_val->reply_id; ?>">
 
 							   <span class="replycmtdivcls" id="likereplycommentcountbox-<?php echo $reply_val->reply_id; ?>"><span class="replycmtspan"><?php echo count($replycomment_like_count); ?></span></span> Like</a></b>
 

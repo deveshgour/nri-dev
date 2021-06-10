@@ -198,13 +198,22 @@
                                             <div class="likeShare d-flex align-items-center justify-content-between">
                                                 <div class="left">
                                                     <a href="javascript:void(0)" class="link-dark like_post" <?php if($likeType){ ?>style="color:#009688;"<?php } ?> id="like-<?php echo $row->post_id; ?>" data-status="1" data-type="1" data-author="<?php echo $row->user_id; ?>" data-postid="<?php echo $row->post_id; ?>"><span
-                                            class="icon-like pr-2"></span>Like</a>
+                                            class="icon-star pr-2"></span>Like</a>
                                                     <a href="javascript:;" class="link-dark"><span
                                             class="icon-comment pr-2"></span>Comment</a>
                                                 </div>
                                                 <div class="right">
-                                                    <a href="javascript:;" class="link-dark"><span
-                                                            class="icon-share-2 pr-2"></span>Share</a>
+                                                <div class="dropdown shareDropdown">
+                                                    <a href="javascript:;" class="link-dark" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span
+
+                                                        class="icon-share-2 pr-2"></span>Share</a>
+
+                                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                            <a class="dropdown-item" href="#"><em class="icon-facebook"></em> Facebook</a>
+                                                            <a class="dropdown-item" href="#"><em class="icon-twitter"></em> Twitter</a>
+                                                            <a class="dropdown-item" href="#"><em class="icon-instagram"></em> Instagram</a>
+                                                        </div>
+                                                        </div>
                                                 </div>
                                             </div>
                                             <!--<div class="seeComment my-3">
@@ -233,7 +242,28 @@ $getallcomment = $this->Common_model->commentpagination(array("post_id" => $row-
                                         <small><?php echo convert_time($allcomment->create_date,'F j, Y, g:i a'); ?></small>
                                         <p><?php echo $allcomment->comment; ?></p>
                                     </div>
-									<div><a href="javascript:void(0);" id="deleteComment" data-commentid="<?php echo  $allcomment->comment_id; ?>"><span class="icon-trash-2 trashcomment" data-commentid="<?php echo  $allcomment->comment_id; ?>" data-postid="<?php echo $row->post_id; ?>"></span></a></div>
+                                    
+                                    <div class="btn-group postActionMenu">
+
+<button type="button" class="btn btn-secondary dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+
+    <em class="icon-more-vertical"></em>
+
+</button>
+
+        <div class="dropdown-menu">
+
+        <ul class="list-unstyled mb-0">
+
+            <li> <a href="javascript:void(0);" id="delete_post" data-postid="<?php echo $row->post_id; ?>" class="postdel<?php echo $row->post_id; ?>"><span class="icon-trash-2"  data-postid="<?php echo $row->post_id; ?>"></span> Delete</a></li>
+
+            <li><a href="javascript:void(0);" data-target="#editPost_<?php echo $row->post_id ?>" data-toggle="modal"><span class="icon-edit-2"></span>  Edit Post</a></li>
+
+            </ul>
+
+        </div>
+
+        </div>						
                                
 							   </li>
 							   </span>

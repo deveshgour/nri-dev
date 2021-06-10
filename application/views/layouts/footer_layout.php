@@ -646,7 +646,7 @@
 
 	  { 
 
-		$('#main-post-sec').append('<img id="loader_img" style="width:50px" src="<?php echo base_url(); ?>images/ajax-loader.gif" />');
+		$('#main-post-sec').append('<img id="loader_img" src="<?php echo base_url(); ?>images/ajax-loader.gif" />');
 
 		<?php if($this->uri->segment(1) == "home"){ ?>
 
@@ -1806,7 +1806,7 @@ $(document).on('click','.adfriend',function(){
 
 	  { 
 
-		$('#main-post-sec').append('<img id="loader_img" style="width:50px" src="<?php echo base_url(); ?>images/ajax-loader.gif" />');
+		$('#main-post-sec').append('<img id="loader_img" src="<?php echo base_url(); ?>images/ajax-loader.gif" />');
 
 		
 

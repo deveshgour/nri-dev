@@ -10,10 +10,11 @@
 
     <meta charset="utf-8">
 
- 
-<meta property="og:locale" content="en_US" /><meta property="og:type" content="post" /><meta property="og:title" content="test" /><meta property="og:description" content="test" /><meta property="og:image" content="http://nriarena.com/images/user_image.png" />
-	<meta property="twitter:image" content="<http://www.localhost/nri-dev/userprofile>" />
-	<!--<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">-->
+    <!-- Required meta tags -->
+
+    <meta charset="utf-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="stylesheet" href="<?php echo base_url() ?>css/bootstrap.min.css">
 
