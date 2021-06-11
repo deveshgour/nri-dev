@@ -79,9 +79,10 @@
                           <span aria-hidden="true">&times;</span>
                       </button>
                   </div>
+				  <div class="modal-body">
                   <form id="creategroupimage" action="<?php echo base_url(); ?>Userdashboard/create_group" method="post"
                       enctype="multipart/form-data">
-                      <div class="modal-body">
+                     
 
                           <div class="form-group">
                               <input type="text" name="group_title" id="group_title" value="" class="form-control"
@@ -171,9 +172,9 @@
                           <input type="submit" name="submit" id="submit" value="Submit" class="btn btn-primary">
                       </div>
 
-					  </div>
+					
                   </form>
-
+				  </div>
 
               </div>
           </div>
