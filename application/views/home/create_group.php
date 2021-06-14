@@ -17,11 +17,7 @@
           </div>
           <ul class="list-unstyled mb-0 groupsearchval">
               <?php 
-<<<<<<< HEAD
 						$groupShow = $this->Common_model->getAll("create_group","update_chat_date","desc");
-=======
-						$groupShow = $this->Common_model->getAll("create_group","group_id","desc");
->>>>>>> 32aa0e726a0bc79735f4440ec28d0486012aa4c9
 				
 				//echo $this->db->last_query();die;
 				 if(!empty($groupShow)){
@@ -65,7 +61,6 @@
               </li>
               <?php }} ?>
               <?php }} }?>
-<<<<<<< HEAD
 
           </ul>
       </div>
@@ -74,16 +69,6 @@
   
       <!-------------------------------------------create group modal-------------------------------- -->
 
-=======
-
-          </ul>
-      </div>
-  </div>
-
-  
-      <!-------------------------------------------create group modal-------------------------------- -->
-
->>>>>>> 32aa0e726a0bc79735f4440ec28d0486012aa4c9
 
       <div class="modal" tabindex="-1" role="dialog" id="creategroupModal">
           <div class="modal-dialog modal-dialog-centered" role="document">
@@ -128,7 +113,6 @@
 													 }														 
 												   ?>
                                   <div class="d-flex align-items-center groupMember">
-<<<<<<< HEAD
 								  <!-- 
                                     <input type="checkbox" id="groupmem" name="groupmem[]"
                                           value="<?php echo $qrp->user_id; ?>" class="mr-2"> -->
@@ -139,11 +123,6 @@
                                             <span class="checkmark"></span>
                                           </label>
 
-=======
-								  
-                                      <input type="checkbox" id="groupmem" name="groupmem[]"
-                                          value="<?php echo $qrp->user_id; ?>" class="mr-2">
->>>>>>> 32aa0e726a0bc79735f4440ec28d0486012aa4c9
 
                                       <!--<label for="coding">--><a
                                           href="<?php echo base_url(); ?>friend-user/<?php echo base64_encode($qrp->user_id); ?>"><img
@@ -208,7 +187,6 @@
           </div>
       </div>
 
-<<<<<<< HEAD
 
 <style type="text/css">
   /*checkbox css*/
@@ -274,6 +252,4 @@
     position: relative;
 }
 </style>
-=======
->>>>>>> 32aa0e726a0bc79735f4440ec28d0486012aa4c9
       <!-------------------------------------------------------------------------------------------- -->
