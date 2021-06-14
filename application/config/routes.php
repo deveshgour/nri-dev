@@ -52,6 +52,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $route['default_controller'] = 'Welcome';
 $route['login'] = 'Welcome/index';
 $route['sign-up'] = 'Welcome/signup';
+$route['changepass'] = 'Userdashboard/changepass';
 $route['home'] = 'Userdashboard/home';
 $route['about-us'] = 'Welcome/aboutus';
 $route['privacypolicy'] = 'Welcome/privacypolicy';
@@ -83,6 +84,7 @@ $route['gov_detail'] = 'Userprofile/gov_detail';
 $route['root_detail_list/(:any)'] = 'Userdashboard/root_detail_list/$1';
 $route['chat/(:any)'] = 'Userdashboard/chat/$1';
 $route['support'] = 'Support/chat';
+$route['deleteselectedchat'] = 'Support/deleteselectedchat';
 $route['logout'] = 'Userdashboard/logout';
 
 
