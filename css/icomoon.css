@@ -25,6 +25,7 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+
 .icon-activity:before {
   content: "\e90d";
 }
@@ -909,4 +910,16 @@
 }
 .icon-users-feed:before {
   content: "\e90c";
+}
+.icon-flame:before {
+  content: "\ea27";
+}
+.icon-two-users:before {
+  content: "\ea28";
+}
+.icon-bell-icon:before {
+  content: "\e900";
+}
+.icon-whatsapp:before {
+  content: "\ea29";
 }
