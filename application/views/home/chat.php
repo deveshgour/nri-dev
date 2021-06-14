@@ -29,7 +29,7 @@
                                     <!-- if no user list will come -->
 									<?php 
 									$group_id = base64_decode($this->uri->segment('2'));
-				$groupShow = $this->Common_model->getAll("create_group","group_id","desc");
+				$groupShow = $this->Common_model->getAll("create_group","update_chat_date","desc");
 				
 				//echo $this->db->last_query();die;
 				 if(!empty($groupShow)){
@@ -145,7 +145,6 @@ $userName = $this->Common_model->getsingle("users",array("user_id" => $group_box
 								?>
 								
                                     <div class="send-msg">
-									
                                         <div class="msg-body position-relative">
                                             <div class="chat_box">
                                                 <div class="msg">
@@ -186,11 +185,13 @@ $userName = $this->Common_model->getsingle("users",array("user_id" => $group_box
 											<?php } ?>
                                             </div>
                                         </div>
+			<span><input type="checkbox" name="deletechatbtn[]" id="deltechatbtn" data-delete-chat-id="<?php echo $chatdetail->chat_id; ?>" class="deletechatclsput deletechatbtn<?php echo $chatdetail->chat_id; ?>" value="<?php echo $chatdetail->chat_id; ?>"></span>
+
                                     </div>
 								
 									<?php }else{ ?>
                                     <div class="rcv-msg">
-									
+									<span><input type="checkbox" name="deletechatbtn[]" id="deltechatbtn" value="<?php echo $chatdetail->chat_id; ?>"></span>
                                         <div class="msg-body position-relative">
                                             <div class="img_wrap position-absolute overflow-hidden rounded-circle">
                                                 <?php if(!empty($chatuserImg->user_image)){ ?>
@@ -231,6 +232,7 @@ $userName = $this->Common_model->getsingle("users",array("user_id" => $group_box
                                                 </div>
                                             </div>
                                         </div>
+										
                                     </div>
 									
 									<?php } ?>

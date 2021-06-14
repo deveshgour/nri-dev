@@ -1,3 +1,4 @@
+
 <style>
 
 
@@ -89,13 +90,20 @@
                                         <h2 class="h2"><?php echo $userDetail->firstname.' '.$userDetail->lastname; ?></h2>
                                         <!--<p class="text-130">Frontend Developer</p>-->
                                     </div>
+                                  <?php
+									 $permanent_address = $this->Common_model->getsingle("country",array("id" => $foruserimage->permanent_country));
+                                     $local_address = $this->Common_model->getsingle("country",array("id" => $foruserimage->local_country));		
+									 ?>
                                     <div class="coverletter">
                                         <div class="desc text-130">
                                             <ul class="list-unstyled">
                                                 <li><?php echo $userDetail->email; ?></li>
                                                 <?php if($userDetail->dob != "0000-00-00"){ ?><li><?php echo $userDetail->dob; ?></li><?php } ?>
                                                 <?php if(!empty($userDetail->gender)){ ?><li><?php if($userDetail->gender == "1"){ echo "male"; }else{ echo "Female"; } ?></li><?php } ?>
-                                                <?php if(!empty($userDetail->country_id)){ ?><li><?php echo $country_name->name; ?></li><?php } ?>
+                                                <?php if(!empty($userDetail->permanent_country)){ ?><li><?php echo '<b>Permanent Country:</b> '. $permanent_address->name; ?></li><?php } ?>
+												<?php if(!empty($userDetail->permanent_country)){ ?><li><?php echo '<b>Permanent Address:</b> '. $foruserimage->permanent_address; ?></li><?php } ?>
+												<?php if(!empty($userDetail->local_country)){ ?><li><?php echo '<b>Current Country:</b> '. $local_address->name; ?></li><?php } ?>
+												<?php if(!empty($userDetail->local_country)){ ?><li><?php echo '<b>Current Address:</b> '. $foruserimage->local_address; ?></li><?php } ?>
                                                
                                             </ul>
                                         </div>
@@ -377,6 +385,7 @@
                                         <a class="dropdown-item" href="http://www.facebook.com/sharer/sharer.php?s=100&p%5Btitle%5D=Title&p%5Bsummary%5D=Test%20Summary.&p%5Burl%5D=http://www.ideocentro.com/&p%5Bimages%5D%5B0%5D=https://static.e-junkie.com/sslpic/64332.ed95f53b41bc4885dd86e2b485f08a3b.jpg" >Share on Facebook</a>-->
 										<a class="twitter-share-button" href="https://twitter.com/intent/tweet?text=<?php echo $row->post; ?>&url=<?php echo base_url().'userprofile'; ?>"><em class="icon-twitter"></em> Twitter</a>
                                         <!--<a class="dropdown-item" href="#"><em class="icon-instagram"></em> Instagram</a>-->
+                                        <a class="dropdown-item" href="#"><em class="icon-whatsapp"></em> Whatsapp</a>
 										
                                     </div> 
                                     </div>
@@ -551,7 +560,7 @@ $getallcomment = $this->Common_model->commentpagination(array("post_id" => $row-
 
                                         <li> <a href="javascript:void(0);" id="deletereplyComment" data-replycommentid="<?php echo  $reply_val->reply_id; ?>" data-commentid="<?php echo  $reply_val->comment_id; ?>"><span class="del trashreplycomment" data-replycommentid="<?php echo  $reply_val->reply_id; ?>" data-commentid="<?php echo  $reply_val->comment_id; ?>" data-postid="<?php echo $row->post_id; ?>">Delete</span></a></li>
 
-                                        <li><a href="javascript:void(0);" data-target="#editreplycomment_<?php echo $reply_val->reply_id; ?>" data-toggle="modal">Edit Post</a></li>
+                                        <li><a href="javascript:void(0);" data-target="#editreplycomment_<?php echo $reply_val->reply_id; ?>" data-toggle="modal">Edit</a></li>
 
 										</ul>
 
@@ -701,7 +710,7 @@ $getallcomment = $this->Common_model->commentpagination(array("post_id" => $row-
 
                                         
 
-                                        <li><a href="javascript:void(0);" data-target="#editcomment_<?php echo $allcomment->comment_id; ?>" data-toggle="modal">Edit Post</a></li>
+                                        <li><a href="javascript:void(0);" data-target="#editcomment_<?php echo $allcomment->comment_id; ?>" data-toggle="modal">Edit</a></li>
 
 										</ul>
 

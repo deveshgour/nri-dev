@@ -158,7 +158,7 @@ $totalcommentcount = $this->Common_model->countwhereuser("comment_event",array("
                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                         <a class="dropdown-item" href="#"><em class="icon-facebook"></em> Facebook</a>
                                         <a class="dropdown-item" href="#"><em class="icon-twitter"></em> Twitter</a>
-                                        <a class="dropdown-item" href="#"><em class="icon-instagram"></em> Instagram</a>
+                                        <a class="dropdown-item" href="#"><em class="icon-whatsapp"></em> Whatsapp</a>
                                     </div>
                                 </div>
                                 </div>
@@ -313,7 +313,7 @@ $totalcommentcount = $this->Common_model->countwhereuser("comment_event",array("
 
                                         <li> <a href="javascript:void(0);" id="deleteeventreplyComment<?php echo $reply_val->reply_id; ?>" data-replycommentid="<?php echo  $reply_val->reply_id; ?>" data-commentid="<?php echo  $reply_val->comment_id; ?>"><span class="del" data-replycommentid="<?php echo  $reply_val->reply_id; ?>" data-commentid="<?php echo  $reply_val->comment_id; ?>" data-postid="<?php echo $reply_val->event_id; ?>">Delete</span></a></li>
 
-                                        <li><a href="javascript:void(0);" data-target="#editevereplycomment_<?php echo $reply_val->reply_id; ?>" data-toggle="modal">Edit Post</a></li>
+                                        <li><a href="javascript:void(0);" data-target="#editevereplycomment_<?php echo $reply_val->reply_id; ?>" data-toggle="modal">Edit</a></li>
 
 										</ul>
 
@@ -463,7 +463,7 @@ $totalcommentcount = $this->Common_model->countwhereuser("comment_event",array("
 
                                         
 
-                                        <li><a href="javascript:void(0);" data-target="#editcomment_<?php echo $allcomment->comment_event_id; ?>" data-toggle="modal">Edit Post</a></li>
+                                        <li><a href="javascript:void(0);" data-target="#editcomment_<?php echo $allcomment->comment_event_id; ?>" data-toggle="modal">Edit</a></li>
 
 										</ul>
 

@@ -13,6 +13,16 @@ class Support extends CI_Controller {
 	{
 		$data = array();
 		
+		/*---------------------------mood-------------------------------*/
+		 $this->load->helper('smiley');
+             $this->load->library('table');
+            $image = base_url().'smiley/';
+                $image_array = get_clickable_smileys($image, 'comments');
+                $col_array = $this->table->make_columns($image_array, 8);
+
+                $data['smiley_table'] = $this->table->generate($col_array);
+		/*--------------------------------------------------------------*/
+		
 		$this->load->view('layouts/profile_layout',$data);
 		$this->load->view('home/support',$data);  
 		$this->load->view('layouts/footer_layout',$data);
@@ -47,7 +57,9 @@ class Support extends CI_Controller {
 			
 		    $data['upload_path'] = 'chat_images/';
 			$data['allowed_types'] = 'gif|jpg|png|jpeg';
-			
+			$config['max_size'] = 6000;
+            $config['max_width'] = 5500;
+            $config['max_height'] = 5500;
 			$data['encrypt_name'] = true;
 			
 			$this->load->library('upload',$data);

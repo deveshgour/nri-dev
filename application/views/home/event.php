@@ -48,7 +48,7 @@
                                 </ul>
                             </div>
                         </li>
-                        <li><a href="<?php echo base_url(); ?>major_missing" >event Mising</a></li>
+                        <li><a href="<?php echo base_url(); ?>major_missing" >Major Missing</a></li>
                         <li><a href="<?php echo base_url(); ?>recent_visit">My Recent Visit</a></li>
                         <li><a href="<?php echo base_url(); ?>fact_list">Interesting Facts</a></li>
                         <li><a href="<?php echo base_url(); ?>event" onclick="">Upload Events</a></li>
@@ -345,7 +345,7 @@
                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                         <a class="dropdown-item" href="#"><em class="icon-facebook"></em> Facebook</a>
                                         <a class="dropdown-item" href="#"><em class="icon-twitter"></em> Twitter</a>
-                                        <a class="dropdown-item" href="#"><em class="icon-instagram"></em> Instagram</a>
+                                       <a class="dropdown-item" href="#"><em class="icon-whatsapp"></em> Whatsapp</a>
                                     </div>
                                 </div>
                                 </div>
@@ -504,7 +504,7 @@ $getallcomment = $this->Common_model->commentpaginationevent(array("event_id" =>
 
                                         <li> <a href="javascript:void(0);" id="deleteeventreplyComment<?php echo $reply_val->reply_id; ?>" data-replycommentid="<?php echo  $reply_val->reply_id; ?>" data-commentid="<?php echo  $reply_val->comment_id; ?>"><span class="del" data-replycommentid="<?php echo  $reply_val->reply_id; ?>" data-commentid="<?php echo  $reply_val->comment_id; ?>" data-postid="<?php echo $reply_val->event_id; ?>">Delete</span></a></li>
 
-                                        <li><a href="javascript:void(0);" data-target="#editevereplycomment_<?php echo $reply_val->reply_id; ?>" data-toggle="modal">Edit Post</a></li>
+                                        <li><a href="javascript:void(0);" data-target="#editevereplycomment_<?php echo $reply_val->reply_id; ?>" data-toggle="modal">Edit</a></li>
 
 										</ul>
 
@@ -654,7 +654,7 @@ $getallcomment = $this->Common_model->commentpaginationevent(array("event_id" =>
 
                                         
 
-                                        <li><a href="javascript:void(0);" data-target="#editcomment_<?php echo $allcomment->comment_event_id; ?>" data-toggle="modal">Edit Post</a></li>
+                                        <li><a href="javascript:void(0);" data-target="#editcomment_<?php echo $allcomment->comment_event_id; ?>" data-toggle="modal">Edit</a></li>
 
 										</ul>
 

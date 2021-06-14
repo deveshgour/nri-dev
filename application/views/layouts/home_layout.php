@@ -39,7 +39,38 @@
 
 
 <body>
+<style>
+  .notification .badge {
+    position: absolute;
+    top: -7px;
+    right: -9px;
+    padding: 6px 10px;
+    border-radius: 50%;
+    background-color: red;
+    color: white;
+}
+.custom-menus {
+    position: absolute;
+    top: 100%;
+    left: -86px;
+    z-index: 1000;
+    display: none;
+    /* float: left; */
+    min-width: 17rem;
+    padding: 0.5rem 7px;
+    margin: 0.125rem 0 0;
+    font-size: 1rem;
+    color: #212529;
+    text-align: left;
+    list-style: none;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid rgba(0,0,0,.15);
+    border-radius: .25rem;
+}
 
+
+</style>
 
 
     <header>
@@ -87,7 +118,7 @@
 
             <a class="navbar-brand" href="<?php echo base_url() ?>">
 
-                <img src="<?php echo base_url() ?>images/logo.png" alt="logo">
+                <img src="<?php echo base_url() ?>images/logo.png" width="250px" alt="logo">
 
             </a>
 
@@ -105,7 +136,7 @@
 
                     <li class="list-inline-item">
                         <a href="<?php echo base_url(); ?>buzz_list">
-                            <span class="icon icon-trending"></span>
+                            <span class="icon icon-flame"></span>
                             <span class="nav-text">buzz</span>
                         </a>
                     </li>
@@ -117,12 +148,70 @@
                         </a>
                     </li>
 
-                    <li class="list-inline-item">
+                    <?php /* ?><li class="list-inline-item">
                         <a href="<?php echo base_url(); ?>friendRequest_list">
-                            <span class="icon icon-users-feed"></span>
+                            <span class="icon icon-two-users"></span>
                             <span class="nav-text">Friend Request</span>
                         </a>
+                    </li><?php */ ?>
+                    <?php $where_q = "(notification.friend_user_id = ".$this->session->userdata('userId')['user_id']." or notification.user_id = ".$this->session->userdata('userId')['user_id'].")";
+
+		$notification_list = $this->Common_model->jointwotableorderby('notification', 'user_id', 'users', 'user_id',$where_q,'notification.user_id,notification.friend_user_id,users.firstname,users.lastname,notification.status','notification.create_date','desc');
+		$where_p = "(notification.friend_user_id = ".$this->session->userdata('userId')['user_id']." or notification.user_id = ".$this->session->userdata('userId')['user_id'].") and friend_read = 0";
+
+		$notification_count = $this->Common_model->jointwotableorderby('notification', 'user_id', 'users', 'user_id',$where_p,'notification.user_id,notification.friend_user_id,users.firstname,users.lastname,notification.status','notification.create_date','desc');			
+
+		//echo '<pre>';print_r($notification_list);die;
+		?>
+					
+					<li class="list-inline-item">
+					<div class="dropdown moodDropdoown notification">
+                        <a href="<?php echo base_url(); ?>friendRequest_list" class="notification dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <span class="icon icon-bell"></span>
+                            <span class="nav-text">Notification</span>
+							<?php if(!empty($notification_count)){ 
+							foreach($notification_count as $noti){
+							if($noti->friend_user_id == $this->session->userdata('userId')['user_id']){
+								if($noti->status == 0){
+							?>
+							<div class="dis"><span class="badge"><?php echo count($notification_count); ?></span></div>
+							<?php }elseif($noti->status == 1){ ?>
+							<div class="dis"><span class="badge"><?php echo count($notification_count); ?></span></div>
+							<?php } ?>
+							<?php }elseif($noti->status == 1 && $noti->user_id == $this->session->userdata('userId')['user_id']){
+                              
+								?>
+                                 <div class="dis"><span class="badge"><?php echo count($notification_count); ?></span></div>					
+								 <?php }}} ?>
+                        </a>
+						<div class="dropdown-menu custom-menus" aria-labelledby="moodDropdoown">
+						    <?php if(!empty($notification_list)){ 
+							foreach($notification_list as $noti){
+							if($noti->friend_user_id == $this->session->userdata('userId')['user_id']){
+								if($noti->status == 0){
+							?>
+                               <span><a href="<?php echo base_url(); ?>friend-user/<?php echo base64_encode($noti->user_id); ?>"><b><?php echo ucwords($noti->firstname.' '.$noti->lastname); ?></b> sent you a friend request</a></span><br/>
+								<span><?php echo convert_time($noti->create_date,'F j, Y, g:i a'); ?></span><br/>
+								<?php }elseif($noti->status == 1){ ?>
+                               <span><a href="<?php echo base_url(); ?>friend-user/<?php echo base64_encode($noti->user_id); ?>"><b><?php echo ucwords($noti->firstname.' '.$noti->lastname); ?></b> and me are friends now</a></span><br/>
+								<span><?php echo convert_time($noti->create_date,'F j, Y, g:i a'); ?></span><br/>
+								<?php }else{ ?>
+								No record found
+								<?php } ?>
+							<?php }elseif($noti->status == 1 && $noti->user_id == $this->session->userdata('userId')['user_id']){
+                              $username = $this->Common_model->getsingle("users",array("user_id" => $noti->friend_user_id));
+								?>
+                               <span><a href="<?php echo base_url(); ?>friend-user/<?php echo base64_encode($noti->friend_user_id); ?>"><b><?php echo ucwords($username->firstname.' '.$username->lastname); ?></b> Accept your friend request</a></span><br/>
+							   <span><?php echo convert_time($noti->create_date,'F j, Y, g:i a'); ?></span><br/>
+							<?php }else{ ?>
+							No record found
+							<?php }}}else{ ?>
+							No record found
+							<?php } ?>
+                        </div>
+						</div>
                     </li>
+                    
                     <li class="list-inline-item">
                         <a href="javascript:;" class="d-lg-none">
                             <span class="icon icon-comment"></span>
@@ -158,8 +247,12 @@
                         </div>
                         <?php }else{ ?>
 
-                        <a href="javascript:;" class="link-dark"><span class="icon-mood"></span></a>
-
+                     <div class="dropdown moodDropdoown">
+						
+						<a href="javascript:;" class="link-dark dropdown-toggle" id="moodDropdoown"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="icon-mood"></span></a>
+                            <div class="dropdown-menu" aria-labelledby="moodDropdoown"><?php echo $smiley_table; ?></div>
+                     </div>
                         <?php } ?>
 
                     </li>
@@ -205,11 +298,14 @@
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 
                                 <a class="dropdown-item" href="<?php echo base_url(); ?>myprofile">Edit Profile</a>
-								<a class="dropdown-item" href="<?php echo base_url(); ?>support">Support System</a>
 
                                 <a class="dropdown-item" href="<?php echo base_url(); ?>userprofile">My Profile</a>
+                                
+                                <a class="dropdown-item" href="<?php echo base_url(); ?>friendRequest_list">Friend Request</a>
+                                
+                                <a class="dropdown-item" href="<?php echo base_url(); ?>support">Support System</a>
 
-                                <a class="dropdown-item" href="javascript:void(0);">Change Password</a>
+                                <a class="dropdown-item" href="<?php echo base_url(); ?>changepass">Change Password</a>
 
                                 <a class="dropdown-item" href="<?php echo base_url(); ?>logout">Logout</a>
 
@@ -228,3 +324,13 @@
         </nav>
 
     </header>
+
+    <style>
+    header .navbar .centerNav li a .icon-bell{
+        color: #BE0002;
+        border-color: #BE0002;
+    }
+    .notification .dropdown-toggle::after{
+        display: none;      
+    }
+</style>

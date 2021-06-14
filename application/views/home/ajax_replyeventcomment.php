@@ -90,7 +90,7 @@
 
                                         <li> <a href="javascript:void(0);" id="deleteeventreplyComment<?php echo $allcomment->reply_id; ?>" data-replycommentid="<?php echo  $allcomment->reply_id; ?>" data-commentid="<?php echo  $allcomment->comment_id; ?>"><span class="del" data-replycommentid="<?php echo  $allcomment->reply_id; ?>" data-commentid="<?php echo  $allcomment->comment_id; ?>" data-postid="<?php echo $allcomment->event_id; ?>">Delete</span></a></li>
 
-                                        <li><a href="javascript:void(0);" data-target="#editevereplycomment_<?php echo $allcomment->reply_id; ?>" data-toggle="modal">Edit Post</a></li>
+                                        <li><a href="javascript:void(0);" data-target="#editevereplycomment_<?php echo $allcomment->reply_id; ?>" data-toggle="modal">Edit</a></li>
 
 										</ul>
 
