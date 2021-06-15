@@ -44,7 +44,7 @@
                                     <div class="dropdown-menu">
                                     <ul class="list-unstyled mb-0">
                                         <li> <a href="javascript:void(0);" id="deletereplyComment" class="trashbuzzreplycmts_<?php echo $allcomment->replybuzz_id; ?>" data-replycommentid="<?php echo  $allcomment->replybuzz_id; ?>" data-commentid="<?php echo  $allcomment->comment_buzz_id; ?>"><span class="del" data-replycommentid="<?php echo  $allcomment->replybuzz_id; ?>" data-commentid="<?php echo  $allcomment->comment_buzz_id; ?>">Delete</span></a></li>
-                                        <li><a href="javascript:void(0);" data-target="#editbuzzreplycomment_<?php echo $allcomment->replybuzz_id; ?>" data-toggle="modal">Edit Post</a></li>
+                                        <li><a href="javascript:void(0);" data-target="#editbuzzreplycomment_<?php echo $allcomment->replybuzz_id; ?>" data-toggle="modal">Edit</a></li>
 										</ul>
                                     </div>
                                 </div>

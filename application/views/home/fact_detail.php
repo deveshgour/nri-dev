@@ -30,7 +30,8 @@
             </div>
             <div class="col-xl-6 col-lg-9">
                 <div class="feeds">
-				<form id="newuploadimage" action="" method="post" enctype="multipart/form-data">
+                    <h2>Interesting Fact</h2>
+				<?php /* ?><form id="newuploadimage" action="" method="post" enctype="multipart/form-data">
                     <div class="feeds-search d-sm-flex align-items-center text-center rounded-10 bg-white">
                         <div class="d-flex align-items-center flex-1">
                             <div class="userImg rounded-circle overflow-hidden">
@@ -52,8 +53,9 @@
                       
                         <button name="submit" type="submit" id="postdata"  class="btn btn-primary">Post</button>
                     </div>
-					</form>
+					</form><?php */ ?>
                     <div class="feed-box rounded-10">
+                        
                         <div class="feedTop">
                             <div class="userInfo d-flex align-items-center">
                                 <div class="userImg rounded-circle overflow-hidden">

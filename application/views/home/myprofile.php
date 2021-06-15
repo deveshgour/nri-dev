@@ -116,7 +116,7 @@
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <select class="form-control selectpicker" name="local_country" id="local_country" title="Country">
-										<option value="">Select Local Country</option>
+										<option value="">Select Current Country</option>
                                             <?php if(!empty($country)){
                                                    foreach($country as $local_country){
 												?>
@@ -127,7 +127,7 @@
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="form-group">
-                                       <textarea name="local_address" class="form-control" id="local_address" placeholder="Local Address"><?php if(!empty($myprofile->local_address)){ echo $myprofile->local_address; } ?></textarea>
+                                       <textarea name="local_address" class="form-control" id="local_address" placeholder="Current Address"><?php if(!empty($myprofile->local_address)){ echo $myprofile->local_address; } ?></textarea>
                                     </div>
                                 </div>
                             </div>  

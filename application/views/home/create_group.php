@@ -17,7 +17,7 @@
           </div>
           <ul class="list-unstyled mb-0 groupsearchval">
               <?php 
-						$groupShow = $this->Common_model->getAll("create_group","group_id","desc");
+						$groupShow = $this->Common_model->getAll("create_group","update_chat_date","desc");
 				
 				//echo $this->db->last_query();die;
 				 if(!empty($groupShow)){
@@ -113,9 +113,16 @@
 													 }														 
 												   ?>
                                   <div class="d-flex align-items-center groupMember">
-								  
-                                      <input type="checkbox" id="groupmem" name="groupmem[]"
+								  <!-- 
+                                    <input type="checkbox" id="groupmem" name="groupmem[]"
+                                          value="<?php echo $qrp->user_id; ?>" class="mr-2"> -->
+
+                                          <label class="checkbox-wrap">
+                                            <input type="checkbox" id="groupmem" name="groupmem[]"
                                           value="<?php echo $qrp->user_id; ?>" class="mr-2">
+                                            <span class="checkmark"></span>
+                                          </label>
+
 
                                       <!--<label for="coding">--><a
                                           href="<?php echo base_url(); ?>friend-user/<?php echo base64_encode($qrp->user_id); ?>"><img
@@ -180,4 +187,69 @@
           </div>
       </div>
 
+
+<style type="text/css">
+  /*checkbox css*/
+
+.checkbox-wrap{
+  padding-right: 50px;
+}
+
+/* Hide the browser's default checkbox */
+.checkbox-wrap input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+/* Create a custom checkbox */
+.checkbox-wrap .checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  background-color: #eee;
+}
+
+/* On mouse-over, add a grey background color */
+.checkbox-wrap:hover input ~ .checkmark {
+  background-color: #ccc;
+}
+
+/* When the checkbox is checked, add a blue background */
+.checkbox-wrap input:checked ~ .checkmark {
+  background-color: #010080;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the checkmark when checked */
+.checkbox-wrap input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Style the checkmark/indicator */
+.checkbox-wrap .checkmark:after {
+  left: 9px;
+  top: 3px;
+  width: 6px;
+  height: 15px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+.groupMember {
+    position: relative;
+}
+</style>
       <!-------------------------------------------------------------------------------------------- -->

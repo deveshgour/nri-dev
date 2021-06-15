@@ -3922,7 +3922,7 @@ $(document).on('click','#editcomment_submit',function(){
  
  	$(document).on('submit','[id^="cmtrootform-"]', function(e){ 
 	    var pid = $(this).attr('data-postid');
-		alert(pid);
+		//alert(pid);
 		var uid = $(this).attr('data-userid');
 		
 		//alert('test');
@@ -6015,6 +6015,144 @@ var chatid = $(this).attr('data-img-id');
 	    });
 });
 
+
+
+ /*$('.deletechatclsput').on('click', function(){
+	 var chatid = $(this).attr('data-delete-chat-id');
+	 //alert(chatid);
+	 
+	var values = $('input[name=deletechatbtn[]]:checked')
+               .map(() => { return this.value }).get();
+            alert(values);
+	
+
+	 $.ajax 
+
+		({
+
+			url: "<?php echo base_url(); ?>Support/delete_all_chat",
+
+			type: "POST",             
+
+			data: "chatid="+chatid,            			
+            
+			success: function(data)   
+
+			{
+              
+		    }
+
+	    });
+	});*/
+	
+	
+	
+/*	$('input[type=checkbox][name=deletechatbtn[]]').each(function () {   
+   var chatid = $(this).attr('data-delete-chat-id');
+	 alert(chatid);
+});*/
+
+
+
+$(document).ready(function() {
+
+ var array = [];
+$("input[type=checkbox]:checked").each(function(i){
+    array.push( i.value );
+	alert(array);
+});
+
+
+});
+
+
+$('.notification').on('click', function(){
+		   var userId = "<?php echo $this->session->userdata('userId')['user_id']; ?>";
+		      $.ajax 
+
+		({
+
+			url: "<?php echo base_url(); ?>Userdashboard/notification_status_change",
+
+			type: "POST",             
+
+			data: "userId="+userId,            			
+            
+			success: function(data)   
+
+			{
+				$('.dis').hide();
+				//alert("success");
+		    }
+
+	    });
+	   });
+	   
+$(document).ready(function() {
+
+  $("#changepass").validate({
+
+    rules: {
+
+            oldpass: {
+
+                required: true
+
+            },
+
+           newpass: {
+
+                required: true,
+
+				
+
+            },
+           confpass: {
+
+                required: true,
+
+				equalTo: "#newpass" 
+
+            },
+			
+		},
+
+    messages: {
+
+             oldpass: {
+
+                required: "Old Password field is required",
+
+            },
+
+			newpass: {
+
+                required: "New Password field is required",
+
+            },
+			
+			confpass: {
+
+                required: "Confirm Password field is required",
+
+            },
+
+
+    },
+
+    errorElement: "span",
+
+        errorPlacement: function(error, element) {
+
+                error.appendTo(element.parent());
+
+        }
+
+
+
+  });
+
+});
 
 </script>
 

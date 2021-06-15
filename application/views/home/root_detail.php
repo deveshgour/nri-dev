@@ -1,3 +1,13 @@
+ <style>
+ .replyshow, .replyrootcomment_like_post {
+    font-size: 14px;
+    font-weight: normal;
+}
+.replyshow, .comment_root_like_post {
+    font-size: 14px;
+    font-weight: normal;
+}
+</style>
 <main class="main-content">
         <a href="javascript:;" class="d-none d-xl-none d-lg-block chatIcon">
             <span class="icon-comment"></span>
@@ -21,7 +31,7 @@
                                 </ul>
                             </div>
                         </li>
-                        <li><a href="<?php echo base_url(); ?>major_missing" >Major Mising</a></li>
+                        <li><a href="<?php echo base_url(); ?>major_missing" >Major Missing</a></li>
                         <li><a href="<?php echo base_url(); ?>recent_visit">My Recent Visit</a></li>
                         <li><a href="<?php echo base_url(); ?>fact_list">Interesting Facts</a></li>
                         <li><a href="<?php echo base_url(); ?>event">Upload Events</a></li>
@@ -31,7 +41,8 @@
 			<?php $userDetail = $this->Common_model->getsingle("users",array("user_id" => $this->session->userdata('userId')['user_id'])); ?>
             <div class="col-xl-6 col-lg-9">
                 <div class="feeds">
-				<form id="newuploadimage" action="" method="post" enctype="multipart/form-data">
+                    <h2>Connect to root</h2>
+			<?php /* ?>	<form id="newuploadimage" action="" method="post" enctype="multipart/form-data">
                     <div class="feeds-search d-sm-flex align-items-center text-center rounded-10 bg-white">
                         <div class="d-flex align-items-center flex-1">
                             <div class="userImg rounded-circle overflow-hidden">
@@ -52,7 +63,7 @@
                         
                         <button name="submit" type="submit" id="postdata"  class="btn btn-primary">Post</button>
                     </div>
-					</form>
+					</form><?php */ ?>
 					
 					<?php //echo '<pre>'; print_r($detail);die; ?>
                     <div class="feed-box rounded-10">
@@ -118,7 +129,7 @@
                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                         <a class="dropdown-item" href="#"><em class="icon-facebook"></em> Facebook</a>
                                         <a class="dropdown-item" href="#"><em class="icon-twitter"></em> Twitter</a>
-                                        <a class="dropdown-item" href="#"><em class="icon-instagram"></em> Instagram</a>
+                                        <a class="dropdown-item" href="#"><em class="icon-whatsapp"></em> Whatsapp</a>
                                     </div>
                                 </div>
                                 </div>
@@ -156,7 +167,7 @@ $getallcomment = $this->Common_model->commentpaginationroot(array("detail_id" =>
                                         <p class="edit_comment_text_<?php echo $allcomment->comment_root_id; ?>"><?php echo $allcomment->comment; ?></p>
 										<b><a href="javascript:;" class="link-dark replyshow" data-commentid="<?php echo  $allcomment->comment_root_id; ?>">Reply</a></b>
 										 <b><a href="javascript:void(0)" class="link-dark comment_root_like_post" <?php if($getmylikecomment){ ?>style="color:#009688;"<?php } ?> id="likecomment-<?php echo $allcomment->comment_root_id; ?>" data-status="1" data-type="1" data-author="<?php echo $allcomment->user_id; ?>" data-postid="<?php echo $allcomment->post_id; ?>" data-commentid="<?php echo $allcomment->comment_root_id; ?>">
-							   <div class="cmtdivcls" id="likecommentcountbox-<?php echo $allcomment->comment_root_id; ?>"><span class="cmtspan"><?php echo count($comment_like_count); ?></span></div>Like</a></b>
+							   <span class="cmtdivcls" id="likecommentcountbox-<?php echo $allcomment->comment_root_id; ?>"><span class="cmtspan"><?php echo count($comment_like_count); ?></span></span> Like</a></b>
 										<!----------------------------show reply comment---------------------------- -->
 										<?php $reply_comment = $this->Common_model->getAllwhereorder("replycomment_root",array("comment_root_id" => $allcomment->comment_root_id),"replyroot_id","asc"); 
 										      
@@ -196,7 +207,7 @@ $getallcomment = $this->Common_model->commentpaginationroot(array("detail_id" =>
                                         <small><?php echo convert_time($reply_val->create_date,'F j, Y, g:i a'); ?></small>
                                         <p class="edit_replycomment_text_<?php echo $reply_val->replyroot_id; ?>"><?php echo $reply_val->reply_comment; ?></p>
 										<b><a href="javascript:void(0)" class="link-dark replyrootcomment_like_post" <?php if($getmyreplylikecomment){ ?>style="color:#009688;"<?php } ?> id="likereplycomment-<?php echo $reply_val->replyroot_id; ?>" data-status="1" data-postid="<?php echo $reply_val->post_id; ?>" data-commentid="<?php echo $reply_val->comment_root_id; ?>" data-replycommentid="<?php echo $reply_val->replyroot_id; ?>">
-							   <div class="replycmtdivcls" id="likereplycommentcountbox-<?php echo $reply_val->replyroot_id; ?>"><span class="replycmtspan"><?php echo count($replycomment_like_count); ?></span></div>Like</a></b>
+							   <span class="replycmtdivcls" id="likereplycommentcountbox-<?php echo $reply_val->replyroot_id; ?>"><span class="replycmtspan"><?php echo count($replycomment_like_count); ?></span></span> Like</a></b>
 	
                                     </div>
                                <!-------------------------------------------------------replycomment edit and delete dropdown--------------------- -->
@@ -281,7 +292,7 @@ $getallcomment = $this->Common_model->commentpaginationroot(array("detail_id" =>
                                     <div class="dropdown-menu">
                                     <ul class="list-unstyled mb-0">
                                         <li> <a class="trashrootcomments<?php echo  $allcomment->comment_root_id; ?>" href="javascript:void(0);" id="deleteComment" data-postid="<?php echo $allcomment->post_id; ?>" data-commentid="<?php echo  $allcomment->comment_root_id; ?>"><span class="del trashcomment" data-commentid="<?php echo  $allcomment->comment_root_id; ?>" data-postid="<?php echo $allcomment->post_id; ?>">Delete</span></a></li>
-                                        <li><a href="javascript:void(0);" data-target="#editcomment_<?php echo $allcomment->comment_root_id; ?>" data-toggle="modal">Edit Post</a></li>
+                                        <li><a href="javascript:void(0);" data-target="#editcomment_<?php echo $allcomment->comment_root_id; ?>" data-toggle="modal">Edit</a></li>
 										</ul>
                                     </div>
                                 </div>

@@ -147,7 +147,7 @@
 
                                         <li> <a href="javascript:void(0);" id="deleteeventreplyComment<?php echo $reply_val->reply_id; ?>" data-replycommentid="<?php echo  $reply_val->reply_id; ?>" data-commentid="<?php echo  $reply_val->comment_id; ?>"><span class="del" data-replycommentid="<?php echo  $reply_val->reply_id; ?>" data-commentid="<?php echo  $reply_val->comment_id; ?>" data-postid="<?php echo $reply_val->event_id; ?>">Delete</span></a></li>
 
-                                        <li><a href="javascript:void(0);" data-target="#editevereplycomment_<?php echo $reply_val->reply_id; ?>" data-toggle="modal">Edit Post</a></li>
+                                        <li><a href="javascript:void(0);" data-target="#editevereplycomment_<?php echo $reply_val->reply_id; ?>" data-toggle="modal">Edit</a></li>
 
 										</ul>
 
@@ -293,7 +293,7 @@
 
                                        <li> <a class="trasheventcomments<?php echo  $allcomment->comment_event_id; ?>" href="javascript:void(0);" id="deleteComment" data-postid="<?php echo $allcomment->event_id; ?>" data-commentid="<?php echo  $allcomment->comment_event_id; ?>"><span class="del" data-commentid="<?php echo  $allcomment->comment_event_id; ?>" data-postid="<?php echo $allcomment->event_id; ?>">Delete</span></a></li>
 
-                                  <li><a href="javascript:void(0);" data-target="#editcomment_<?php echo $allcomment->comment_event_id; ?>" data-toggle="modal">Edit Post</a></li>
+                                  <li><a href="javascript:void(0);" data-target="#editcomment_<?php echo $allcomment->comment_event_id; ?>" data-toggle="modal">Edit</a></li>
 
 										</ul>
 

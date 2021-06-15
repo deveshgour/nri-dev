@@ -89,10 +89,10 @@ class Userdashboard extends CI_Controller {
 			}				
 			
 		    $data['upload_path'] = 'upload/';
-			$data['allowed_types'] = 'gif|jpg|png';
-			$data['max_size'] = '338186'; 
-            $data['max_width']  = '1024';
-            $data['max_height']  = '768';
+			$data['allowed_types'] = 'gif|jpg|png|jpeg';
+			$config['max_size'] = 6000;
+            $config['max_width'] = 5500;
+            $config['max_height'] = 5500;
 			$data['encrypt_name'] = true;
 			
 			$this->load->library('upload',$data);
@@ -111,6 +111,12 @@ class Userdashboard extends CI_Controller {
 			"media_path" => $uploadfile
 		);
 		$this->Common_model->updateRecords("post",$array,array("post_id" => $insertid));
+		$imagearray = array(
+		     "user_id" => $this->session->userdata('userId')['user_id'],
+			 "photo_type" => $media_type_new,
+			"photo" => $uploadfile
+		);
+		$this->Common_model->addRecords("user_images",$imagearray);
 			}
 
 		
@@ -144,6 +150,12 @@ class Userdashboard extends CI_Controller {
 			"media_path" => $uploadfile
 		);
 		$this->Common_model->updateRecords("post",$array,array("post_id" => $insertid));
+		$imagearray = array(
+		     "user_id" => $this->session->userdata('userId')['user_id'],
+			 "photo_type" => $media_type_new,
+			"photo" => $uploadfile
+		);
+		$this->Common_model->addRecords("user_images",$imagearray);
 		}
 		}
 		}
@@ -600,8 +612,9 @@ class Userdashboard extends CI_Controller {
 		if(!empty($search_value)){
 		$data['searchData'] = $this->Common_model->searchgrouplikenew($search_value,array("user_id" => $user_id));
 		}else{
-		$data['searchData'] = $this->Common_model->getAllwhereorder("create_group",array("user_id" => $this->session->userdata("userId")["user_id"]),"group_id","desc");
-
+		//$data['searchData'] = $this->Common_model->getAllwhereorder("create_group",array("user_id" => $this->session->userdata("userId")["user_id"]),"update_chat_date","desc");
+      $data['searchData'] = $this->Common_model->getAll("create_group","update_chat_date","desc");
+	  //  echo $this->db->last_query();die;
 		}
 		$this->load->view('home/searchgroup_ajax',$data);
 	}
@@ -784,6 +797,16 @@ class Userdashboard extends CI_Controller {
 		$data["chatData"] = $this->Common_model->jointwotableorderby("group_chat","user_id","users", "user_id",array("group_chat.group_id"=>$group_id),"*","chat_id","asc");
 		//echo "<pre>";print_r($data["chatData"]);die;
 		
+		/*---------------------------mood-------------------------------*/
+		 $this->load->helper('smiley');
+             $this->load->library('table');
+            $image = base_url().'smiley/';
+                $image_array = get_clickable_smileys($image, 'comments');
+                $col_array = $this->table->make_columns($image_array, 8);
+
+                $data['smiley_table'] = $this->table->generate($col_array);
+		/*--------------------------------------------------------------*/
+		
 		$this->load->view('layouts/profile_layout',$data);
 		$this->load->view('home/chat',$data);  
 		$this->load->view('layouts/footer_layout',$data);
@@ -818,6 +841,7 @@ class Userdashboard extends CI_Controller {
 		if(!empty($msg) || !empty($media_name)){
 		$array = array("msg" => $msg,"friend_user_id"=>$friend_user_id,"real_video_name"=> $media_name,"group_id" => $group_id,"user_id" => $user_id,"create_date" =>date("Y-m-d H:i:s"));
 		$insertid = $this->Common_model->addRecords("group_chat",$array);
+		$this->Common_model->updateRecords("create_group",array("update_chat_date" => date("Y-m-d H:i:s")),array("group_id" => $group_id));
 		
 		if(!empty($media_type[0])){
 			
@@ -942,6 +966,70 @@ force_download($real_name, $data);
 	
 	redirect($_SERVER['HTTP_REFERER']);
 	}
+	
+	public function notification_status_change()
+{
+	$userId = $this->input->post('userId');
+	$where_q = "(friend_user_id = ".$this->session->userdata('userId')['user_id']." or user_id = ".$this->session->userdata('userId')['user_id'].")";
+	$getnotification = $this->Common_model->getAllwhereorder("notification",$where_q,'notification_id','desc');
+	
+	//echo "<pre>";print_r($getnotification);die;
+	 if(!empty($getnotification)){ 
+	foreach($getnotification as $noti){
+		
+			$this->Common_model->updateRecords("notification",array("friend_read" => 1),array("friend_user_id" => $this->session->userdata('userId')['user_id']));
+			$this->Common_model->updateRecords("notification",array("friend_read" => 1),array("user_id" => $this->session->userdata('userId')['user_id']));
+            
+		
+	}	
+echo "test";	
+}
+}
+
+public function changepass()
+{
+	
+	$data = array();
+	//$this->form_validation->set_rules('oldpass', 'Old Password', 'required');
+	//$this->form_validation->set_rules('newpass', 'Password', 'required');
+	//$this->form_validation->set_rules('confpass', 'Password Confirmation', 'required|matches[password]');
+	
+	//if ($this->form_validation->run() == TRUE)
+		if($_POST['submit'])
+	   {
+	
+		 $where = array();
+		  $where['password'] = md5(@$_POST['oldpass']);
+		   $where['user_id'] = $this->session->userdata('userId')['user_id'];
+		 
+		  $update = $this->Common_model->updateRecords('users',array('password'=>md5(@$_POST['newpass'])),$where);
+			if($update > 0)
+			{
+			   $this->session->set_flashdata('item', array('message' => 'Password updated successfully','class' => 'success'));
+			   redirect('changepass', 'refresh');
+			   
+			}else
+			{
+			   $this->session->set_flashdata('danger','Please enter valid password');
+			   $this->session->set_flashdata('item', array('message' => 'Please enter valid password','class' => 'danger'));
+			   redirect('changepass');
+			}
+	}
+	
+	/*---------------------------mood-------------------------------*/
+		 $this->load->helper('smiley');
+             $this->load->library('table');
+            $image = base_url().'smiley/';
+                $image_array = get_clickable_smileys($image, 'comments');
+                $col_array = $this->table->make_columns($image_array, 8);
+
+                $data['smiley_table'] = $this->table->generate($col_array);
+		/*--------------------------------------------------------------*/
+		
+		$this->load->view('layouts/profile_layout',$data);
+		$this->load->view('home/changepassword',$data);  
+		$this->load->view('layouts/footer_layout',$data);
+}
 
 	public function logout()
 	{

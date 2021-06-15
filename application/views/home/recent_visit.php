@@ -21,7 +21,7 @@
                                 </ul>
                             </div>
                         </li>
-                        <li><a href="<?php echo base_url(); ?>major_missing" >Major Mising</a></li>
+                        <li><a href="<?php echo base_url(); ?>major_missing" >Major Missing</a></li>
                         <li><a href="<?php echo base_url(); ?>recent_visit">My Recent Visit</a></li>
                         <li><a href="<?php echo base_url(); ?>fact_list">Interesting Facts</a></li>
                         <li><a href="<?php echo base_url(); ?>event">Upload Events</a></li>
@@ -35,7 +35,8 @@
 					 <button type="button" class="close" data-dismiss="alert">x</button>
         <?php echo $message; ?></div><?php } ?>
                 <div class="feeds">
-				<form id="visituploadimage" action="" method="post" enctype="multipart/form-data">
+                   
+			<?php /* ?>	<form id="visituploadimage" action="" method="post" enctype="multipart/form-data">
                     <div class="feeds-search d-sm-flex align-items-center text-center rounded-10 bg-white">
 					
                         <div class="d-flex align-items-center flex-1">
@@ -59,7 +60,7 @@
 						<button name="submit" type="submit" id="visitdata"  class="btn btn-primary">Post</button>
 						
                     </div>
-					</form>
+					</form><?php */ ?>
 					<div class="newmain-post-sec" id="main-post-sec">
 					<?php
 					    if(!empty($post_data)){ 
@@ -229,7 +230,7 @@
                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                         <a class="dropdown-item" href="#"><em class="icon-facebook"></em> Facebook</a>
                                         <a class="dropdown-item" href="#"><em class="icon-twitter"></em> Twitter</a>
-                                        <a class="dropdown-item" href="#"><em class="icon-instagram"></em> Instagram</a>
+                                        <a class="dropdown-item" href="#"><em class="icon-whatsapp"></em> Whatsapp</a>
                                     </div>
                                     </div>
 
@@ -391,7 +392,7 @@ $getallcomment = $this->Common_model->commentpaginationvisit(array("visit_id" =>
 
                                         <li> <a href="javascript:void(0);" id="deletevisitreplyComment<?php echo $reply_val->replyvisit_id; ?>" data-replycommentid="<?php echo  $reply_val->replyvisit_id; ?>" data-commentid="<?php echo  $reply_val->comment_visit_id; ?>"><span class="del" data-replycommentid="<?php echo  $reply_val->replyvisit_id; ?>" data-commentid="<?php echo  $reply_val->comment_visit_id; ?>" data-postid="<?php echo $row->visit_id; ?>">Delete</span></a></li>
 
-                                        <li><a href="javascript:void(0);" data-target="#editreplycomment_<?php echo $reply_val->replyvisit_id; ?>" data-toggle="modal">Edit Post</a></li>
+                                        <li><a href="javascript:void(0);" data-target="#editreplycomment_<?php echo $reply_val->replyvisit_id; ?>" data-toggle="modal">Edit</a></li>
 
 										</ul>
 
@@ -541,7 +542,7 @@ $getallcomment = $this->Common_model->commentpaginationvisit(array("visit_id" =>
 
                                         
 
-                                        <li><a href="javascript:void(0);" data-target="#editcomment_<?php echo $allcomment->comment_visit_id; ?>" data-toggle="modal">Edit Post</a></li>
+                                        <li><a href="javascript:void(0);" data-target="#editcomment_<?php echo $allcomment->comment_visit_id; ?>" data-toggle="modal">Edit</a></li>
 
 										</ul>
 

@@ -93,11 +93,9 @@ class Event extends CI_Controller {
 			
 		    $data['upload_path'] = 'upload/';
 			$data['allowed_types'] = 'gif|jpg|png|jpeg';
-			$data['max_size'] = '338186'; 
-			
-			//$data['max_size'] = "2048000"; // Can be set to particular file size , here it is 2 MB(2048 Kb)
-			//$data['max_height'] = "768";
-			//$data['max_width'] = "1024";
+			$config['max_size'] = 6000;
+            $config['max_width'] = 5500;
+            $config['max_height'] = 5500;
            
 			$data['encrypt_name'] = true;
 			

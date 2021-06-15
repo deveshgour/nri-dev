@@ -223,4 +223,20 @@ public function forgotpassword()
 		$this->load->view('resetpassword',$data);
 	}
 	
+	public function aboutus()
+	{
+		$data = array();
+		$data['aboutus'] = $this->Common_model->getsingle('pages',array("page_id" => 1)); 
+		$this->load->view('layouts/login_layout',$data);
+		$this->load->view('aboutus',$data);
+	}
+	
+	public function privacypolicy()
+	{
+		$data = array();
+		$data['privacypolicy'] = $this->Common_model->getsingle('pages',array("page_id" => 2)); 
+		$this->load->view('layouts/login_layout',$data);
+		$this->load->view('privacypolicy',$data);
+	}
+	
 }

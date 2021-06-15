@@ -21,7 +21,7 @@
                                 </ul>
                             </div>
                         </li>
-                        <li><a href="<?php echo base_url(); ?>major_missing" >Major Mising</a></li>
+                        <li><a href="<?php echo base_url(); ?>major_missing" >Major Missing</a></li>
                         <li><a href="<?php echo base_url(); ?>recent_visit">My Recent Visit</a></li>
                         <li><a href="<?php echo base_url(); ?>fact_list">Interesting Facts</a></li>
                         <li><a href="<?php echo base_url(); ?>event">Upload Events</a></li>
@@ -30,7 +30,8 @@
             </div>
             <div class="col-xl-6 col-lg-9">
                 <div class="feeds">
-				<form id="newuploadimage" action="" method="post" enctype="multipart/form-data">
+                    <h2>Buzz</h2>
+			<?php /* ?>	<form id="newuploadimage" action="" method="post" enctype="multipart/form-data">
                     <div class="feeds-search d-sm-flex align-items-center text-center rounded-10 bg-white">
                         <div class="d-flex align-items-center flex-1">
                             <div class="userImg rounded-circle overflow-hidden">
@@ -51,7 +52,7 @@
                       
                         <button name="submit" type="submit" id="postdata"  class="btn btn-primary">Post</button>
                     </div>
-					</form>
+					</form><?php */ ?>
                     <div class="feed-box rounded-10">
                         <div class="feedTop">
                             <div class="userInfo d-flex align-items-center">
@@ -114,7 +115,7 @@
                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                         <a class="dropdown-item" href="#"><em class="icon-facebook"></em> Facebook</a>
                                         <a class="dropdown-item" href="#"><em class="icon-twitter"></em> Twitter</a>
-                                        <a class="dropdown-item" href="#"><em class="icon-instagram"></em> Instagram</a>
+                                        <a class="dropdown-item" href="#"><em class="icon-whatsapp"></em> Whatsapp</a>
                                     </div>
                                 </div>
                                 </div>
@@ -201,7 +202,7 @@ $getallcomment = $this->Common_model->commentpaginationbuzz(array("buzz_id" => $
                                     <div class="dropdown-menu">
                                     <ul class="list-unstyled mb-0">
                                         <li> <a href="javascript:void(0);" id="deletereplyComment" class="trashbuzzreplycmts_<?php echo $reply_val->replybuzz_id; ?>" data-replycommentid="<?php echo  $reply_val->replybuzz_id; ?>" data-commentid="<?php echo  $reply_val->comment_buzz_id; ?>"><span class="del" data-replycommentid="<?php echo  $reply_val->replybuzz_id; ?>" data-commentid="<?php echo  $reply_val->comment_buzz_id; ?>">Delete</span></a></li>
-                                        <li><a href="javascript:void(0);" data-target="#editbuzzreplycomment_<?php echo $reply_val->replybuzz_id; ?>" data-toggle="modal">Edit Post</a></li>
+                                        <li><a href="javascript:void(0);" data-target="#editbuzzreplycomment_<?php echo $reply_val->replybuzz_id; ?>" data-toggle="modal">Edit</a></li>
 										</ul>
                                     </div>
                                 </div>
@@ -274,7 +275,7 @@ $getallcomment = $this->Common_model->commentpaginationbuzz(array("buzz_id" => $
                                     <div class="dropdown-menu">
                                     <ul class="list-unstyled mb-0">
                                         <li> <a class="trashbuzzcomments<?php echo  $allcomment->comment_buzz_id; ?>" href="javascript:void(0);" id="deleteComment" data-commentid="<?php echo  $allcomment->comment_buzz_id; ?>"><span class="del trashcomment" data-commentid="<?php echo  $allcomment->comment_buzz_id; ?>" >Delete</span></a></li>
-                                        <li><a href="javascript:void(0);" data-target="#editcomment_<?php echo $allcomment->comment_buzz_id; ?>" data-toggle="modal">Edit Post</a></li>
+                                        <li><a href="javascript:void(0);" data-target="#editcomment_<?php echo $allcomment->comment_buzz_id; ?>" data-toggle="modal">Edit</a></li>
 										</ul>
                                     </div>
                                 </div>

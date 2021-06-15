@@ -26,6 +26,9 @@ class Userprofile extends CI_Controller {
 		$sort_by = 'date_added';
 		$field = "post.post_id,post.post,post.media_path,post.media_type,post.status,post.date_added,users.user_id,users.firstname,users.lastname,users.user_image,users.email,users.country_id";
 		$result = $this->Common_model->getAllJoin($pagecon['per_page'], $data['page'], $var_search, $var_type, 'post', "user_id", "users", "user_id",$sort_by, $sort_order, $sort_columns, $field,$search = '');
+	//	$data["allphoto"] = $this->Common_model->getAllwhereorder("post",array("user_id" => $this->session->userdata('userId')['user_id'],'media_type' => 'image'),'post_id','desc');
+        //$data["allvideo"] = $this->Common_model->getAllwhereorder("post",array("user_id" => $this->session->userdata("userId")["user_id"],"media_type" => "video"),"post_id","desc");
+
 		
 		//print_r($this->db->last_query()); die;
 		$data["userDetail"] = $this->Common_model->getsingle("users",array("user_id" => $this->session->userdata("userId")["user_id"]));
@@ -59,6 +62,9 @@ class Userprofile extends CI_Controller {
 	{ 
 		    $data['upload_path'] = 'upload/';
 			$data['allowed_types'] = 'gif|jpg|png|jpeg|webp';
+			$config['max_size'] = 6000;
+            $config['max_width'] = 5500;
+            $config['max_height'] = 5500;
 			$data['encrypt_name'] = true;
 			
 			$media_type_name = $_FILES['userphoto']['type'];		
@@ -207,8 +213,8 @@ public function friend_user()
 		$data = array();
 		$data['page'] = 0;
 			
-		$pagecon['per_page'] = 3;
-		$data['per_page'] = 3;
+		$pagecon['per_page'] = 50;
+		$data['per_page'] = 50;
 		
 		$data["foruserimage"] = $this->Common_model->getsingle("users",array("user_id" => $user_id));
 		
@@ -268,7 +274,10 @@ public function friend_user()
 				   'user_id' => $session_id,
 				   'request_status' => 0,				   
 				);
-			$this->Common_model->addRecords('friend',$array);
+			$insert = $this->Common_model->addRecords('friend',$array);
+			$array = array("user_id" => $session_id,"friend_user_id" => $user, "status" => 0,"create_date" => date('Y-m-d H:i:s'),"message_request"=>"friend_req");
+			$this->Common_model->addRecords("notification",$array);
+			
 			$response = array("success" => true, 'message'=>'Friend Request Sent Successfully');
 		    echo json_encode($response); exit;
 		}
@@ -282,7 +291,9 @@ public function friend_user()
 		$session_id = $this->session->userdata('userId')['user_id'];
 		
 		$this->Common_model->deleteRecords("friend",array("friend_user_id" => $user,"user_id" => $session_id));
+		$this->Common_model->deleteRecords("notification",array("friend_user_id" => $user,"user_id" => $session_id,"message_request"=>"friend_req"));
 		$response = array("success" => true, 'message'=>'Request remove successfully');
+		
 		echo json_encode($response);
 	}
 	
@@ -292,7 +303,9 @@ public function friend_user()
 		$session_id = $this->session->userdata('userId')['user_id'];
 		
 		$this->Common_model->deleteRecords("friend",array("friend_user_id" => $session_id,"user_id" => $user));
+		$this->Common_model->deleteRecords("notification",array("friend_user_id" => $session_id,"user_id" => $user,"message_request"=>"friend_req"));
 		$response = array("success" => true, 'message'=>'Request remove successfully');
+		
 		echo json_encode($response);
 	}
 	
@@ -328,6 +341,7 @@ public function friend_user()
 			   'request_status' => 1
 			);
 			$this->Common_model->updateRecords('friend',$array,array('friend_user_id' => $user_id,'user_id' => $friend_id));	
+			$this->Common_model->updateRecords("notification",array("create_date"=>date('Y:m:d H:i:s'),"status" => 1,"message_request"=>"friend_req"),array('friend_user_id' => $user_id,'user_id' => $friend_id));
 			$response = array("success" => true, 'message'=>'Friend Request Sent Successfully');
 			echo json_encode($response); 
 	}

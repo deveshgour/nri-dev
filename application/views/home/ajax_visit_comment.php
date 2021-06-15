@@ -148,7 +148,7 @@
 
                                         <li> <a href="javascript:void(0);" id="deletevisitreplyComment<?php echo $reply_val->replyvisit_id; ?>" data-replycommentid="<?php echo  $reply_val->replyvisit_id; ?>" data-commentid="<?php echo  $reply_val->comment_visit_id; ?>"><span class="del" data-replycommentid="<?php echo  $reply_val->replyvisit_id; ?>" data-commentid="<?php echo  $reply_val->comment_visit_id; ?>" data-postid="<?php echo $allcomment->visit_id; ?>">Delete</span></a></li>
 
-                                        <li><a href="javascript:void(0);" data-target="#editreplycomment_<?php echo $reply_val->replyvisit_id; ?>" data-toggle="modal">Edit Post</a></li>
+                                        <li><a href="javascript:void(0);" data-target="#editreplycomment_<?php echo $reply_val->replyvisit_id; ?>" data-toggle="modal">Edit</a></li>
 
 										</ul>
 
@@ -298,7 +298,7 @@
 
                                         
 
-                                        <li><a href="javascript:void(0);" data-target="#editcomment_<?php echo $allcomment->comment_visit_id; ?>" data-toggle="modal">Edit Post</a></li>
+                                        <li><a href="javascript:void(0);" data-target="#editcomment_<?php echo $allcomment->comment_visit_id; ?>" data-toggle="modal">Edit</a></li>
 
 										</ul>
 

@@ -116,7 +116,7 @@
 					 <button type="button" class="close" data-dismiss="alert">x</button>
         <?php echo $this->session->flashdata('error_msg'); ?></div>
                 <?php } } ?>
-                                    <form id="newuploadimage" action="" method="post" enctype="multipart/form-data">
+                                    <?php /* ?><form id="newuploadimage" action="" method="post" enctype="multipart/form-data">
 									<div class="feeds-search d-sm-flex align-items-center text-center rounded-10 bg-white">
                                         <div class="d-flex align-items-center flex-1">
                                             <div class="userImg rounded-circle overflow-hidden">
@@ -137,7 +137,7 @@
                                        
                                         <button name="submit" type="submit" id="postdata"  class="btn btn-primary">Post</button>
                                     </div>
-									</form>
+									</form><?php */ ?>
 
                                     <div class="newmain-post-sec" id="main-post-sec">
 									<?php
