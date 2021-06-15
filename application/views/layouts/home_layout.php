@@ -118,7 +118,7 @@
 
             <a class="navbar-brand" href="<?php echo base_url() ?>">
 
-                <img src="<?php echo base_url() ?>images/logo.png" width="250px" alt="logo">
+                <img src="<?php echo base_url() ?>images/logo.png" alt="logo">
 
             </a>
 
@@ -190,19 +190,21 @@
 							if($noti->friend_user_id == $this->session->userdata('userId')['user_id']){
 								if($noti->status == 0){
 							?>
-                               <span><a href="<?php echo base_url(); ?>friend-user/<?php echo base64_encode($noti->user_id); ?>"><b><?php echo ucwords($noti->firstname.' '.$noti->lastname); ?></b> sent you a friend request</a></span><br/>
-								<span><?php echo convert_time($noti->create_date,'F j, Y, g:i a'); ?></span><br/>
+                               <span class="notification__wrap"> <span class="notification__msg"><a href="<?php echo base_url(); ?>friend-user/<?php echo base64_encode($noti->user_id); ?>"><b><?php echo ucwords($noti->firstname.' '.$noti->lastname); ?></b> sent you a friend request</a></span>
+								<span class="notification__time"><?php echo convert_time($noti->create_date,'F j, Y, g:i a'); ?></span>
+                                </span>
+
 								<?php }elseif($noti->status == 1){ ?>
-                               <span><a href="<?php echo base_url(); ?>friend-user/<?php echo base64_encode($noti->user_id); ?>"><b><?php echo ucwords($noti->firstname.' '.$noti->lastname); ?></b> and me are friends now</a></span><br/>
-								<span><?php echo convert_time($noti->create_date,'F j, Y, g:i a'); ?></span><br/>
+                                    <span class="notification__wrap"><span class="notification__msg"><a href="<?php echo base_url(); ?>friend-user/<?php echo base64_encode($noti->user_id); ?>"><b><?php echo ucwords($noti->firstname.' '.$noti->lastname); ?></b> and me are friends now</a></span>
+								<span class="notification__time"><?php echo convert_time($noti->create_date,'F j, Y, g:i a'); ?></span></span>
 								<?php }else{ ?>
 								No record found
 								<?php } ?>
 							<?php }elseif($noti->status == 1 && $noti->user_id == $this->session->userdata('userId')['user_id']){
                               $username = $this->Common_model->getsingle("users",array("user_id" => $noti->friend_user_id));
 								?>
-                               <span><a href="<?php echo base_url(); ?>friend-user/<?php echo base64_encode($noti->friend_user_id); ?>"><b><?php echo ucwords($username->firstname.' '.$username->lastname); ?></b> Accept your friend request</a></span><br/>
-							   <span><?php echo convert_time($noti->create_date,'F j, Y, g:i a'); ?></span><br/>
+                               <span><a href="<?php echo base_url(); ?>friend-user/<?php echo base64_encode($noti->friend_user_id); ?>"><b><?php echo ucwords($username->firstname.' '.$username->lastname); ?></b> Accept your friend request</a></span>
+							   <span><?php echo convert_time($noti->create_date,'F j, Y, g:i a'); ?></span>
 							<?php }else{ ?>
 							No record found
 							<?php }}}else{ ?>
@@ -297,17 +299,17 @@
 
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 
-                                <a class="dropdown-item" href="<?php echo base_url(); ?>myprofile">Edit Profile</a>
+                                <a class="dropdown-item" href="<?php echo base_url(); ?>myprofile"><em class="icon icon-edit-2"></em> Edit Profile</a>
 
-                                <a class="dropdown-item" href="<?php echo base_url(); ?>userprofile">My Profile</a>
+                                <a class="dropdown-item" href="<?php echo base_url(); ?>userprofile"><em class="icon icon-user"></em> My Profile</a>
                                 
-                                <a class="dropdown-item" href="<?php echo base_url(); ?>friendRequest_list">Friend Request</a>
+                                <a class="dropdown-item" href="<?php echo base_url(); ?>friendRequest_list"><em class="icon icon-users"></em> Friend Request</a>
                                 
-                                <a class="dropdown-item" href="<?php echo base_url(); ?>support">Support System</a>
+                                <a class="dropdown-item" href="<?php echo base_url(); ?>support"><em class="icon icon-headphones"></em> Support System</a>
 
-                                <a class="dropdown-item" href="<?php echo base_url(); ?>changepass">Change Password</a>
+                                <a class="dropdown-item" href="<?php echo base_url(); ?>changepass"><em class="icon icon-lock"></em> Change Password</a>
 
-                                <a class="dropdown-item" href="<?php echo base_url(); ?>logout">Logout</a>
+                                <a class="dropdown-item" href="<?php echo base_url(); ?>logout"><em class="icon icon-log-out"></em> Logout</a>
 
                             </div>
 
@@ -325,12 +327,3 @@
 
     </header>
 
-    <style>
-    header .navbar .centerNav li a .icon-bell{
-        color: #BE0002;
-        border-color: #BE0002;
-    }
-    .notification .dropdown-toggle::after{
-        display: none;      
-    }
-</style>
