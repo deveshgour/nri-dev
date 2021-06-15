@@ -910,3 +910,9 @@
 .icon-users-feed:before {
   content: "\e90c";
 }
+.icon-flame:before {
+  content: "\ea27";
+}
+.icon-two-users:before {
+  content: "\ea28";
+}

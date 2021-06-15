@@ -58,18 +58,22 @@ header {
                         color: $black;
                         transition: 0.5s;
                         margin: 0 auto;
-                        &.icon-users-feed{
-                            background: #276EBC;
-                            color: #fff;
+                        font-size: 20px;
+                        &.icon-home{
+                            color: #010080;
+                            border-color: #010080;
+                        }
+                        &.icon-two-users{
+                            color: #276EBC;
                             border: 1px solid #276EBC;
                         }
-                        &.icon-trending{
-                            background-color: #9C251B;
-                            color: #fff;
+                        &.icon-flame{
+                            color: #9C251B;
+                            border-color: #9C251B;
                         }
                         &.icon-menu{
-                            background-color: #203864;
-                            color: #fff;
+                            color: #203864;
+                            border-color: #203864;
                         }
                     }
                     .nav-text {

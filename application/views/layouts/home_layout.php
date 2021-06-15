@@ -105,7 +105,7 @@
 
                     <li class="list-inline-item">
                         <a href="<?php echo base_url(); ?>buzz_list">
-                            <span class="icon icon-trending"></span>
+                            <span class="icon icon-flame"></span>
                             <span class="nav-text">buzz</span>
                         </a>
                     </li>
@@ -119,7 +119,7 @@
 
                     <li class="list-inline-item">
                         <a href="<?php echo base_url(); ?>friendRequest_list">
-                            <span class="icon icon-users-feed"></span>
+                            <span class="icon icon-two-users"></span>
                             <span class="nav-text">Friend Request</span>
                         </a>
                     </li>
